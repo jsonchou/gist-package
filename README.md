@@ -1,7 +1,5 @@
-gist-package
-============
-
 <h1>代码片断包</h1>
+============
 <h2>Knockoutjs</h2>
 <h2>angularjs</h2>
 <h2>backbone</h2>
