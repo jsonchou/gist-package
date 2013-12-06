@@ -6,12 +6,12 @@
 <h3>html5</h3>
 
 <h2>Nosql</h2>
-<h3>mencache</h3>
-<h3>mongodb</h3>
-<h3>redis</h3>
+<h3>Mencache</h3>
+<h3>Mongodb</h3>
+<h3>Redis</h3>
 
 
 <h2>MVVM</h2>
 <h3>Knockoutjs</h3>
-<h3>angularjs</h3>
-<h3>backbone</h3>
+<h3>Angularjs</h3>
+<h3>Backbone</h3>
