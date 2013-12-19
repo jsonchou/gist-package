@@ -1,18 +1,30 @@
-<h1>代码片断包</h1>
-<p>vs2012 .net c#环境</p>
+代码片断包
+=============
+vs2012 .net c#环境
 
-<h2>前端</h2>
-<h3>canvas</h3>
-<h3>css3</h3>
-<h3>html5</h3>
+前端
+-----
 
-<h2>Nosql</h2>
-<h3>Mencache</h3>
-<h3>Mongodb</h3>
-<h3>Redis</h3>
+canvas
 
+css3
 
-<h2>MVVM</h2>
-<h3>Knockoutjs</h3>
-<h3>Angularjs</h3>
-<h3>Backbone</h3>
+html5
+
+Nosql
+-----
+
+Mencache
+
+Mongodb
+
+Redis
+
+MVVM
+-----
+Knockoutjs
+
+Angularjs
+
+Backbone
+
