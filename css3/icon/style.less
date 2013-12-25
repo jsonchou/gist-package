@@ -1,0 +1,405 @@
+﻿@import "/libs/reset.less";
+body { font-size: 12px; line-height: 1.5; font-family: Helvetica,"Microsoft yahei",Arial,simsun; color: #000; min-height: 460px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+/*******************CSS RESET END*************************/
+
+/*main*/
+.main { width: 650px; margin: 0 auto; }
+.item { margin: 10px; display: inline-block; }
+
+.fn-icon { display: inline-block; width: 32px; height: 32px; position: relative; }
+
+/*全局参数*/
+@black: rgba(0,0,0,1);
+@white: rgba(255,255,255,1);
+@transparent: rgba(0,0,0,0);
+
+/*语法糖*/
+.rotate (@v: 1) { -webkit-transform: rotate(@v); -moz-transform: rotate(@v); -ms-transform: rotate(@v); -o-transform: rotate(@v); transform: rotate(@v); }
+.scale (@v: 1) { -webkit-transform: scale(@v); -moz-transform: scale(@v); -ms-transform: scale(@v); -o-transform: scale(@v); transform: scale(@v); }
+.radius (@v: 50%) { -webkit-border-radius: @v; -moz-border-radius: @v; -ms-border-radius: @v; -o-border-radius: @v; border-radius: @v; }
+.skewX(@v) { -moz-transform: skewX(@v); -webkit-transform: skewX(@v); -o-transform: skewX(@v); -ms-transform: skewX(@v); transform: skewX(@v); }
+.skewY(@v) { -moz-transform: skewY(@v); -webkit-transform: skewY(@v); -o-transform: skewY(@v); -ms-transform: skewY(@v); transform: skewY(@v); }
+.box-sizing (@v: border-box) { -webkit-box-sizing: @v; -moz-box-sizing: @v; -ms-box-sizing: @v; -o-box-sizing: @v; box-sizing: @v; }
+
+/*全局方法*/
+.module-icon(@position: absolute,@left: 0,@top: 0,@width: 0,@height: 0) { position: @position; width: @width; height: @height; left: @left; top: @top; }
+.bNa(@position: absolute,@left: 0,@top: 0,@width: 0,@height: 0) {  .module-icon(absolute,@left,@top,@width,@height);content: " "; font-size: 0; line-height: 0; }
+
+/*箭头*/
+.fn-icon .i-arrow-down { border-width: 16px; border-style: solid; border-color: @black @transparent @transparent; .module-icon(absolute,0,16px,0,0); }
+.fn-icon .i-arrow-down::before { .bNa(absolute,-6px,-32px,12px,16px); background: @black; }
+
+.fn-icon .i-arrow-up { border-width: 16px; border-style: solid; border-color: @transparent @transparent @black; .module-icon(absolute,0,-16px,0,0); }
+.fn-icon .i-arrow-up::before { .bNa(absolute,-6px,16px,12px,16px); background: @black; }
+
+.fn-icon .i-arrow-right { border-width: 16px; border-style: solid; border-color: @transparent @transparent @transparent @black; .module-icon(absolute,16px,0,0,0); }
+.fn-icon .i-arrow-right::before { .bNa(absolute,-32px,-6px,16px,12px); background: @black; }
+
+.fn-icon .i-arrow-left { border-width: 16px; border-style: solid; border-color: @transparent @black @transparent @transparent; .module-icon(absolute,-16px,0,0,0); }
+.fn-icon .i-arrow-left::before { .bNa(absolute,16px,-6px,16px,12px); background: @black; }
+
+/*首页*/
+.fn-icon .i-home { border-width: 16px; border-style: solid; border-color: @transparent @transparent @black; .module-icon(absolute,0,-16px,0,0); }
+.fn-icon .i-home::before { .bNa(absolute,-10px,16px,5px,10px); border-left: 8px solid @black; border-right: 8px solid @black; border-top: 4px solid @black; }
+.fn-icon .i-home::after {.bNa(absolute,7px,3px,3px,12px); background: @black; }
+
+/*圆圈*/
+.fn-icon .i-disc { .radius(50%); border: 3px solid @black; background: @white; .module-icon(absolute,0,0,26px,26px); }
+.fn-icon .i-disc::before { .bNa(absolute,7px,7px,6px,6px); border: 3px solid @black; .radius(50%); }
+
+/*心*/
+.fn-icon .i-heart { background: @black; border-radius: 8px 8px 0 0; .rotate(-45deg);.module-icon(absolute,4px,3px,16px,26px); }
+.fn-icon .i-heart::before { .bNa(absolute,5px,5px,16px,26px); border-radius: 8px 8px 0 0; .rotate(90deg); background: #000; }
+
+/*铅笔*/
+.fn-icon .i-pencil { background: @black; position: absolute; .rotate(45deg);.module-icon(absolute,13px,5px,6px,22px); }
+.fn-icon .i-pencil::before { .bNa(absolute,0,-6px,6px,5px); background: @black; .radius(1px); }
+.fn-icon .i-pencil::after { .bNa(absolute,0,23px,0,0); border-color: @black @transparent @transparent; border-style: solid; border-width: 3px 3px 0; }
+
+/*信息*/
+.fn-icon .i-chat { background: @black; .radius(20%); .module-icon(absolute,2px,5px,28px,22px); }
+.fn-icon .i-chat::before { .bNa(absolute,4px,21px,0,0); border-color: @black @transparent @transparent; border-style: solid; border-width: 4px 4px 0; .rotate(135deg); }
+.fn-icon .i-chat + i { border-bottom: 2px solid #fff; .module-icon(absolute,5px,10px,12px,0); }
+.fn-icon .i-chat + i::before {.bNa(absolute,0,5px,7px,0); border-bottom: 2px solid #fff; }
+.fn-icon .i-chat + i::after {.bNa(absolute,0,10px,18px,0); border-bottom: 2px solid #fff; }
+
+/*对*/
+.fn-icon .i-true { background: @black; .rotate(-45deg);.module-icon(absolute,7px,13px,3px,12px); }
+.fn-icon .i-true::before { .bNa(absolute,10px,1px,3px,22px); background: @black; .rotate(90deg); }
+
+/*错*/
+.fn-icon .i-false { background: @black; .rotate(-45deg);.module-icon(absolute,15px,7px,3px,20px); }
+.fn-icon .i-false::before { .bNa(absolute,0,0,3px,20px); background: @black; .rotate(90deg); }
+
+/*用户*/
+.fn-icon .i-user { background: @black; .module-icon(absolute,10px,0,12px,12px); border-radius: 5px 5px 0 0; }
+.fn-icon .i-user::before { .bNa(absolute,2px,12px,8px,5px); background: @black; }
+.fn-icon .i-user::after { border-style: solid; .bNa(absolute,-8px,15px,0,0); border-color: @transparent @transparent @black @transparent; border-width: 0 14px 6px; }
+.fn-icon .i-user + i {.module-icon(absolute,2px,21px,28px,0); border-bottom: 5px solid @black; }
+
+/*搜索*/
+.fn-icon .i-search { border: 4px solid @black; .radius(50%); .module-icon(absolute,2px,5px,13px,13px); }
+.fn-icon .i-search::before { .bNa(absolute,16px,12px,4px,15px); background: @black; .rotate(135deg); }
+
+/*搜索pro*/
+.fn-icon .i-search-pro { .module-icon(absolute,-1px,0,30px,30px); background: @black; .radius(5px); }
+.fn-icon .i-search-pro::before { border: 3px solid @white; .radius(50%); .bNa(absolute,6px,5px,6px,6px); }
+.fn-icon .i-search-pro::after { .bNa(absolute,19px,13px,3px,12px); background: @white; .rotate(135deg); }
+
+/*iphone*/
+.fn-icon .i-iphone { .module-icon(absolute,7px,0,16px,26px); background: @black; .radius(2px); border: 1px solid @black; }
+.fn-icon .i-iphone::before { .bNa(absolute,7px,22px,2px,2px); overflow: hidden; background: @white; }
+.fn-icon .i-iphone::after { .bNa(absolute,1px,3px,14px,16px); background: @white; }
+
+/*ipod*/
+.fn-icon .i-ipod { .module-icon(absolute,8px,0,15px,26px); background: @black; .radius(2px); border: 1px solid @black; }
+.fn-icon .i-ipod::before { .bNa(absolute,2px,14px,5px,5px); overflow: hidden; background: @black; .radius(50%); border: 3px solid @white; }
+.fn-icon .i-ipod::after { .bNa(absolute,1px,1px,13px,10px); background: @white; .radius(1px); }
+
+/*ipad*/
+.fn-icon .i-ipad { .module-icon(absolute,2px,0,25px,32px); background: @black; .radius(3px); border: 1px solid @black; }
+.fn-icon .i-ipad::before { .bNa(absolute,12px,29px,2px,2px); overflow: hidden; background: @white; }
+.fn-icon .i-ipad::after { .bNa(absolute,1px,2px,23px,25px); background: @white; }
+
+/*柱状图*/
+.fn-icon .i-histogram { .module-icon(absolute,1px,2px,25px,25px); border-radius: 0 0 0 3px; border-left: 3px solid @black; border-top: 0; border-right: 0; border-bottom: 3px solid @black; }
+.fn-icon .i-histogram + i {.module-icon(absolute,10px,11px,4px,12px); background: @black; }
+.fn-icon .i-histogram + i::before { .bNa(absolute,5px,-6px,4px,18px); background: @black; }
+.fn-icon .i-histogram + i::after {.bNa(absolute,10px,4px,4px,8px); background: @black; }
+
+/*显示器*/
+.fn-icon .i-screen { .module-icon(absolute,1px,2px,28px,24px); border: 2px solid @black; background: @white; }
+.fn-icon .i-screen::before { .bNa(absolute,8px,26px,12px,3px); background: @black; }
+.fn-icon .i-screen::after {.bNa(absolute,4px,29px,20px,2px); background: @black; }
+
+/*云*/
+.fn-icon .i-cloud { .module-icon(absolute,1px,14px,30px,12px); background: @black; .radius(10px); }
+.fn-icon .i-cloud::before { .bNa(absolute,3px,-5px,12px,10px); background: @black; .radius(10px); .rotate(68deg); }
+.fn-icon .i-cloud::after {.bNa(absolute,10px,-6px,18px,15px); background: @black; .radius(15px);.rotate(-68deg); }
+
+/*云下载*/
+.fn-icon .i-cloud-down { .module-icon(absolute,1px,14px,30px,12px); background: @black; .radius(10px); }
+.fn-icon .i-cloud-down::before { .bNa(absolute,3px,-5px,12px,10px); background: @black; .radius(10px); .rotate(68deg); }
+.fn-icon .i-cloud-down::after {.bNa(absolute,10px,-6px,18px,15px); background: @black; .radius(15px);.rotate(-68deg); }
+.fn-icon .i-cloud-down + i { .bNa(absolute,11px,6px,0,0); border-width: 5px; border-style: solid; border-color: @transparent @transparent @white; }
+.fn-icon .i-cloud-down + i::before {.bNa(absolute,-2px,4px,4px,6px); background: @white; }
+
+/*云上载*/
+.fn-icon .i-cloud-up { .module-icon(absolute,1px,14px,30px,12px); background: @black; .radius(10px); }
+.fn-icon .i-cloud-up::before { .bNa(absolute,3px,-5px,12px,10px); background: @black; .radius(10px); .rotate(68deg); }
+.fn-icon .i-cloud-up::after {.bNa(absolute,10px,-6px,18px,15px); background: @black; .radius(15px);.rotate(-68deg); }
+.fn-icon .i-cloud-up + i { .bNa(absolute,11px,18px,0,0); border-width: 5px; border-style: solid; border-color: @white @transparent @transparent; }
+.fn-icon .i-cloud-up + i::before {.bNa(absolute,-2px,-11px,4px,6px); background: @white; }
+
+/*文本*/
+.fn-icon .i-txt { .module-icon(absolute,4px,1px,19px,25px); background: @white; border: 2px solid @black; }
+.fn-icon .i-txt::before { .bNa(absolute,2px,3px,15px,0); border-top: 2px solid @black; }
+.fn-icon .i-txt::after {.bNa(absolute,2px,7px,15px,0); border-top: 2px solid @black; }
+
+.fn-icon .i-txt + i { .bNa(absolute,8px,14px,15px,0); border-top: 2px solid @black; }
+.fn-icon .i-txt + i::before {.bNa(absolute,0,2px,15px,0); border-top: 2px solid @black; }
+.fn-icon .i-txt + i::after {.bNa(absolute,0,6px,15px,0); border-top: 2px solid @black; }
+
+/*RSS*/
+.fn-icon .i-rss { .module-icon(absolute,0,20px,6px,6px);.radius(50%); background: @black; }
+.fn-icon .i-rss::before {.bNa(absolute,0,-20px,15px,15px);.radius(50%); border: 14px double @black; border-radius: 0 30px 0 0; border-left: 0; border-bottom: 0; }
+
+/*电池*/
+.fn-icon .i-battery-full { .module-icon(absolute,-2px,7px,26px,12px); background: @white; border: 3px solid @black; }
+.fn-icon .i-battery-full::before {.bNa(absolute,0,0,100%,12px); background: @black; .box-sizing(border-box); border: 1px solid #fff; }
+.fn-icon .i-battery-full::after { .bNa(absolute,29px,2px,2px,7px); background: @black; }
+
+.fn-icon .i-battery-med { .module-icon(absolute,0,7px,26px,12px); background: @white; border: 3px solid @black; }
+.fn-icon .i-battery-med::before {.bNa(absolute,0,0,60%,12px); background: @black; .box-sizing(border-box); border: 1px solid #fff; }
+.fn-icon .i-battery-med::after { .bNa(absolute,29px,2px,2px,7px); background: @black; }
+
+.fn-icon .i-battery-low { .module-icon(absolute,0,7px,26px,12px); background: @white; border: 3px solid @black; }
+.fn-icon .i-battery-low::before {.bNa(absolute,0,0,20%,12px); background: @black; .box-sizing(border-box); border: 1px solid #fff; }
+.fn-icon .i-battery-low::after { .bNa(absolute,29px,2px,2px,7px); background: @black; }
+
+.fn-icon .i-battery-empty { .module-icon(absolute,-1px,7px,26px,12px); background: @white; border: 3px solid @black; }
+.fn-icon .i-battery-empty::before {.bNa(absolute,0,0,0%,12px); background: @black; .box-sizing(border-box); border: 1px solid #fff; }
+.fn-icon .i-battery-empty::after { .bNa(absolute,29px,2px,2px,7px); background: @black; }
+
+/*喇叭*/
+.fn-icon .i-horn-full { .module-icon(absolute,-6px,4px,0,0); border-color: @transparent @black @transparent @transparent; border-width: 12px; border-style: solid; }
+.fn-icon .i-horn-full::before {.bNa(absolute,-2px,-6px,8px,12px); background: @black; }
+.fn-icon .i-horn-full::after { .bNa(absolute,13px,-6px,5px,5px); border-top: 8px double @black; border-right: 8px double @black; border-radius: 0 18px 0 0; .rotate(45deg); }
+
+.fn-icon .i-horn-med { .module-icon(absolute,-3px,4px,0,0); border-color: @transparent @black @transparent @transparent; border-width: 12px; border-style: solid; }
+.fn-icon .i-horn-med::before {.bNa(absolute,-2px,-6px,8px,12px); background: @black; }
+.fn-icon .i-horn-med::after { .bNa(absolute,13px,-4px,5px,5px); border-top: 3px solid @black; border-right: 3px solid @black; border-radius: 0 18px 0 0; .rotate(45deg); }
+
+.fn-icon .i-horn-empty { .module-icon(absolute,-3px,4px,0,0); border-color: @transparent @black @transparent @transparent; border-width: 12px; border-style: solid; }
+.fn-icon .i-horn-empty::before {.bNa(absolute,-2px,-6px,8px,12px); background: @black; }
+
+/*play*/
+.fn-icon .i-play { border-style: solid; border-color: @transparent @transparent @transparent @black; border-width: 8px 8px 8px 12px; .module-icon(absolute,12px,7px,0,0); }
+
+/*pause*/
+.fn-icon .i-pause { border-style: none solid; border-width: 0 3px; border-color: @black; .module-icon(absolute,12px,10px,3px,12px); }
+
+/*stop*/
+.fn-icon .i-stop { background: @black; .module-icon(absolute,8px,8px,15px,15px); }
+
+/*上一页 下一页 快进 快退*/
+.fn-icon .i-forward { border-style: solid; border-color: @transparent @transparent @transparent @black; border-width: 8px 8px 8px 12px; .module-icon(absolute,6px,7px,0,0); }
+.fn-icon .i-forward::before { border-style: solid; border-color: @transparent @transparent @transparent @black; border-width: 8px 8px 8px 12px; .bNa(absolute,0,-8px,0,0); }
+
+.fn-icon .i-next { border-style: solid; border-color: @transparent @transparent @transparent @black; border-width: 8px 8px 8px 12px; .module-icon(absolute,2px,7px,0,0); }
+.fn-icon .i-next::before { border-style: solid; border-color: @transparent @transparent @transparent @black; border-width: 8px 8px 8px 12px; .bNa(absolute,0,-8px,0,0); }
+.fn-icon .i-next::after { border-right: 4px solid @black; .bNa(absolute,12px,-7px,0,14px); }
+
+.fn-icon .i-rewind { border-style: solid; border-color: @transparent @black @transparent @transparent; border-width: 8px 12px 8px 8px; .module-icon(absolute,-6px,7px,0,0); }
+.fn-icon .i-rewind::before { border-style: solid; border-color: @transparent @black @transparent @transparent; border-width: 8px 12px 8px 8px; .bNa(absolute,4px,-8px,0,0); }
+
+.fn-icon .i-previous { border-style: solid; border-color: @transparent @black @transparent @transparent; border-width: 8px 12px 8px 8px; .module-icon(absolute,-1px,7px,0,0); }
+.fn-icon .i-previous::before { border-style: solid; border-color: @transparent @black @transparent @transparent; border-width: 8px 12px 8px 8px; .bNa(absolute,4px,-8px,0,0); }
+.fn-icon .i-previous::after { border-right: 4px solid @black; .bNa(absolute,-4px,-7px,0,14px); }
+
+/*location*/
+.fn-icon .i-location { border: 5px solid @black; .module-icon(absolute,7px,0,8px,8px);.radius(); background: @white; }
+.fn-icon .i-location::before { border-style: solid; border-color: @black @transparent @transparent @transparent; border-width: 18px 8px 8px 8px; .bNa(absolute,-4px,8px,0,0); }
+
+/*clock*/
+.fn-icon .i-clock { border: 4px solid @black; .module-icon(absolute,3px,3px,18px,18px);.radius(); background: @white; }
+.fn-icon .i-clock::before { .bNa(absolute,8px,3px,4px,6px); border:2px solid @black;border-right:none;border-top:none; }
+
+.fn-icon .i-clock-on { background:@black; .module-icon(absolute,3px,3px,26px,26px);.radius(); }
+.fn-icon .i-clock-on::before { .bNa(absolute,4px,4px,16px,16px); border:1px solid @white;.radius();}
+.fn-icon .i-clock-on::after { .bNa(absolute,12px,8px,3px,4px); border:2px solid @white;border-right:none;border-top:none; }
+
+/*direction*/
+.fn-icon .i-direction-left { .module-icon(absolute,8px,5px,12px,12px); border: 6px solid @black; border-right: 0; border-top: 0; .rotate(45deg); }
+.fn-icon .i-direction-right { .module-icon(absolute,6px,5px,12px,12px); border: 6px solid @black; border-right: 0; border-top: 0; .rotate(-135deg); }
+.fn-icon .i-direction-up { .module-icon(absolute,7px,9px,12px,12px); border: 6px solid @black; border-right: 0; border-top: 0; .rotate(135deg); }
+.fn-icon .i-direction-down { .module-icon(absolute,8px,3px,12px,12px); border: 6px solid @black; border-right: 0; border-top: 0; .rotate(-45deg); }
+
+/*signal*/
+.fn-icon .i-signal { .module-icon(absolute,5px,22px,3px,4px); background: @black; }
+.fn-icon .i-signal::before { .bNa(absolute,4px,-3px,3px,7px); background: @black; }
+.fn-icon .i-signal::after { .bNa(absolute,8px,-6px,3px,10px); background: @black; }
+
+.fn-icon .i-signal + i {.module-icon(absolute,17px,13px,3px,13px); background: @black; }
+.fn-icon .i-signal + i::before { .bNa(absolute,4px,-3px,3px,16px); background: @black; }
+.fn-icon .i-signal + i::after { .bNa(absolute,8px,-6px,3px,19px); background: @black; }
+
+/*信号*/
+.fn-icon .i-graph-bar { .module-icon(absolute,5px,22px,4px,6px); background: @black; }
+.fn-icon .i-graph-bar::before { .bNa(absolute,7px,-4px,4px,12px); background: @black; }
+.fn-icon .i-graph-bar::after { .bNa(absolute,13px,-18px,4px,24px); background: @black; }
+
+.fn-icon .i-graph-bar + i {.module-icon(absolute,24px,10px,4px,18px); background: @black; }
+.fn-icon .i-graph-bar + i::before { .bNa(absolute,-22px,18px,28px,2px);  background: @black; }
+
+/*ribbon*/
+.fn-icon .i-ribbon { .module-icon(absolute,10px,4px,0,14px);border-style:solid;border-color:@black @black @transparent @black;border-width:6px;}
+
+/*i-video-camera*/
+.fn-icon .i-video-camera { background: @black; .module-icon(absolute,4px,8px,18px,16px); }
+.fn-icon .i-video-camera::before { .bNa(absolute,12px,3px,0,0); border-style:solid;border-color:@transparent @black @transparent @transparent;border-width:5px 8px 5px 5px;}
+
+/*star5*/
+.fn-icon .i-star5 { .module-icon(absolute,0,10px,0,0); border-style: solid; border-width:10px 17px 0 16px; border-color: @black @transparent @transparent @transparent;.rotate(-150deg);}
+.fn-icon .i-star5::before {  .bNa(absolute,-16px,-10px,0,0); border-style: solid; border-width:10px 17px 0 16px; border-color: @black @transparent @transparent @transparent;.rotate(-60deg);}
+.fn-icon .i-star5::after {  .bNa(absolute,2px,-3px,0,0); border-style: solid; border-width:0 4px 16px; border-color: @transparent @transparent @black @transparent;.rotate(150deg);}
+
+/*earphone*/
+.fn-icon .i-earphone { .module-icon(absolute,-1px,0,26px,25px); border-radius: 15px 15px 0 0;border:3px solid @black;border-bottom:0; }
+.fn-icon .i-earphone::before {.bNa(absolute,2px,18px,5px,10px); background: @black;border-radius:0 3px 3px 0; }
+.fn-icon .i-earphone::after { .bNa(absolute,20px,18px,5px,10px); background: @black;border-radius:3px 0 0 3px; }
+
+/*胶囊*/
+.fn-icon .i-capsule { .module-icon(absolute,14px,6px,14px,18px); border-radius: 15px 15px 0 0;background:@black;.rotate(45deg)}
+.fn-icon .i-capsule::before {.bNa(absolute,0,19px,14px,10px); border-radius:  0 0 15px 15px;background:@black;}
+
+/*mic*/
+.fn-icon .i-mic { .module-icon(absolute,11px,6px,10px,8px); border-radius: 15px 15px 0 0;background:@black;}
+.fn-icon .i-mic::before {.bNa(absolute,0,9px,10px,8px); border-radius:  0 0 15px 15px;background:@black;}
+.fn-icon .i-mic::after {.bNa(absolute,-3px,11px,12px,8px); border-radius:  0 0 15px 15px;border:2px solid @black;border-top:0;}
+
+.fn-icon .i-mic + i {.module-icon(absolute,14px,27px,3px,2px); background: @black; }
+.fn-icon .i-mic + i::before { .bNa(absolute,-2px,2px,7px,3px); background: @black; }
+
+/*tower*/
+.fn-icon .i-tower { .module-icon(absolute,15px,8px,4px,4px); .radius(); background: @black; }
+.fn-icon .i-tower::before {.bNa(absolute,-1px,1px,0,0); border-style: solid; border-color: @transparent @transparent @black @transparent; border-width: 0 3px 22px; }
+
+.fn-icon .i-tower + i {.module-icon(absolute,1px,2px,8px,8px); border-style: double; border-color: @black; border-width:6px 6px 0 0;border-radius:0 50px 0 0;.rotate(-135deg); }
+.fn-icon .i-tower + i::before { .bNa(absolute,-13px,7px,8px,8px); border-style: double; border-color: @black;border-width:6px 0 0 6px;border-radius:50px 0 0 0;.rotate(-90deg); }
+
+/*icecream*/
+.fn-icon .i-icecream { .module-icon(absolute,6px,1px,20px,26px); background: @black;border-radius:50% 50% 3px 3px; }
+.fn-icon .i-icecream::before {.bNa(absolute,8px,26px,4px,6px); background: @black;}
+
+/*golf*/
+.fn-icon .i-golf { .module-icon(absolute,8px,0,15px,15px); .radius();background:@black;}
+.fn-icon .i-golf::before {.bNa(absolute,3px,4px,3px,3px);.radius();background:@white;}
+.fn-icon .i-golf::after {.bNa(absolute,6px,15px,2px,12px); background:@black;}
+
+.fn-icon .i-golf + i {.module-icon(absolute,11px,27px,8px,2px); background:@black;}
+
+/*bag*/
+.fn-icon .i-bag { .module-icon(absolute,1px,9px,30px,15px);background:@black;}
+.fn-icon .i-bag::before {.bNa(absolute,0,15px,30px,5px);background:@black;border-top:1px solid @white;border-radius:0 0 3px 3px;}
+.fn-icon .i-bag::after {.bNa(absolute,8px,-7px,10px,10px);border-radius:50% 50% 0 0;border:2px solid @black;border-bottom:0;}
+
+.fn-icon .i-bag-ext { .module-icon(absolute,6px,9px,20px,22px);background:@black;}
+.fn-icon .i-bag-ext::before {.bNa(absolute,-6px,0,5px,22px);background:@black;border-right:1px solid @white;border-radius:3px 0 0 3px;}
+.fn-icon .i-bag-ext::after {.bNa(absolute,20px,0,5px,22px);background:@black;border-left:1px solid @white;border-radius:0 3px 3px 0;}
+
+.fn-icon .i-bag-ext+i{.bNa(absolute,9px,0,10px,10px);border-radius:50% 50% 0 0;border:2px solid @black;border-bottom:0;}
+
+
+
+/*roller-blush*/
+.fn-icon .i-roller-blush { .module-icon(absolute,0,2px,26px,10px); background:@black;.radius(5px);}
+.fn-icon .i-roller-blush::before {.bNa(absolute,16px,4px,12px,7px);border:2px solid @black;border-left:0;}
+
+.fn-icon .i-roller-blush + i {.module-icon(absolute,15px,20px,4px,18px); background:@black;.radius(5px);}
+.fn-icon .i-roller-blush + i::before{.bNa(absolute,1px,-3px,2px,5px);background:@black;}
+
+/*magnet*/
+.fn-icon .i-magnet { .module-icon(absolute,2px,10px,18px,16px); border-radius: 0 0 18px 18px;border:5px solid @black;border-top:0;}
+.fn-icon .i-magnet::before {.bNa(absolute,-5px,-6px,5px,5px); background:@black;}
+.fn-icon .i-magnet::after {.bNa(absolute,18px,-6px,5px,5px);background:@black;}
+
+/*bomb*/
+.fn-icon .i-bomb { .module-icon(absolute,4px,8px,24px,24px); .radius();background:@black;}
+.fn-icon .i-bomb::before {.bNa(absolute,9px,-2px,5px,2px); background:@black;}
+.fn-icon .i-bomb::after {.bNa(absolute,11px,-8px,12px,10px);border-top:2px solid @black;border-radius:40% 40% 0 0;.rotate(-45deg);}
+
+/*birdhouse*/
+.fn-icon .i-birdhouse { .module-icon(absolute,-5px,-17px,0,0); border-style:solid;border-width:15px 20px 15px;border-color:@transparent @transparent @black @transparent;}
+
+.fn-icon .i-birdhouse + i {.module-icon(absolute,0,13px,14px,0); border-style:solid;border-width:20px 8px;border-color:@black @transparent @transparent @transparent;}
+.fn-icon .i-birdhouse + i::before {.bNa(absolute,2px,-30px,10px,10px);.radius();background:@white;}
+.fn-icon .i-birdhouse + i::after {.bNa(absolute,6px,-10px,3px,3px);.radius();background:@white;}
+
+/*woofer*/
+.fn-icon .i-woofer { .module-icon(absolute,5px,0,22px,30px);.radius(3px);background:@black;}
+.fn-icon .i-woofer::before {.bNa(absolute,8px,4px,2px,2px);.radius();background:@black;border:1px solid @white;}
+.fn-icon .i-woofer::after {.bNa(absolute,4px,12px,4px,4px);.radius();background:@black;border:4px solid @white;}
+
+/*handbag*/
+.fn-icon .i-handbag { .module-icon(absolute,0,10px,24px,0); border-style:solid;border-width:0 3px 16px;border-color:@transparent @transparent @black @transparent;}
+.fn-icon .i-handbag::before {.bNa(absolute,3px,-8px,15px,6px);.radius();border:2px solid @black;border-radius:25px 25px 0 0;border-bottom:0;}
+
+/*bell*/
+.fn-icon .i-bell { .module-icon(absolute,5px,5px,22px,22px); background: @black; border-radius: 50% 50% 0 0; }
+.fn-icon .i-bell::before {.bNa(absolute,-5px,10px,16px,0); border-style: solid; border-width:0 8px 16px; border-color: @transparent @transparent @black @transparent;border-radius:0 0 3px 3px; }
+.fn-icon .i-bell::after {.bNa(absolute,4px,-4px,10px,3px);border:2px solid @black;background:@white;border-radius:10px 10px 0 0; }
+
+.fn-icon .i-bell+ i { .module-icon(absolute,4px,32px,6px,3px);background:@black;border-radius:0 0 20px 20px;}
+
+/*signboard*/
+.fn-icon .i-signboard { .module-icon(absolute,2px,6px,28px,18px); background: @black;}
+.fn-icon .i-signboard::before {.bNa(absolute,8px,7px,8px,4px); background:@white;}
+.fn-icon .i-signboard::after {.bNa(absolute,16px,4px,0,0); border-style: solid; border-width:5px; border-color: @transparent @transparent @transparent @white;}
+
+.fn-icon .i-signboard + i { .module-icon(absolute,15px,24px,3px,10px); background: @black; }
+
+/*musicnote*/
+.fn-icon .i-musicnote { .module-icon(absolute,10px,7px,8px,12px); border:2px solid @black;border-bottom:0;border-top:3px solid @black;.skewY(-25deg);}
+.fn-icon .i-musicnote::before {.bNa(absolute,-6px,10px,6px,6px); background:@black;border-radius:4px 4px 4px 4px}
+.fn-icon .i-musicnote::after {.bNa(absolute,4px,11px,6px,6px); background:@black;border-radius:4px 4px 4px 4px}
+
+/*key*/
+.fn-icon .i-key { .module-icon(absolute,2px,3px,18px,18px); background: @black;.radius();}
+.fn-icon .i-key::before {.bNa(absolute,4px,4px,4px,4px); background: @white;.radius();}
+.fn-icon .i-key::after {.bNa(absolute,18px,13px,4px,16px);.rotate(-38deg);background: @black;}
+
+.fn-icon .i-key + i {.module-icon(absolute,14px,19px,5px,5px);background:@black;}
+.fn-icon .i-key + i::before {.bNa(absolute,5px,5px,5px,5px);background:@black;}
+.fn-icon .i-key + i::after {.bNa(absolute,9px,9px,5px,5px);background:@black;}
+
+/*upload*/
+.fn-icon .i-upload { .module-icon(absolute,-2px,14px,28px,8px);border:4px solid @black;border-top:0;}
+.fn-icon .i-upload::before {.bNa(absolute,12px,-8px,6px,10px); background: @black;}
+.fn-icon .i-upload::after {.bNa(absolute,9px,-20px,0,0);border-style: solid; border-width:6px; border-color: @transparent @transparent @black @transparent;}
+
+/*download*/
+.fn-icon .i-download { .module-icon(absolute,-2px,13px,28px,8px);border:4px solid @black;border-top:0;}
+.fn-icon .i-download::before {.bNa(absolute,12px,-10px,6px,10px); background: @black;}
+.fn-icon .i-download::after {.bNa(absolute,9px,0,0,0);border-style: solid; border-width:6px; border-color: @black @transparent @transparent @transparent;}
+
+/*reload*/
+.fn-icon .i-reload { .module-icon(absolute,3px,17px,18px,10px);border:4px solid @black;border-radius:0 0 50px 50px;border-top:0;}
+.fn-icon .i-reload::before {.bNa(absolute,-4px,-13px,9px,9px);border:4px solid @black;border-radius:15px 0 0;border-right:0;border-bottom:0;}
+.fn-icon .i-reload::after {.bNa(absolute,9px,-17px,0,0);border-style: solid; border-width:6px; border-color: @transparent @transparent @transparent @black;}
+
+/*refresh*/
+.fn-icon .i-refresh { .module-icon(absolute,5px,15px,10px,10px); border: 4px solid @black; border-radius: 0 0 0 50px; border-top: 0; border-right: 0; }
+.fn-icon .i-refresh::before {.bNa(absolute,-8px,-12px,0,0); border-style: solid; border-width: 6px; border-color: @transparent @transparent @black @transparent; }
+
+.fn-icon .i-refresh + i {.module-icon(absolute,14px,3px,10px,10px); border: 4px solid @black; border-radius: 0 50px 0 0; border-bottom: 0; border-left: 0; }
+.fn-icon .i-refresh + i::before {.bNa(absolute,6px,10px,0,0); border-style: solid; border-width: 6px; border-color: @black @transparent @transparent @transparent; }
+
+/*loopback*/
+.fn-icon .i-loopback { .module-icon(absolute,2px,16px,9px,5px);border:3px solid @black;border-radius:0 0 50px 50px;border-top:0;}
+.fn-icon .i-loopback::before {.bNa(absolute,-3px,-7px,4px,4px);border:3px solid @black;border-radius:15px 0 0;border-right:0;border-bottom:0;}
+.fn-icon .i-loopback::after {.bNa(absolute,4px,-9px,0,0);border-style: solid; border-width:4px; border-color: @transparent @transparent @transparent @black;}
+
+.fn-icon .i-loopback + i { .module-icon(absolute,15px,10px,9px,5px);border:3px solid @black;border-radius:50px 50px 0 0;border-bottom:0;}
+.fn-icon .i-loopback + i::before {.bNa(absolute,5px,5px,4px,4px);border:3px solid @black;border-radius:0 0 15px 0;border-left:0;border-top:0;}
+.fn-icon .i-loopback + i::after {.bNa(absolute,-3px,7px,0,0);border-style: solid; border-width:4px; border-color: @transparent @black @transparent @transparent;}
+
+/*target*/
+.fn-icon .i-target { .module-icon(absolute,0,0,26px,26px);border:3px solid @black;background: @white;.radius();}
+.fn-icon .i-target::before {.bNa(absolute,2px,2px,16px,16px);border:3px solid @black;background: @white;.radius();}
+.fn-icon .i-target::after {.bNa(absolute,7px,7px,10px,10px);border:1px solid @black;background: @black;.radius();}
+
+/*lock*/
+.fn-icon .i-lock { .module-icon(absolute,6px,9px,20px,16px); background: @black; }
+.fn-icon .i-lock::before {.bNa(absolute,9px,7px,3px,5px); background: @white; }
+.fn-icon .i-lock::after {.bNa(absolute,8px,3px,5px,5px);.radius(); background: @white; }
+
+.fn-icon .i-lock + i { .module-icon(absolute,10px,2px,9px,5px); border: 2px solid @black; border-radius: 50px 50px 0 0; border-bottom: 0; }
+
+.fn-icon .i-lock-on { .module-icon(absolute,6px,9px,20px,16px); background: @black; }
+.fn-icon .i-lock-on::before {.bNa(absolute,9px,7px,3px,5px); background: @white; }
+.fn-icon .i-lock-on::after {.bNa(absolute,8px,3px,5px,5px);.radius(); background: @white; }
+
+.fn-icon .i-lock-on + i { .module-icon(absolute,20px,2px,9px,5px); border: 2px solid @black; border-radius: 50px 50px 0 0; border-bottom: 0; }
+
+
