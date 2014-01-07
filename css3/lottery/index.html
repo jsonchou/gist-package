@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>悠哉2014年会抽奖</title>
+    <link rel="stylesheet/less" type="text/css" href="style.less">
+    <script src="/libs/less-1.3.3.min.js" type="text/javascript"></script>
+    <script src="/libs/jquery-2.0.3.min.js"></script>
+    <script src="/libs/jquery.cookie.js"></script>
+    <script src="/css3/lottery/gsap/minified/TweenMax.min.js"></script>
+   
+    <script type="text/javascript">
+
+        var uzaiList = ["李代山", "夏力", "樊燕红", "周傲云", "张硕蕾", "王婧", "陆黎生", "陈媛媛", "张蕾", "秦雄", "牛曼曼", "刘丽", "汪建彬", "黄又青", "陈佩娟", "陆斌", "朱佳妮", "杨竹", "徐晶", "王伟", "肖文华", "景慧婷", "蔡伊菁", "徐敏", "杨冰", "熊健佳", "楼亚琦", "张美", "涂新华", "杨华", "王磊", "陈金璐", "袁图南", "张艳玲", "周昱晟", "芮雯娟", "陈文君", "龙德煌", "王芳芳", "冯玮", "杨佳雯", "吴小亮", "初珊", "徐芹", "贺小丽", "陆夏恋", "陈静", "迟美欢", "李云", "谈勇", "张钦", "徐晟", "刘贝贝", "王毅伟", "朱红岩", "沈竹君", "戚昊", "徐亮亮", "徐俊亮", "沈静", "施力菁", "张雪", "陈潇艳", "张艳磊", "严侃", "耿初阳", "谢迪云", "张健", "罗瑛", "王嘉奇", "陈佳欣", "杨华蓉", "宋迪元", "周龙强", "刘邦龙", "沈俊超", "陈蕾", "黄城霞", "何文", "马昌亮", "陈婷", "孔德飞", "邢霞飞", "高嶶", "顾沈莉", "杨艳伟", "蔡小云", "孙小燕", "王霄峰", "刘磊", "宋嘉懿", "李超", "韩亚奇", "谢薇", "何婷", "许进", "黄周斌", "董春兰", "王焕俊", "林骏", "李园园", "张玉龙", "谭喜生", "沈菁", "顾惠荣", "王莹", "洪霞", "徐妮娜", "胡梅", "陈姚伟", "王春尧", "孙琼", "吴国明", "顾红", "蒋诚辰", "徐玉凤", "乔晓花", "戴春燕", "涂丁一", "汪婷婷", "邵振娥", "杨健", "赵国银", "徐殿雯", "供应商", "管清林", "蔡舒", "郑建平", "李娟", "姚天娇", "程琳", "史惠芳", "陈杰", "葛旋", "吴湘", "赵凯", "朱亮", "寇毅巍", "吴启平", "王玉明", "曹智萍", "苏玲", "林之浩", "鲁延阁", "陈佳林", "窦婕", "俞晓雯", "康晓红", "秦基伟", "沈健", "张丽", "朱弋", "李苏", "高屴", "陈麟", "林双羽", "高正", "吁霞女", "吴晔琼", "郑宇", "殷平", "张斌", "张晓婧", "李颖祎", "顾欢欢", "陈琪", "崔丽莎", "夏水花", "顾芬", "蒋霄雯", "任少惠", "聂威", "全小兰", "张培培", "张秀云", "杨彩", "肖骏", "谢艳玲", "沈俊", "王敏", "杨正清", "王明霞", "陈剑君", "汤界轩", "顾骏", "王彦彦", "王芳", "孙洁", "杨杰", "刘彬", "贺颖雯", "戴劼", "张梦琪", "曹俊", "朱瑾", "任伟", "郑菁菁", "叶婴", "徐燕", "章飚", "赵春林", "李伟", "苏玉芳", "何娟", "洪俊婷", "陈鹏", "叶剑青", "燕陈华", "张俊杰", "罗依雯", "王悦", "陈涛", "李徐权", "张学菲", "魏婷婷", "代义锋", "金一", "郑旭", "杨阿敏", "王彩霞", "蔡蓓燕", "黄欢", "喻凯丽", "朱春燕", "周霞", "季玲", "王珏", "廉春霞", "潘刻仪", "颜梦婷", "董雪", "赵洋", "杨川", "赵锟", "程秋谊", "陆亮", "刘泽华", "沈敏", "徐程乐", "李平飞", "于星星", "郭占旺", "马翔玮", "陈婷婷", "陈嘉麒", "马诗萌", "舒敏", "吴海跃", "蔡君", "熊鑫", "蒋丽花", "杨青青", "陈蓓", "储群", "陈佳俊", "黄志祥", "张磊", "杨成玉"];
+        //var uzaiList = ["李代山", "夏力", "樊燕红", "周傲云", "张硕蕾", "王婧", "陆黎生", "陈媛媛", "张蕾", "秦雄", "牛曼曼", "刘丽", "汪建彬", "黄又青", "陈佩娟", "陆斌", "朱佳妮", "杨竹", "徐晶", "王伟", "肖文华", "景慧婷", "蔡伊菁", "徐敏", "杨冰", "熊健佳", "楼亚琦", "张美", "涂新华", "杨华", "王磊", "陈金璐", "袁图南", "张艳玲", "周昱晟", "芮雯娟", "陈文君", "龙德煌", "王芳芳", "冯玮", "杨佳雯", "吴小亮", "初珊", "徐芹", "贺小丽", "陆夏恋", "陈静", "迟美欢", "李云", "谈勇", "张钦", "徐晟", "刘贝贝", "王毅伟", "朱红岩", "沈竹君", "戚玉"];
+        //var uzaiList = ["李代山", "夏力", "樊燕红", "周傲云", "张硕蕾", "王婧", "陆黎生", "陈媛媛", "张蕾", "秦雄", "牛曼曼", "刘丽", "小周", "小李", "小丁"];//15
+        var vNum = 11;//参与抽奖最少人数
+        var ckName = "ckUzaiLottery";//Cookie 表单
+
+        var firstNameArr = [];
+        var realNameArr = "";
+
+        var handler = "";
+        var holder = "";
+
+        var scroller = "";
+        var sEmpty = "";
+        var sList = "";
+
+        $(function () {
+
+            handler = $('.handler');
+            holder = $('.holder');
+
+            scroller = $('#scroller')
+            sEmpty = scroller.find('.uzai-empty');
+            sList = scroller.find('.uzai-list');
+
+            $('.ball').on('click', function () {
+                var o = $(this);
+
+                sEmpty.fadeIn('slow', function () {
+                    
+                    if (o.hasClass('ball-true')) {
+                        sEmpty.hide();
+                        sList.empty();
+                        //产生中奖名单
+                        handleNameList();
+                        
+                        var nodeUL = $('.uzai-list');
+                        for (var i = 0; i < firstNameArr.length; i++) {
+                            var nodeLi = "<ul>";
+                            var item = firstNameArr[i];
+                            var itemList = item.split('');
+                            //console.log(item);
+                            if (itemList.length == 2) {
+                                itemList[2] = "";
+                            }
+                             
+                            for (var j = 0; j < itemList.length; j++) {
+                                nodeLi += "<li>" + itemList[j] + "</li>";
+                            }
+                            nodeLi += "</ul>";
+                            nodeUL.append(nodeLi);
+
+                        }
+                        var coloneFirstNode = nodeUL.find('ul').eq(0).clone();
+                        nodeUL.append(coloneFirstNode);
+                          
+                        if (nodeUL.find('li').size() > 0) {
+                            sList.addClass('uzai-list-on');
+                            TweenMax.to('.handler', 0.3, {
+                                rotation: "90deg",
+                                marginTop: "67px",
+                                right: "-114px",
+                                onComplete: tmComplete(realNameArr)
+                            }, 2);
+                        }
+                    }
+                });
+            });
+        });
+
+        function tmComplete(name) {
+            $('.ball').removeClass('ball-true');
+            TweenMax.to('.handler', 0.2, {
+                delay: 0.6,
+                rotation: "45deg",
+                marginTop: "0",
+                right: "-79px",
+                onComplete: function () {
+                    setTimeout(function () {
+                        scroller.find('.uzai-list').removeClass('uzai-list-on');
+                        $('.ball').addClass('ball-true');
+                    }, 1500);
+                    //增加cookie
+                    var ck = $.cookie(ckName);
+                    if (ck != null && ck != '' & ck != undefined) {
+                        $.cookie(ckName, ck + "," + name);
+                    } else {
+                        $.cookie(ckName, name);
+                    }
+                }
+            }, 2);
+        }
+         
+        //获取有机索引
+        function renderNum(count, maxs, mins) {
+            var array = [];
+            while (array.length < count) {
+                var temp = renderNumSingle(maxs, mins);
+                if (!renderNumSearch(array, temp)) {
+                    array.push(temp);
+                }
+            }
+            return array;
+        }
+
+        function renderNumSingle(maxs, mins) {  //随机生成maxs到mins之间的数
+            return Math.round(Math.random() * (maxs - mins)) + mins;
+        }
+
+        function renderNumSearch(array, num) {   //array是否重复的数
+            for (var i = 0; i < array.length; i++) {
+                if (array[i] == num) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        //通过索引值，获取姓名
+        function getNameListValue(Namelist, indexList) {
+            var arr = [];
+            for (var i = 0; i < indexList.length; i++) {
+                arr.push(Namelist[indexList[i] - 1]);
+            }
+            //console.log("通过索引获取姓名:"+arr.join(','));
+            return arr;
+        }
+
+        //返回所有可参与抽奖用户 过滤已中奖用户
+        function handleNestUzaiList(initList) {
+            var ck = $.cookie(ckName);
+            if (ck != null && ck != '' & ck != undefined) {
+                var ckList = ck.split(',');
+                var ckLength = ckList.length;
+                var temp = initList;
+                for (var i = 0; i < ckLength; i++) {
+                    temp = $.grep(temp, function (v, k) {
+                        return v != ckList[i];
+                    });
+                }
+                //debugger;
+                return temp;
+            }
+            return initList;
+        }
+
+        function handleNameList() {
+            var newUzaiList = handleNestUzaiList(uzaiList);
+            //console.log("已中奖用户:" + $.cookie(ckName));
+            //console.log("参与中奖用户:" + newUzaiList.join(','));
+            var uzaiLength = newUzaiList.length;
+            if (uzaiLength >= vNum) {
+                var firstNameIndex = renderNum(vNum, uzaiLength, 1);//随机抽中11个进行旋转;注意，数据不包含0
+                firstNameArr = getNameListValue(newUzaiList, firstNameIndex);//从新公司人员数中，首次获取这11个随机真实姓名数组
+                //console.log("将可能中奖用户索引:" + firstNameIndex.join(','));
+                //var rIndex = Math.round(Math.random() * (firstNameArr.length - 1));//真正抽中的1个用户数组索引;
+                //realNameArr = firstNameArr[rIndex];//呈上，从获取的11个真实姓名中，抽取其1真实姓名字符
+                realNameArr = firstNameArr[0];
+            }
+            else {
+                alert("抽奖人数不得少于" + vNum + "人");
+            }
+        }
+
+
+    </script>
+
+</head>
+<body>
+
+    <div class="main">
+        <div class="scroller-box">
+        <div class="scroller" id="scroller">
+             
+             <ul class="uzai-empty">
+                <li class="empty"></li>
+                <li class="empty"></li>
+                <li class="empty"></li>
+            </ul>
+
+            <div class="uzai-list">
+ 
+            </div>
+
+           
+
+        </div>
+        </div>
+        <div class="handler">
+         <div class="handler-box">
+              <div class="ball ball-true"></div>
+                <div class="holder"></div>
+         </div>
+     </div>
+    </div>
+
+</body>
+</html>
+

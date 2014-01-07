@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content=" charset=utf-8" />
+    <title>悠哉2014年会抽奖</title>
+    <link href="/libs/reset.css" rel="stylesheet" />
+    <script src="/libs/jquery-2.0.3.min.js"></script>
+    <script src="gsap/minified/TweenMax.min.js"></script>
+    <style type="text/css">
+        body { background: #a4170b url(cj.jpg) no-repeat center 0; }
+
+
+        .hide { display:none;}
+
+        .main { width: 715px; position: relative; margin: 388px auto 0; }
+        .scroller { width: 620px; margin: 0 0 0 55px; height: 235px; overflow:hidden;}
+        .scroller ul { width: 700px; height: 235px;}
+        .scroller li { width: 180px; height: 235px; float: left; margin-right: 39px; line-height: 235px; font-weight: bold; font-family: 'Microsoft YaHei'; text-align: center; font-size: 100px; color: #f60;background:#eee;}
+        .scroller li.empty { background: url(cj3.jpg) no-repeat center 0; }
+
+        .uzai-list { height: 235px; position:relative;-webkit-animation-name: x-spin-2; -webkit-animation-duration: 2s; -webkit-transform-style: preserve-3d; -webkit-animation-iteration-count: 1; -webkit-animation-timing-function: linear;width:620px;}
+        .uzai-list ul{position: absolute;left:0;transition:all ease-in-out 0.2s;}
+
+        .handler { width: 45px; height: 218px; position: absolute; right: -54px; top: -43px; overflow: hidden; -webkit-perspective: 1000px; }
+        .handler-box { width: 45px; height: 218px; background: url(cj2.png) no-repeat center 0;-webkit-transform-style: preserve-3d; -webkit-transition: transform 1s;position: absolute;left:0;top:0; }
+        .handler .ball { cursor: pointer; width: 44px; height: 44px; position:absolute;left:1px;top:0; }
+        .handler .holder { cursor: pointer; width: 44px; height: 174px;position:absolute;left:0;top:44px;}
+
+
+        .handler-box-on { 
+         -webkit-transform: rotateX( -180deg ) translateZ( 199px );
+         -moz-transform: rotateX( -180deg ) translateZ( 199px );
+           -o-transform: rotateX( -180deg ) translateZ( 199px );
+              transform: rotateX( -180deg ) translateZ( 199px );
+        }
+
+         @-webkit-keyframes x-spin-2 {
+            0% { -webkit-transform: rotateX(720deg); }
+            50% { -webkit-transform: rotateX(360deg); }
+            100% { -webkit-transform: rotateX(0deg); }
+        }
+
+    </style>
+
+    <script type="text/javascript">
+        $(function () {
+
+            $('.ball').on('click', function () {
+                var o = $(this);
+                var handler = $('.handler');
+                var holder = $('.holder');
+                var handlerBox = $('.handler-box');
+
+                var s = $('.scroller')
+                var sEmpty = s.find('.uzai-empty');
+                var sList = s.find('.uzai-list');
+
+                sEmpty.hide();
+                o.addClass('ball-on')
+
+                if (o.hasClass('ball-on')) {
+                    handlerBox.addClass('handler-box-on');
+                }
+            });
+
+            function tmComplete() {
+                TweenMax.to('.handler', 0.6, {
+                    css: { transform: "translateZ(0) rotateX(0)", height: 'auto', top: '-43px' },
+                    onComplete: tmComplete,
+                },2);
+            }
+
+        });
+    </script>
+
+</head>
+<body>
+
+    <div class="main">
+        <div class="scroller">
+            <ul class="uzai-empty hide">
+                <li class="empty"></li>
+                <li class="empty"></li>
+                <li class="empty"></li>
+            </ul>
+
+            <div class="uzai-list">
+                <ul style="-webkit-transform: rotateX(0deg) translateZ(235px);">
+                    <li class="li1">夏</li>
+                    <li class="li2">力</li>
+                    <li class="li3"></li>
+                </ul>
+
+                <ul style="-webkit-transform: rotateX(30deg) translateZ(235px);">
+                    <li class="li1">陈</li>
+                    <li class="li2">静</li>
+                    <li class="li3"></li>
+                </ul>
+
+                <ul style="-webkit-transform: rotateX(60deg) translateZ(235px);">
+                    <li class="li1">陆</li>
+                    <li class="li2">离</li>
+                    <li class="li3">生</li>
+                </ul>
+
+
+                <ul style="-webkit-transform: rotateX(90deg) translateZ(235px);">
+                    <li class="li1">董</li>
+                    <li class="li2">逸</li>
+                    <li class="li3">云</li>
+                </ul>
+
+                <ul style="-webkit-transform: rotateX(120deg) translateZ(235px);">
+                    <li class="li1">肖</li>
+                    <li class="li2">家</li>
+                    <li class="li3">强</li>
+                </ul>
+
+                <ul style="-webkit-transform: rotateX(150deg) translateZ(235px);">
+                    <li class="li1">陆</li>
+                    <li class="li2">亮</li>
+                    <li class="li3"></li>
+                </ul>
+
+                <ul style="-webkit-transform: rotateX(180deg) translateZ(235px);">
+                    <li class="li1">戚</li>
+                    <li class="li2">浩</li>
+                    <li class="li3"></li>
+                </ul>
+
+                <ul style="-webkit-transform: rotateX(210deg) translateZ(235px);">
+                    <li class="li1">谭</li>
+                    <li class="li2">喜</li>
+                    <li class="li3">生</li>
+                </ul>
+
+                <ul style="-webkit-transform: rotateX(240deg) translateZ(235px);">
+                    <li class="li1">涂</li>
+                    <li class="li2">丁</li>
+                    <li class="li3">一</li>
+                </ul>
+
+                <ul style="-webkit-transform: rotateX(270deg) translateZ(235px);">
+                    <li class="li1">张</li>
+                    <li class="li2">雪</li>
+                    <li class="li3"></li>
+                </ul>
+
+                <ul style="-webkit-transform: rotateX(300deg) translateZ(235px);">
+                    <li class="li1">沈</li>
+                    <li class="li2">菁</li>
+                    <li class="li3"></li>
+                </ul>
+
+                <ul style="-webkit-transform: rotateX(330deg) translateZ(235px);">
+                    <li class="li1">宋</li>
+                    <li class="li2">迪</li>
+                    <li class="li3">元</li>
+                </ul>
+
+
+
+            </div>
+
+
+        </div>
+        <div class="handler">
+         <div class="handler-box">
+              <div class="ball"></div>
+                <div class="holder"></div>
+         </div>
+     </div>
+    </div>
+
+</body>
+</html>
+

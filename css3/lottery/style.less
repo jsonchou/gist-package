@@ -1,0 +1,55 @@
+﻿@import "/libs/reset.less";
+/*******************CSS RESET END*************************/
+
+.subRotate(@v1:0deg,@v2:235px){ -moz-transform: rotateX(@v1) translateZ(@v2); -webkit-transform: rotateX(@v1) translateZ(@v2); transform: rotateX(@v1) translateZ(@v2); }
+.rotate(@v:45deg) { -moz-transform:rotate(@v);-webkit-transform:rotate(@v);transform:rotate(@v);}
+
+body { background: #a0150a url(cj.jpg) no-repeat center 0;}
+
+.hide { display: none; }
+
+.main { position: relative; width: 640px; height: 559px; margin: 79px auto; }
+.scroller-box { background: url(tiger.png) no-repeat 0 0; width: 640px; height: 559px;position:relative;z-index:99; }
+.scroller { width: 620px; height: 210px; overflow: hidden;position:relative;z-index:99;margin:309px 0 0 37px;display:inline-block; }
+.scroller ul { width: 750px;height: 210px; }
+.scroller li { width: 158px; height: 210px; float: left; margin-right: 35px; line-height: 210px; font-weight: bold; font-family: 'Microsoft YaHei'; text-align: center; font-size: 100px; color: #f60; background: #eee;overflow:hidden; }
+.scroller li.empty { background: url(cj3.jpg) no-repeat center 0; }
+.uzai-empty{ position:absolute;z-index:99;left:0;top:0;z-index:99;}
+
+.uzai-list { height: 210px; position: absolute; left:0;top:0;width: 620px;z-index:9; }
+.uzai-list ul {  position:absolute;left:0; }
+
+.uzai-list-on { -webkit-animation-name: x-spin-2; -webkit-animation-duration: 2s; -webkit-transform-style: preserve-3d; -webkit-animation-iteration-count: 1; -webkit-animation-timing-function: linear; }
+.uzai-list-on { -moz-animation-name: x-spin-2; -moz-animation-duration: 2s; -moz-transform-style: preserve-3d; -moz-animation-iteration-count: 1; -moz-animation-timing-function: linear; }
+
+/*.uzai-list-on ul { transition: all ease-in-out 2s; }*/
+
+.uzai-list-on ul:nth-child(1) {.subRotate(0deg); }
+.uzai-list-on ul:nth-child(2) {.subRotate(30deg); }
+.uzai-list-on ul:nth-child(3) {.subRotate(60deg); }
+.uzai-list-on ul:nth-child(4) {.subRotate(90deg); }
+.uzai-list-on ul:nth-child(5) {.subRotate(120deg); }
+.uzai-list-on ul:nth-child(6) {.subRotate(150deg); }
+.uzai-list-on ul:nth-child(7) {.subRotate(180deg); }
+.uzai-list-on ul:nth-child(8) {.subRotate(210deg); }
+.uzai-list-on ul:nth-child(9) {.subRotate(240deg); }
+.uzai-list-on ul:nth-child(10) {.subRotate(270deg); }
+.uzai-list-on ul:nth-child(11) {.subRotate(300deg); }
+.uzai-list-on ul:nth-child(12) {.subRotate(330deg); }
+
+.handler { perspective: 1000px; width: 42px; height: 187px; position: absolute; right: -79px; top: 315px; overflow: hidden; transform-style: preserve-3d;z-index:1; .rotate();}
+.handler-box { width: 42px; height: 187px; background: url(cj2.png) no-repeat center 0; }
+.handler .ball { cursor: pointer; width: 42px; height: 44px; position: absolute; left: 1px; top: 0; }
+.handler .holder { cursor: pointer; width: 42px; height: 174px; position: absolute; left: 0; top: 44px; }
+
+@-webkit-keyframes x-spin-2 {
+    0% { -webkit-transform: rotateX(720deg); }
+    50% { -webkit-transform: rotateX(360deg); }
+    100% { -webkit-transform: rotateX(0deg); }
+}
+
+@-moz-keyframes x-spin-2 {
+    0% { -moz-transform: rotateX(720deg); }
+    50% { -moz-transform: rotateX(360deg); }
+    100% { -moz-transform: rotateX(0deg); }
+}
