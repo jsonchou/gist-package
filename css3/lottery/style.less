@@ -1,10 +1,12 @@
-﻿@import "/libs/reset.less";
+﻿@import "reset.less";
 /*******************CSS RESET END*************************/
 
 .subRotate(@v1:0deg,@v2:235px){ -moz-transform: rotateX(@v1) translateZ(@v2); -webkit-transform: rotateX(@v1) translateZ(@v2); transform: rotateX(@v1) translateZ(@v2); }
 .rotate(@v:45deg) { -moz-transform:rotate(@v);-webkit-transform:rotate(@v);transform:rotate(@v);}
 
 body { background: #a0150a url(cj.jpg) no-repeat center 0;}
+
+html, body { -moz-user-select: none; -khtml-user-select: none; user-select: none; }
 
 .hide { display: none; }
 
@@ -19,8 +21,8 @@ body { background: #a0150a url(cj.jpg) no-repeat center 0;}
 .uzai-list { height: 210px; position: absolute; left:0;top:0;width: 620px;z-index:9; }
 .uzai-list ul {  position:absolute;left:0; }
 
-.uzai-list-on { -webkit-animation-name: x-spin-2; -webkit-animation-duration: 2s; -webkit-transform-style: preserve-3d; -webkit-animation-iteration-count: 1; -webkit-animation-timing-function: linear; }
-.uzai-list-on { -moz-animation-name: x-spin-2; -moz-animation-duration: 2s; -moz-transform-style: preserve-3d; -moz-animation-iteration-count: 1; -moz-animation-timing-function: linear; }
+.uzai-list-on { -webkit-animation-name: x-spin-2; -webkit-animation-duration: 2s; -webkit-transform-style: preserve-3d; -webkit-animation-iteration-count: infinite; -webkit-animation-timing-function: linear; }
+.uzai-list-on { -moz-animation-name: x-spin-2; -moz-animation-duration: 2s; -moz-transform-style: preserve-3d; -moz-animation-iteration-count: infinite; -moz-animation-timing-function: linear; }
 
 /*.uzai-list-on ul { transition: all ease-in-out 2s; }*/
 
@@ -37,19 +39,18 @@ body { background: #a0150a url(cj.jpg) no-repeat center 0;}
 .uzai-list-on ul:nth-child(11) {.subRotate(300deg); }
 .uzai-list-on ul:nth-child(12) {.subRotate(330deg); }
 
-.handler { perspective: 1000px; width: 42px; height: 187px; position: absolute; right: -79px; top: 315px; overflow: hidden; transform-style: preserve-3d;z-index:1; .rotate();}
-.handler-box { width: 42px; height: 187px; background: url(cj2.png) no-repeat center 0; }
-.handler .ball { cursor: pointer; width: 42px; height: 44px; position: absolute; left: 1px; top: 0; }
-.handler .holder { cursor: pointer; width: 42px; height: 174px; position: absolute; left: 0; top: 44px; }
+.handler { width:210px;height:79px;position:absolute;z-index:1;left:200px;top:580px;cursor:pointer;text-align:center;background:url(cj5.jpg) no-repeat 0 0;color:#fff;line-height:79px;font-size:35px;font-family:'Microsoft YaHei'}
+ 
+
 
 @-webkit-keyframes x-spin-2 {
-    0% { -webkit-transform: rotateX(720deg); }
-    50% { -webkit-transform: rotateX(360deg); }
+    0% { -webkit-transform: rotateX(1440deg); }
+    50% { -webkit-transform: rotateX(720deg); }
     100% { -webkit-transform: rotateX(0deg); }
 }
 
 @-moz-keyframes x-spin-2 {
-    0% { -moz-transform: rotateX(720deg); }
-    50% { -moz-transform: rotateX(360deg); }
+    0% { -moz-transform: rotateX(1440deg); }
+    50% { -moz-transform: rotateX(720deg); }
     100% { -moz-transform: rotateX(0deg); }
 }
