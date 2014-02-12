@@ -1,10 +1,44 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <script src="/libs/knockout-3.0.0.js"></script>
+    <meta charset="utf-8" />
+    <title>JS Bin</title>
 </head>
 <body>
+
+    <input type="text" data-bind="value: item, valueUpdate: 'afterkeydown'" />
+    <input data-bind="click: add,enable:item().length>0" type="button" value="添加" />
+
+    <div class="box ">
+        <select multiple="multiple" data-bind="options: items, selectedOptions: itemFocus" style="width: 80%; padding: 10px;"></select>
+    </div>
+
+    <input data-bind="click: remove, enable: itemFocus().length > 0" type="button" value="移除" />
+<input data-bind="click: sort, enable: items().length > 2" type="button" value="排序" />
+
+
+     <script type="text/javascript">
+         var addToSelectModel = function (items) {
+             this.items = ko.observableArray(items);
+             this.item = ko.observable("");
+             this.itemFocus = ko.observableArray(["c"]);
+             this.add = function () {
+                 if (this.item() != '') {
+                     this.items.push(this.item());
+                     this.item("");
+                 }
+             }
+             this.remove = function () {
+                 this.items.removeAll(this.itemFocus());
+                 itemFocus([]);
+             }
+             this.sort = function () {
+                 this.items.sort();
+             }
+         }
+         ko.applyBindings(new addToSelectModel(["a", "b", "c"]));
+    </script>
 
 </body>
 </html>
