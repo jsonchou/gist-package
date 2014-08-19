@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas Filter</title>
+	<link rel="stylesheet" href="http://r01.uzaicdn.com/content/v1/styles/base.css">
+	<script src="/libs/jquery-2.0.3.min.js"></script>
+	<script src="jsonCanvasFilter.js"></script>
+	<script src="filter.js"></script>
+	<style>
+	.wrap{width:800px;margin: 0 auto;}
+	.bar{width: 100px;position: fixed;}
+	.bar input{background:#f90;border: 0;color: #fff;width: 100px;line-height: 26px;margin-bottom: 5px;background-color: rgba(0,0,0,.5)}
+	</style>
+</head>
+<body>
+
+<div class="wrap">
+	<div class="bar tc fl" id="j_bar">
+		<input type="button" class="init" value="原图">	
+		<input type="button" class="grayscale" value="灰度">	
+		<input type="button" class="sepia" value="复古">	
+		<input type="button" class="red" value="红色蒙版">
+		<input type="button" class="green" value="绿色蒙版">	
+		<input type="button" class="blue" value="蓝色蒙版">	
+		<input type="button" class="brightness" value="亮度">	
+		<input type="button" class="invert" value="反转">
+		<input type="button" class="mirror" value="镜像">
+		<input type="button" class="sculpture" value="雕刻">
+		<input type="button" class="relief" value="浮雕">
+		<input type="button" class="blur" value="模糊">
+	</div>
+
+	<div class="box tc" id="j_box">
+		<canvas id="can" width="800" height="1200"></canvas>
+	</div>
+</div>
+
+
+</body>
+</html>
