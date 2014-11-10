@@ -1,0 +1,20 @@
+﻿[
+    {
+        "id": 12,
+        "age": 111,
+        "name": "json",
+        "sex": "1",
+        "address": "shanghai",
+        "avator": "http://r.uzaicdn.com/IndexManagerImageUrl/201408190938440818-首页右侧-塞班.jpg"
+
+    },
+    {
+        "id": 17,
+        "age": 15,
+        "name": "chou",
+        "sex": "0",
+        "address": "beijing",
+        "avator": "http://r.uzaicdn.com/IndexManagerImageUrl/201408190938440818-首页右侧-塞班.jpg"
+    }
+
+]
