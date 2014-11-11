@@ -1,7 +1,5 @@
-﻿var phonecatApp = angular.module('phonecatApp', [
-'ngRoute',
-'phonecatControllers'
-]);
+﻿var phonecatApp = angular.module('phonecatApp', ['ngRoute', 'phonecatControllers', 'phonecatFilters', 'phonecatServices']);
+
 
 phonecatApp.config(['$routeProvider',
   function ($routeProvider) {
@@ -10,12 +8,12 @@ phonecatApp.config(['$routeProvider',
             templateUrl: '/angularjs/views/member-list.html',
             controller: 'PhoneListCtrl'
         }).
-        when('/id:phoneId', {
+        when('/list/:pid', {
             templateUrl: '/angularjs/views/member-detail.html',
             controller: 'PhoneDetailCtrl'
         }).
         otherwise({
-            redirectTo: '/phones'
+            redirectTo: '/list'
         });
   }]);
 

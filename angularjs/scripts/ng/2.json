@@ -1,0 +1,20 @@
+﻿{
+    "phoneId": 1,
+    "additionalFeatures": "nfc,3g,wcdma,cdma",
+    "availability": "但是，在开心欢乐之余，我们也不禁地对编译器内部到底为我们做了哪些事儿而感到好奇？于是，我们就借助反编译神器，去看看编译器到底做",
+    "isSupport3G": false,
+    "android": {
+        "os": "Android 5.3",
+        "ui": "Android 5 ui"
+    },
+    "images": [
+        "/angularjs/images/nexus-s.0.jpg",
+        "/angularjs/images/nexus-s.1.jpg",
+        "/angularjs/images/nexus-s.2.jpg",
+        "/angularjs/images/nexus-s.3.jpg"
+    ],
+    "storage": {
+        "flash": "16384MB",
+        "ram": "512MB"
+    }
+}

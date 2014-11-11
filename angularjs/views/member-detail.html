@@ -1,1 +1,25 @@
-﻿detail view for <span>{{phoneId}}</span>
+﻿产品ID： <span>{{phone.phoneId}}</span>
+
+<img ng-src="{{phone.images[0]}}" class="phone">
+
+<h1>{{phone.name}}</h1>
+
+<p>{{phone.description}}</p>
+
+<ul class="phone-thumbs">
+    <li ng-repeat="img in phone.images">
+        <img ng-src="{{img}}">
+    </li>
+</ul>
+
+<ul class="specs">
+    <li class="ab" ng-click="popAb(phone.availability)">
+        {{phone.availability}}
+    </li>
+    <li>支持3G：{{phone.isSupport3G? '\u2713' : '\u2718'}}</li>
+    <li>(更多语法)支持3G：{{phone.isSupport3G|checkmark}}</li>
+    <li ng-repeat="item in phone.additionalFeatures.split(',')">
+        {{item}}
+    </li>
+</ul>
+
