@@ -1,0 +1,9 @@
+﻿<div class="list" id="j_list" ng-controller="MsgListCtrl">
+    <ul>
+        <li class="item" ng-repeat="msg in msgs">
+            <p class="p1">手机：{{msg.mobile}} 邮箱：{{msg.email}}</p>
+            <p class="p2">{{msg.content}}</p>
+            <p class="p3">{{msg.date}}</p>
+        </li>
+    </ul>
+</div>

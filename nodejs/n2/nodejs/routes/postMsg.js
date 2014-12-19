@@ -13,7 +13,7 @@ var msgSchema = mongoose.Schema({
 }, { collection: 'msg' });
 
 //建表
-var msgModel = mongoose.model('msg', msgSchema);
+var msgModel = mongoose.model('msgTest', msgSchema);
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -21,7 +21,7 @@ router.get('/', function(req, res) {
     var phone=req.param('phone');
     var content=req.param('content');
     var email = req.param('email');
-    var date = (new Date().getFullYear()) + '-' + (new Date().getMonth() + 1) + '-' + (new Date().getDay());
+    var date = (new Date().getFullYear()) + '-' + (new Date().getMonth() + 1) + '-' + (new Date().getDate());
        
     // yay!
     var msgData = new msgModel({

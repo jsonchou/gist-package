@@ -1,28 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html ng-app>
   <head>
-    <title>
-      <%= phone %>
-      </title>
+    <title><%= phone %></title>
     <link rel='stylesheet' href='http://r01.uzaicdn.com/content/v1/styles/base.css' />
     <link rel="stylesheet" href="http://r.uzaicdn.com/content/v1/styles/_src/base.css" />
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="http://r01.uzaicdn.com/content/libs/jquery-2.1.1.min.js" type="text/javascript"></script>
+	<script src="/libs/angular.min.js" type="text/javascript"></script>
     <script src="/javascripts/core.js" type="text/javascript"></script>
   </head>
   <body>
-
-    <div class="list" id="j_list">
-      <ul>
-        <li class="item">
-          <p class="p1">手机：<%= phone %> 邮箱：<%= email %></p>
-          <p class="p2"><%= content %></p>
-          <p class="p3"><%= date %></p>
-        </li>
-      </ul>
-    </div>
-
-    
-
+    <div class="list" id="j_list" ng-controller="MsgListCtrl">
+       <ul>
+           <li class="item" ng-repeat="item in msgs">
+               <p class="p1">手机：{{mobile}} 邮箱：{{email}}</p>
+               <p class="p2">{{content}}</p>
+               <p class="p3">{{date}}</p>
+           </li>
+       </ul>
+   </div>
   </body>
 </html>
