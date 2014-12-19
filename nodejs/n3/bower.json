@@ -1,0 +1,15 @@
+{
+    "name": "angular-jsonchou",
+    "description": "A starter project for AngularJS",
+    "version": "0.0.1",
+    "homepage": "https://github.com/angular/angular-phonecat",
+    "license": "MIT",
+    "private": true,
+    "dependencies": {
+        "angular": "~1.3.0",
+        "jquery": "2.1.1",
+        "angular-route": "~1.3.0",
+        "angular-resource": "~1.3.0",
+        "angular-animate": "~1.3.0"
+    }
+}
