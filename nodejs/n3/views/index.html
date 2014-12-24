@@ -1,11 +1,40 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<% include partial/header.html %>
+<% include partial/menu.html %>
+
+<p><%   =title% </p>
+
+<div id='main'>
+    <div id='sidebar'>
+
+        <% include partial/userpanel.html %>
+        <% include partial/ad.html %>
+        <% include partial/friendlink.html %>
+
+    </div>
+
+    <div id='content'>
+        <div class='panel'>
+            <div class='header'>
+                <ul class='breadcrumb'>
+                    <li><a href='/'>主页</a><span class='divider'>/</span></li>
+                    <li class='active'>Node.js 新手入门</li>
+                </ul>
+            </div>
+            <div class='inner topic'>
+                <div class="topic_content">
+                    <div class="markdown-text">
+                        <ul>
+                            <% for(var i=0; i
+                            <msgs.length; i++) {%>
+                                <li><%= msgs[i] %></li>
+                                <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<% include partial/footer.html %>

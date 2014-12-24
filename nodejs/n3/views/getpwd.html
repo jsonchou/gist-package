@@ -1,0 +1,47 @@
+﻿<% include partial/header.html %>
+<% include partial/menu.html %>
+
+<div id='main'>
+    <div id='sidebar'>
+
+        <% include partial/userpanel.html %>
+        <% include partial/ad.html %>
+        <% include partial/friendlink.html %>
+
+    </div>
+
+    <div id='content'>
+        <div class='panel'>
+            <div class='header'>
+                <ul class='breadcrumb'>
+                    <li><a href='/'>主页</a><span class='divider'>/</span></li>
+                    <li class='active'></li>
+                </ul>
+            </div>
+            <div class="inner">
+
+                <form method="post" action="/search_pass" class="form-horizontal" id="search_pass_form">
+                    <div class="control-group">
+                        <label for="email" class="control-label">电子邮箱</label>
+
+                        <div class="controls">
+
+                            <input type="text" size="30" name="email" id="email" class="input-xlarge">
+
+                            <p class="help-block">请输入您注册帐户时使用的电子邮箱</p>
+                        </div>
+                        <input type="hidden" name="_csrf">
+                    </div>
+                    <div class="form-actions">
+                        <input type="submit" value="提交" class="span-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<% include partial/footer.html %>
+
+

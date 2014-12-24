@@ -1,0 +1,58 @@
+﻿<% include partial/header.html %>
+<% include partial/menu.html %>
+
+<div id='main'>
+    <div id='sidebar'>
+
+        <% include partial/userpanel.html %>
+        <% include partial/ad.html %>
+        <% include partial/friendlink.html %>
+
+    </div>
+
+    <div id='content'>
+        <div class='panel'>
+            <div class='header'>
+                <ul class='breadcrumb'>
+                    <li><a href='/'>主页</a><span class='divider'>/</span></li>
+                    <li class='active'>Node.js 新手入门</li>
+                </ul>
+            </div>
+            <div class="inner">
+
+                <form method="post" action="/signup" class="form-horizontal" id="signin_form">
+                    <div class="control-group">
+                        <label for="email" class="control-label">邮箱</label>
+
+                        <div class="controls">
+                            <input type="text" size="30" name="email" id="email" class="input-xlarge">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="pass" class="control-label">密码</label>
+
+                        <div class="controls">
+                            <input type="password" size="30" name="pass" id="pass" class="input-xlarge">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="pass" class="control-label">密码</label>
+
+                        <div class="controls">
+                            <input type="password" size="30" name="pass" id="pass" class="input-xlarge">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input type="submit" value="注册" class="span-primary">
+                    </div>
+
+                     
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<% include partial/footer.html %>
