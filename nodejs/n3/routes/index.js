@@ -15,15 +15,10 @@ router.get('/', function (req, res) {
     
     topicModel.getAll(function (err, docs) {
         console.log('####################---' + new Date().getMinutes());
-        res.render('index', { topics: docs,title:"Node js" });
+        res.render('index', { topics: docs,title:"Node js index" });
         console.log('####################');
     });
      
-    //console.log('####################' + new Date().getMinutes());
-    //console.log(docs);
-    //console.log('####################');
-
-
 });
 
 module.exports = router;

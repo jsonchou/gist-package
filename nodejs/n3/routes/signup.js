@@ -9,7 +9,7 @@ var userModel = new mongoHelper(models.User);
 
 // mongoose 链接
 
-router.get('/signup', function (req, res) {
+router.get('/', function (req, res) {
 
     res.render('signup', { title: '注册' });
 
@@ -21,11 +21,11 @@ router.get('/signup', function (req, res) {
 
 });
 
-router.post('/signup', function (req, res) {
+router.post('/', function (req, res) {
 
-    var email = req.params('email');
-    var pwd = req.params('pwd');
-    var repwd = req.params('repwd');
+    var email = req.body.email
+    var pwd = req.body.pwd;
+    var repwd = req.body.repwd;
 
     var doc = {
         email: email,
@@ -34,9 +34,10 @@ router.post('/signup', function (req, res) {
 
     if (!repwd || !pwd || !email) {
         res.status(500).render('signup', { title: '请正确填写您的信息' });
-    } else {
+    }
+    else {
         if (pwd != repwd) {
-            res.status(500).render('signup', {  title: '确认密码不正确' });
+            res.status(500).render('signup', { title: '确认密码不正确' });
         } else {
             userModel.getByQuery({ email: email }, [], function (error, model) {
                 if (model.lenght > 0) {
