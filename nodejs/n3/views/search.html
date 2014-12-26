@@ -1,4 +1,4 @@
-<% include partial/header.html %>
+﻿<% include partial/header.html %>
 <% include partial/menu.html %>
 
 <div id='main'>
@@ -15,17 +15,13 @@
             <div class='header'>
                 <ul class='breadcrumb'>
                     <li><a href='/'>主页</a><span class='divider'>/</span></li>
-                    <li class='active'><%=title%></li>
+                    <li class='active'>搜索<b><%=tag%></b>的结果页</li>
                 </ul>
             </div>
             <div class='inner topic'>
                 <div class="topic_content">
                     <div class="markdown-text">
-                        <ul>
-                            <% for(var i=0; i<topics.length; i++) {%>
-                                <li><%= topics[i] %></li>
-                                <% } %>
-</ul>
+                        <%=tag%>
                     </div>
                 </div>
             </div>

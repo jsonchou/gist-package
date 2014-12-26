@@ -3,11 +3,11 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res) {
-  res.send('respond with a resource');
+  res.render('respond with a resource');
 });
 
 router.get('/id', function(req, res) {
-    res.send('respond with a resource id');
+    res.render('respond with a resource id');
 });
 
 module.exports = router;

@@ -1,4 +1,4 @@
-﻿<% include partial/header.html %>
+<% include partial/header.html %>
 <% include partial/menu.html %>
 
 <div id='main'>
@@ -15,7 +15,7 @@
             <div class='header'>
                 <ul class='breadcrumb'>
                     <li><a href='/'>主页</a><span class='divider'>/</span></li>
-                    <li class='active'>Node.js 新手入门</li>
+                    <li class='active'><%=title%></li>
                 </ul>
             </div>
             <div class="inner">
@@ -32,14 +32,14 @@
                         <label for="pass" class="control-label">密码</label>
 
                         <div class="controls">
-                            <input type="password" size="30" name="pass" id="pass" class="input-xlarge">
+                            <input type="password" size="30" name="pwd" id="pwd" class="input-xlarge">
                         </div>
                     </div>
                     <div class="control-group">
-                        <label for="pass" class="control-label">密码</label>
+                        <label for="pass" class="control-label">确认密码</label>
 
                         <div class="controls">
-                            <input type="password" size="30" name="pass" id="pass" class="input-xlarge">
+                            <input type="password" size="30" name="repwd" id="repwd" class="input-xlarge">
                         </div>
                     </div>
 

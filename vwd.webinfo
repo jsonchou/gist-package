@@ -13,6 +13,8 @@
   
     
   
-    <UserProperties angularjs_2bower_1json__JSONSchema="" angularjs_2scripts_2ng_2mv-1_1json__JSONSchema=""/>
+    
+  
+    <UserProperties nodejs_2n3_2package_1json__JSONSchema="" angularjs_2bower_1json__JSONSchema="" angularjs_2scripts_2ng_2mv-1_1json__JSONSchema=""/>
   </Globals>
 </VisualWebDeveloper>
