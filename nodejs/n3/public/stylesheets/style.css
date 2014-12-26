@@ -1,8 +1,130 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; }
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section { display: block; }
 
-a {
-  color: #00B7FF;
-}
+ol, ul, menu { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after,
+q:before, q:after { content: ''; content: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+
+/* customize by jsonchou */
+
+/* grid */
+.g1 { width:10%;}
+.g2 { width:20%;}
+.g3 { width:30%;}
+.g4 { width:40%;}
+.g5 { width:50%;}
+.g6 { width:60%;}
+.g7 { width:70%;}
+.g8 { width:80%;}
+.g9 { width:90%;}
+.g10 { width:100%;}
+
+a { color: #333; text-decoration: none; }
+img{ vertical-align: middle;}
+
+input[type=submit], button { cursor: pointer;}
+strong, b, .b { font-weight: bold; }
+em, i{ font-style:normal;}
+.u { text-decoration: underline; }
+
+.center { text-align: center; }
+.tr { text-align: right; }
+.tl { text-align: left; }
+.tc { text-align: center; }
+
+.fr { float: right; }
+.fl { float: left; }
+
+.f333 { color:#333;}
+.f666 { color:#666;}
+.f999 { color:#999;}
+
+.f10 { font-size: 10px; }
+.f11 { font-size: 11px; }
+.f12 { font-size: 12px; }
+.f13 { font-size: 13px; }
+.f14 { font-size: 14px; }
+.f15 { font-size: 15px; }
+.f16 { font-size: 16px; }
+.f18 { font-size: 18px; }
+.f20 { font-size: 20px; }
+.f24 { font-size: 24px; }
+.f26 { font-size: 26px; }
+
+.yahei { font-family: "Microsoft YaHei"; }
+.songti { font-family:SimSun;}
+.verdana { font-family:Verdana;}
+
+.vm { vertical-align:middle;}
+.vb{ vertical-align: bottom;}
+
+.mt5 { margin-top: 5px; }
+.mr5 { margin-right: 5px; }
+.mb5 { margin-bottom: 5px; }
+.ml5 { margin-left: 5px; }
+.mt10 { margin-top: 10px; }
+.mr10 { margin-right: 10px; }
+.mb10 { margin-bottom: 10px; }
+.ml10 { margin-left: 10px; }
+.mt15 { margin-top: 15px; }
+.mb15 { margin-bottom: 15px; }
+
+.p5 { padding:5px;}
+.p10 { padding:10px;}
+.pt5 { padding-top: 5px; }
+.pr5 { padding-right: 5px; }
+.pb5 { padding-bottom: 5px; }
+.pl5 { padding-left: 5px; }
+.pt10 { padding-top: 10px; }
+.pr10 { padding-right: 10px; }
+.pb10 { padding-bottom: 10px; }
+.pl10 { padding-left: 10px; }
+
+.lh1 { line-height:1;}
+.lh2 { line-height:2;}
+.lh3 { line-height:3;}
+
+.pointer { cursor:pointer;}
+.noborder { border:0 none;}
+
+.clearfix:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+.clearfix { display: inline-table; }
+* html .clearfix { height: 1%; }
+.clearfix { display: block; *zoom:1;}
+
+.show,.block { display: block; }
+.hide,.none { display: none; }
+
+.black { color:#000;}
+.white { color:#fff;}
+.orange { color:#f60;}
+.blue { color:#36c;}
+.green { color:#49a100;}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] { cursor: pointer; -webkit-appearance: button; }
+
+.red{color:red;}
+
+body { line-height: 1.5; font-family: simsun,Arial,"Microsoft yahei"; color: #333; font-size: 12px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+
+/*½ûÖ¹ÈÎºÎÐÞ¸Ä*/
