@@ -35,8 +35,8 @@ router.post('/', function (req, res) {
 
         if (models.length > 0) {
             //登录成功
-            var ed = 3600000 * 24 * 7;//7天过期
-            res.cookie('user', email, { path: '/', expires: new Date(Date.now() + ed), maxAge: ed }); //7天
+            var ex = 3600000 * 24 * 7;//7天过期
+            res.cookie('user', email, { path: '/', expires: new Date(Date.now() + ex), maxAge: ex }); //7天
 
             var json = {
                 title: '登录',
@@ -47,13 +47,11 @@ router.post('/', function (req, res) {
         } else {
             var json = {
                 title: '登录',
-                msg: '账号密码不相符，请重新登录'
+                msg: '* 账号密码不相符，请重新登录'
             };
-            res.redirect('/signin', json);
+            res.render('signin', json);
         }
     });
 });
-
-    
 
 module.exports = router;

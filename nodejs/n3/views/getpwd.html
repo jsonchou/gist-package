@@ -20,7 +20,7 @@
             </div>
             <div class="inner">
 
-                <form method="post" action="/search_pass" class="form-horizontal" id="search_pass_form">
+                <form method="post" action="/getpwd" class="form-horizontal" id="getpwd_form">
                     <div class="control-group">
                         <label for="email" class="control-label">电子邮箱</label>
 
@@ -34,6 +34,7 @@
                     </div>
                     <div class="form-actions">
                         <input type="submit" value="提交" class="span-primary">
+                        <span class="red ml10 f12"><%=msg%></span>
                     </div>
                 </form>
             </div>

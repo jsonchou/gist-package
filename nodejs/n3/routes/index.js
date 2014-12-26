@@ -13,9 +13,14 @@ var db = mongoose.connect(config.db.host);
 /* GET home page. */
 router.get('/', function (req, res) {
     
+    var json = { 
+        topics: [],
+        title:"Node js index"
+    }
     topicModel.getAll(function (err, docs) {
         console.log('####################---' + new Date().getMinutes());
-        res.render('index', { topics: docs,title:"Node js index" });
+        json.topics = docs;
+        res.render('index', json);
         console.log('####################');
     });
      
