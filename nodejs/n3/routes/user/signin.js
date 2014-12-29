@@ -1,12 +1,13 @@
 var express = require('express');
 var crypto = require('crypto');
 var router = express.Router();
-var config = require('../config.js');//数据配置文件
 var mongoose = require('mongoose');
-var mongoHelper = require('../dao/mongohelper');
+var mongoHelper = require('../../dao/mongoHelper');
 
-var user = require('./../models/userModel').User;
+var user = require('../../models/userModel').User;
 var userModel = new mongoHelper(user);
+
+var config = require('../../config');
 
 // mongoose 链接
 
@@ -33,17 +34,18 @@ router.post('/', function (req, res) {
 
     userModel.getByQuery(json, {}, {}, function (error, models) {
 
-        if (models.length > 0) {
+        if (models&&models.length > 0) {
             //登录成功
-            var ex = 3600000 * 24 * 7;//7天过期
+            var ex = 3600000 * 24 * parseInt(config.site.cookieAge);//默认7天过期
             res.cookie('user', email, { path: '/', expires: new Date(Date.now() + ex), maxAge: ex }); //7天
 
             var json = {
                 title: '登录',
                 user: email,
+                topics: [],
                 msg:''
             };
-            res.render('signin', json);
+            res.render('index', json);//登录成功，回到首页
         } else {
             var json = {
                 title: '登录',

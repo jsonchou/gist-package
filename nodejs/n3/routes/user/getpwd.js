@@ -1,12 +1,15 @@
 var express = require('express');
 var router = express.Router();
-var email = require("../services/email");
-var guid = require('../services/guid');//生成guid
+var emailPoster = require("../../services/email");
+var guid = require('../../services/guid');//生成guid
+
 var crypto = require('crypto');
 var mongoose = require('mongoose');
-var mongoHelper = require('../dao/mongohelper');
+var mongoHelper = require('../../dao/mongoHelper');
 
-var user = require('./../models/userModel').User;
+var config = require("../../config");
+
+var user = require('../../models/userModel').User;
 var userModel = new mongoHelper(user);
 
 /* GET users listing. */
@@ -40,7 +43,7 @@ router.post('/', function (req, res) {
             //修改密码
             userModel.update(data, { pwd: md5.digest('hex') }, {}, function (error, numAffected) {
                 //发送邮件
-                var poster = new email('onlyone_329@163.com', data.email, '账户认证', '您的新密码为：' + code + ",若有必要，请重新修改密码");
+                var poster = new emailPoster(config.email.email, data.email, '悠哉网账户--获取密码', '您的新密码为：' + code + ",若有必要，请重新<a href='" + config.site.url + "/userinfo'>修改</a>密码");
                 poster.send();
 
                 res.clearCookie('user', { path: '/' });

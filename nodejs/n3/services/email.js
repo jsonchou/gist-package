@@ -1,5 +1,6 @@
 ﻿var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
+var config = require("../config");
 
 //如果您的邮件客户端不在上述列出的范围内，您可以尝试如下通用配置：
 //接收邮件服务器：imap.qq.com
@@ -17,10 +18,10 @@ function email(from, to, subject, html) {
 
 email.prototype.send = function () {
     var transport = nodemailer.createTransport(smtpTransport({
-        host: 'smtp.163.com',
+        host: config.email.host,
         auth: {
-            user: 'onlyone_329@163.com',
-            pass: 'amwewihcv128'
+            user: config.email.email,
+            pass: config.email.pass
         }
     }));
 

@@ -1,12 +1,17 @@
 var express = require('express');
 var crypto = require('crypto');
 var router = express.Router();
-var config = require('../config.js');//数据配置文件
 var mongoose = require('mongoose');
-var mongoHelper = require('../dao/mongohelper');
+var mongoHelper = require('../../dao/mongoHelper');
 
-var models = require('./../models/userModel');
-var userModel = new mongoHelper(models.User);
+var user = require('../../models/userModel').User;
+var userModel = new mongoHelper(user);
+
+var config = require("../../config");
+var emailPoster = require("../../services/email");
+
+var util = require('../../services/util');
+var jc = new util();
 
 // mongoose 链接
 
@@ -17,13 +22,7 @@ router.get('/', function (req, res) {
         msg: ''
     }
     res.render('signup', json);
-
-    //userModel.getAll(function (err, docs) {
-    //    console.log('####################---' + new Date().getMinutes());
-    //    res.render('signup', { title: '注册' });
-    //    console.log('####################');
-    //});
-
+ 
 });
 
 router.post('/', function (req, res) {
@@ -56,21 +55,21 @@ router.post('/', function (req, res) {
             res.status(500).render('signup', json);
         } else {
             userModel.getByQuery({ email: email }, {}, {}, function (error, models) {
-                if (models.lenght > 0) {
+                if (models && models.length>0) {
                     json.msg = '用户邮箱' + email + '已注册';
                     res.status(500).render('signup', json);
                 } else {
                     userModel.create(data, function (err) {
                         if (!err) {
-                            //res.cookie('user', email, { domain: '.example.com', path: '/', secure: true });
-                            //过期时间7天
-                            //res.cookie('user', email, { path: '/', expires: new Date(Date.now() + 60*60*24*7), secure: true });
-                            json.msg = '用户注册成功';
-                            res.render('signup',json);
+
+                            //发送邮件
+                            var poster = new emailPoster(config.email.email, data.email, '悠哉网账户--用户注册', '新用户：' + data.email + ",您好，悠哉网欢迎您！");
+                            poster.send();
+
+                            res.redirect('/signin');
+
                         } else {
-                            console.log('####################---' + new Date().getMinutes());
-                            console.log(err);
-                            console.log('####################');
+                            jc.log(err);
                         }
                     });
                 }

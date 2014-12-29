@@ -10,12 +10,15 @@ var ejs = require('ejs');
 var index = require('./routes/index');
 var hi = require('./routes/hi');
 var users = require('./routes/users');
-var signin = require('./routes/signin');
-var signup = require('./routes/signup');
-var signout = require('./routes/signout');
 var about = require('./routes/about');
-var getpwd = require('./routes/getpwd');
 var search = require('./routes/search');
+
+//user
+var signin = require('./routes/user/signin');
+var signup = require('./routes/user/signup');
+var userinfo = require('./routes/user/userinfo');
+var signout = require('./routes/user/signout');
+var getpwd = require('./routes/user/getpwd');
 
 var app = express();
 
@@ -40,6 +43,7 @@ app.use('/hi', hi);
 app.use('/users', users);
 app.use('/signup', signup);
 app.use('/signin', signin);
+app.use('/userinfo', userinfo);
 app.use('/signout', signout);
 app.use('/about', about);
 app.use('/getpwd', getpwd);
