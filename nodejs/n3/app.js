@@ -9,10 +9,16 @@ var ejs = require('ejs');
 
 var index = require('./routes/index');
 var hi = require('./routes/hi');
-var users = require('./routes/users');
 var about = require('./routes/about');
-var search = require('./routes/search');
 
+//search
+var search = require('./routes/search/search');
+//tag
+var tag = require('./routes/tag/tag');
+//topic
+var topic = require('./routes/topic/topic');
+//comment
+var comment = require('./routes/comment/comment');
 //user
 var signin = require('./routes/user/signin');
 var signup = require('./routes/user/signup');
@@ -40,14 +46,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/hi', hi);
-app.use('/users', users);
+app.use('/about', about);
+
+//user
 app.use('/signup', signup);
 app.use('/signin', signin);
 app.use('/userinfo', userinfo);
 app.use('/signout', signout);
-app.use('/about', about);
 app.use('/getpwd', getpwd);
+//search
 app.use('/search', search);
+//tag
+app.use('/tag', tag);
+//topic
+app.use('/topic', topic);
+//comment
+app.use('/comment', comment);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

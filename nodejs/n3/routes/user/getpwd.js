@@ -18,6 +18,13 @@ router.get('/', function (req, res) {
         title: '获取密码',
         msg: ''
     }
+
+    json.email = req.cookies.user || '';
+
+    if (json.email) {
+        res.redirect('/');//没有登录，则返回登录页面
+    }
+
     res.render('getpwd', json);
 });
 

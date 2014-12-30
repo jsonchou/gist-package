@@ -7,6 +7,7 @@ var topicSchema = new Schema({
     title: { type: String },
     content: { type: String },
     tag: { type: String },
+    hit: { type: String },
     create_time: { type: Date, default: Date.now, index: true },
     update_time: { type: Date, default: Date.now }
 }, { 'collections': 'topics' });

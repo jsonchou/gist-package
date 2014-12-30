@@ -6,11 +6,7 @@ var router = express.Router();
 /* GET users listing. */
 router.get('/', function (req, res) {
     res.clearCookie('user', { path: '/' });
-    var json = {
-        topics: [],
-        title: "Node js index"
-    }
-    res.render('index', json);
+    res.redirect('/');
 });
  
 

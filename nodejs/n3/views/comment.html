@@ -1,0 +1,33 @@
+﻿<% include partial/header.html %>
+<% include partial/menu.html %>
+
+<div id='main'>
+    <div id='sidebar'>
+
+        <% include partial/userpanel.html %>
+        <% include partial/ad.html %>
+        <% include partial/friendlink.html %>
+
+    </div>
+
+    <div id='content'>
+        <div class='panel'>
+            <div class='header'>
+                <ul class='breadcrumb'>
+                    <li><a href='/'>主页</a><span class='divider'>/</span></li>
+                    <li class='active'><b><%=title%></b></li>
+                </ul>
+            </div>
+            <div class='inner topic'>
+                <div class="topic_content">
+                    <div class="markdown-text">
+                        <%=tag%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<% include partial/footer.html %>
