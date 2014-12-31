@@ -1110,7 +1110,7 @@ img.unread { opacity: .1; cursor: pointer; }
 .preview p > img { display: block; box-shadow: 0 0 4px rgba(0,0,0,.6); }
 .markdown_editor .markdown_in_editor, .markdown_editor .markdown_in_preview { display: none; }
 .markdown_editor.in_editor .markdown_in_editor, .markdown_editor.in_preview .markdown_in_preview { display: block; }
-textarea#title { width: 98%; border: 0; margin-bottom: 1em; resize: none; height: 20px; }
+textarea#title,textarea#words { width: 98%; border: 0; margin-bottom: 1em; resize: none; height: 20px; }
 .editor_buttons { margin-top: 10px; }
 .editor_buttons > button { vertical-align: baseline; }
 .navbar { margin-bottom: 0; z-index: 9; width: 100%; position: relative; background: #444; font-size: 13px; }
@@ -1118,7 +1118,7 @@ textarea#title { width: 98%; border: 0; margin-bottom: 1em; resize: none; height
 .navbar .container { width: 100%; min-width: 960px; margin: 0 auto; max-width: 1400px; }
 .navbar .brand { width: 120px; padding: 3px 20px; height: 28px; }
 .navbar .navbar-search { margin-top: 6px; }
-.navbar .search-query { -webkit-box-shadow: none; -moz-box-shadow: none; background: #888 url(../images/search.png) no-repeat 4px 4px; padding: 3px 5px 3px 22px; color: #666; border: 0; margin-top: 2px; transition: all .5s; }
+.navbar .search-query { -webkit-box-shadow: none; -moz-box-shadow: none; background: #888 url(https://dn-cnodestatic.qbox.me/public/images/search.png) no-repeat 4px 4px; padding: 3px 5px 3px 22px; color: #666; border: 0; margin-top: 2px; transition: all .5s; }
 .navbar .search-query.focused, .navbar .search-query:focus, .navbar .search-query:hover { background-color: #fff; }
 .navbar .nav .divider-vertical { background-color: #2b3741; border-right: 1px solid #2f3b46; }
 .navbar .nav > li > a { text-shadow: none; color: #ccc; }

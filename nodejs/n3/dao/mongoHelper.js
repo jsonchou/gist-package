@@ -18,7 +18,7 @@ MongoHelper.prototype.create = function (doc, callback) {
  * 更新
  */
 MongoHelper.prototype.update = function (conditions, update, options, callback) {
-    this.model.update(conditions, update, options, function (error) {
+    this.model.update(conditions, update, options, function (error, numAffected) {
         if (error) return callback(error);
 
         return callback(null);

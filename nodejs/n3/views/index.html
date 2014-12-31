@@ -3,32 +3,76 @@
 
 <div id='main'>
     <div id='sidebar'>
-
         <% include partial/userpanel.html %>
         <% include partial/ad.html %>
         <% include partial/friendlink.html %>
-
     </div>
 
     <div id='content'>
-        <div class='panel'>
-            <div class='header'>
-                <ul class='breadcrumb'>
-                    <li><a href='/'>主页</a><span class='divider'>/</span></li>
-                    <li class='active'><%=title%></li>
-                </ul>
+        <div class="panel">
+            <div class="header">
+                <a class="topic-tab current-tab" href="/">全部</a>
+                <a class="topic-tab " href="/?tab=good">精华</a>
+                <a class="topic-tab " href="/?tab=share">分享</a>
+                <a class="topic-tab " href="/?tab=ask">问答</a>
+                <a class="topic-tab " href="/?tab=job">招聘</a>
             </div>
-            <div class='inner topic'>
-                <div class="topic_content">
-                    <div class="markdown-text">
-                        <ul>
-                            <% for(var i=0; i<topics.length; i++) {%>
-                                <li><%= topics[i] %></li>
-                                <% } %>
-</ul>
-                    </div>
+
+            <div class="inner no-padding">
+                <div id="topic_list">
+
+
+                    <% for(var i=0; i<topics.length; i++) {%>
+                        <div class="cell">
+
+                            <a href="/user/ <%= topics[i].user_name %>" class="user_avatar pull-left">
+                                <%= topics[i].user_name %>
+                            </a>
+
+                            <span class="reply_count pull-left">
+                                <span title="回复数" class="count_of_replies">
+                                    4
+                                </span>
+                                <span class="count_seperator">/</span>
+                                <span title="点击数" class="count_of_visits">
+                                    <%= topics[i].hit %>
+                                </span>
+                            </span>
+
+                            <a href="/topic/<%= topics[i]._id %>" class="last_time pull-right">
+                                <span class="last_active_time"><%= dateFormat(topics[i].update_time) %></span>
+                            </a>
+
+                            <div class="topic_title_wrapper">
+                                <span class="topiclist-tab"><%= topics[i].tag %></span>
+
+                                <a title="<%= topics[i].title %>" href="/topic/<%= topics[i]._id %>" class="topic_title">
+                                    <%= topics[i].title %>
+                                </a>
+                            </div>
+
+                        </div>
+                        <% } %>
+
+
+
                 </div>
+                <div current_page="1" class="pagination">
+                    <ul>
+                        <li class="disabled"><a>«</a></li>
+                        <li class="disabled active"><a>1</a></li>
+                        <li><a href="/?page=2">2</a></li>
+                        <li><a href="/?page=3">3</a></li>
+                        <li><a href="/?page=4">4</a></li>
+                        <li><a href="/?page=5">5</a></li>
+                        <li><a>...</a></li>
+                        <li><a href="/?page=263">»</a></li>
+                    </ul>
+                </div>
+
+
             </div>
+
         </div>
     </div>
 

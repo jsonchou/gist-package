@@ -2,8 +2,7 @@
 var crypto = require('crypto');
 var router = express.Router();
 var mongoose = require('mongoose');
-var util = require('../../services/util');
-var jc = new util();
+var jc = require('../../services/util');//实体共用组件
 var mongoHelper = require('../../dao/mongoHelper');
 var emailPoster = require("../../services/email");
 var user = require('../../models/userModel').User;
@@ -11,20 +10,18 @@ var userModel = new mongoHelper(user);
 
 var config = require("../../config");
 
+var auth = require('../../services/auth');
+
 /* GET users listing. */
 router.get('/', function (req, res) {
-    var json = {
-        msg: '',
-        title: '修改信息'
-    }
-
-    json.email = req.cookies.user || '';
-
-    if (!json.email) {
-        res.redirect('/signin');//没有登录，则返回登录页面
-    }
-
-    res.render('userinfo', json);
+    auth.authorize(req, res, function () {
+        var json = {
+            msg: '',
+            title: '修改信息',
+            email: req.cookies.user.split('|')[1]
+        }
+        res.render('userinfo', json);
+    });
 });
 
 router.post('/', function (req, res) {
@@ -42,10 +39,9 @@ router.post('/', function (req, res) {
 
     var json = {
         title: '修改信息',
-        msg: ''
+        msg: '',
+        email: email
     }
-
-    json.email = email;
 
     if (!repwd || !pwd || !oldpwd || !email) {
         json.msg = '请正确填写您的信息';
@@ -64,22 +60,22 @@ router.post('/', function (req, res) {
             }
 
             userModel.getByQuery(data, {}, {}, function (error, models) {
-                if (models) {
+                if (models && models.length>0) {
                     //查找到当前用户信息
 
-                    var data = {
-                        pwd: md5.digest('hex')//新密码
-                    }
-
-                    userModel.update({ email: email }, data, {}, function (err) {
+                    userModel.update({ email: email }, { pwd: md5.digest('hex') }, {}, function (err) {
                         if (!err) {
-                            json.msg = '用户信息修改成功';
-                            res.render('userinfo', json);
 
                             //发送邮件
-                            var poster = new emailPoster(config.email.from, data.email, '悠哉网账户--信息修改', '您的密码已修改成功');
+                            var poster = new emailPoster(config.email.email, data.email, '悠哉网账户--信息修改', '亲爱的用户' + models[0].user + '，您的密码已修改成功');
                             poster.send();
-                            
+
+                            //清除用户cookie
+                            //res.clearCookie('user', { path: '/' });
+
+                            //跳转
+                            json.msg = '用户信息修改成功';
+                            res.render('userinfo', json);
 
                         } else {
                             jc.log(err);
@@ -87,7 +83,7 @@ router.post('/', function (req, res) {
                     });
                 } else {
                     json.msg = '原始密码不正确';
-                    res.status(500).render('userinfo', json);
+                    res.redirect('/userinfo');
                 }
             });
         }

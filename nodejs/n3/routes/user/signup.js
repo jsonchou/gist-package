@@ -10,8 +10,7 @@ var userModel = new mongoHelper(user);
 var config = require("../../config");
 var emailPoster = require("../../services/email");
 
-var util = require('../../services/util');
-var jc = new util();
+var jc = require('../../services/util');
 
 // mongoose 链接
 
@@ -27,25 +26,17 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
 
+    var user = req.body.user
     var email = req.body.email
     var pwd = req.body.pwd;
     var repwd = req.body.repwd;
-
-    var md5 = crypto.createHash('md5');
-    md5.update(pwd);
-
-    var data = {
-        email: email,
-        pwd: md5.digest('hex')
-    }
 
     var json = {
         title: '注册',
         msg: ''
     }
 
-
-    if (!repwd || !pwd || !email) {
+    if (!repwd || !pwd || !email || !user) {
         json.msg = '请正确填写您的信息';
         res.status(500).render('signup', json);
     }
@@ -59,11 +50,21 @@ router.post('/', function (req, res) {
                     json.msg = '用户邮箱' + email + '已注册';
                     res.status(500).render('signup', json);
                 } else {
+
+                    var md5 = crypto.createHash('md5');
+                    md5.update(pwd);
+
+                    var data = {
+                        user: user,
+                        email: email,
+                        pwd: md5.digest('hex')
+                    }
+
                     userModel.create(data, function (err) {
                         if (!err) {
 
                             //发送邮件
-                            var poster = new emailPoster(config.email.email, data.email, '悠哉网账户--用户注册', '新用户：' + data.email + ",您好，悠哉网欢迎您！");
+                            var poster = new emailPoster(config.email.email, data.email, '悠哉网账户--用户注册', '新用户：' + data.user + ",(邮箱：" + data.email + ")您好，悠哉网欢迎您！");
                             poster.send();
 
                             res.redirect('/signin');

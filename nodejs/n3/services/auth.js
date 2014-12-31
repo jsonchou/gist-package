@@ -1,6 +1,9 @@
-﻿exports.authorize = function (req, res, next) {
-    if (!req.session.user_id) {
-        res.redirect('/admin/login');
+﻿var jc = require('../services/util');
+
+exports.authorize = function (req, res, next) {
+    //jc.log(req.cookies.user);
+    if (!req.cookies.user) {
+        res.redirect('/signin');
     } else {
         next();
     }

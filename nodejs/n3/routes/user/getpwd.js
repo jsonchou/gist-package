@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var emailPoster = require("../../services/email");
-var guid = require('../../services/guid');//生成guid
+var guid = require('../../services/guid');//生成guid code
 
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 var mongoHelper = require('../../dao/mongoHelper');
 
 var config = require("../../config");
+var auth = require('../../services/auth');
 
 var user = require('../../models/userModel').User;
 var userModel = new mongoHelper(user);
@@ -16,16 +17,17 @@ var userModel = new mongoHelper(user);
 router.get('/', function (req, res) {
     var json = {
         title: '获取密码',
-        msg: ''
+        msg: '',
+        email:''
     }
 
-    json.email = req.cookies.user || '';
+    user = req.cookies.user || '';
 
-    if (json.email) {
-        res.redirect('/');//没有登录，则返回登录页面
+    if (user) {
+        res.redirect('/');//已登录，则返回首页
     }
-
     res.render('getpwd', json);
+
 });
 
 router.post('/', function (req, res) {
@@ -40,9 +42,9 @@ router.post('/', function (req, res) {
 
     userModel.getByQuery(data, {}, {}, function (error, models) {
 
-        if (models.length > 0) {
+        if (models&&models.length > 0) {
             //生成guid code
-            var code = new guid().render();
+            var code = guid;
 
             var md5 = crypto.createHash('md5');
             md5.update(code);
@@ -50,17 +52,18 @@ router.post('/', function (req, res) {
             //修改密码
             userModel.update(data, { pwd: md5.digest('hex') }, {}, function (error, numAffected) {
                 //发送邮件
-                var poster = new emailPoster(config.email.email, data.email, '悠哉网账户--获取密码', '您的新密码为：' + code + ",若有必要，请重新<a href='" + config.site.url + "/userinfo'>修改</a>密码");
+                var poster = new emailPoster(config.email.email, data.email, '悠哉网账户--获取密码', '亲爱的用户' + models[0].user + '，您的新密码为：' + code + "，若有必要，请重新<a href='" + config.site.url + "/userinfo'>修改</a>密码");
                 poster.send();
 
+                //清除用户cookie
                 res.clearCookie('user', { path: '/' });
 
-                json.msg = "请登录您的邮箱：" + data.email + "，找回您的密码";
+                json.msg = "请登录您的邮箱：" + models[0].email + "，找回您的密码";
                 res.render('getpwd', json);
             });
              
         } else {
-            json.msg = "* 您输入的邮箱不存在，请重新输入";
+            json.msg = "* 您输入的邮箱不正确，请重新输入";
             res.render('getpwd', json);
         }
     });

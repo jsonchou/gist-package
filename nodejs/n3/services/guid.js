@@ -1,8 +1,4 @@
-﻿function guid() {
- 
-}
-
-guid.prototype.render = function () {
+﻿exports.guid = function () {
     var S4 = function () {
         return Math.floor(
             Math.random() * 0x10000 /* 65536 */
@@ -11,5 +7,3 @@ guid.prototype.render = function () {
     var d = S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4();
     return d;
 }
-
-module.exports = guid;

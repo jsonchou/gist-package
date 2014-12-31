@@ -4,9 +4,6 @@ var config = require('../config');//数据配置文件
 var mongoose = require('mongoose');
 var mongoHelper = require('../dao/mongohelper');
 
-var util = require('../services/util');
-var jc = new util();
-
 var topic = require('./../models/topicModel').Topic;
 var topicModel = new mongoHelper(topic);
 
@@ -18,10 +15,11 @@ router.get('/', function (req, res) {
     
     var json = { 
         topics: [],
-        title:"Node js index"
+        title:"Uzai Nodejs Site"
     }
     topicModel.getAll(function (err, docs) {
         json.topics = docs;
+        res.locals.dateFormat = jc.dateFormat;
         res.render('index', json);
     });
      

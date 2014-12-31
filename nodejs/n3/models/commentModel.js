@@ -2,12 +2,10 @@
 var Schema = mongoose.Schema;
 
 var commentSchema = new Schema({
-    topic_id: Schema.Types.ObjectId,//文章ID
-    user_id: Schema.Types.ObjectId,//用户ID
-    content: { type: Schema.Text },
-    date: { type: Date, default: Date.now } , 
-    create_time: {type: Date, default: Date.now, index: true}, 
-    update_time: { type: Date, default: Date.now }
+    _topic_id: Schema.Types.ObjectId,//文章ID
+    user_name: { type: String },//用户ID
+    content: { type: String },
+    create_time: { type: Date, default: Date.now, index: true }
 },
     { 'collections': 'comments' });
 

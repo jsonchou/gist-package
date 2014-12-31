@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
 var ejs = require('ejs');
+jc = require('./services/util');
 
 var index = require('./routes/index');
 var hi = require('./routes/hi');
@@ -16,9 +17,10 @@ var search = require('./routes/search/search');
 //tag
 var tag = require('./routes/tag/tag');
 //topic
-var topic = require('./routes/topic/topic');
+var topic_show = require('./routes/topic/show');
+var topic_post = require('./routes/topic/post');
 //comment
-var comment = require('./routes/comment/comment');
+var comment_post = require('./routes/comment/post');
 //user
 var signin = require('./routes/user/signin');
 var signup = require('./routes/user/signup');
@@ -26,7 +28,12 @@ var userinfo = require('./routes/user/userinfo');
 var signout = require('./routes/user/signout');
 var getpwd = require('./routes/user/getpwd');
 
+//api restfull
+var api_topics = require('./routes/api/topics');
+
 var app = express();
+
+//格式化时间
 
 // view engine setup
 app.engine('.html', ejs.__express);
@@ -35,6 +42,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 
 // uncomment after placing your favicon in /public
+
+app.use('/public', express.static(__dirname + '/public'));
+
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -59,12 +69,17 @@ app.use('/search', search);
 //tag
 app.use('/tag', tag);
 //topic
-app.use('/topic', topic);
+app.use('/topic/post', topic_post);
+app.use('/topic', topic_show);
 //comment
-app.use('/comment', comment);
+app.use('/comment/post', comment_post);
+
+//restfull api
+app.use('/api/topics', api_topics);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
+    //jc.log(req.params);
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
