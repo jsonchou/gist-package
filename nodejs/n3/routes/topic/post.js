@@ -29,14 +29,13 @@ router.post('/', function (req, res) {
         var tag = req.body.tab;
         var words = req.body.words.replace('，', ',').replace('｜', ',').replace(' ', '');
 
-
         var data = {
             tag: tag,
             title: title,
             content: content,
             words: words,
-            user_name: user.split('|')[0],
-            update_user: user.split('|')[0]
+            user_id: user.split('|')[0],
+            update_user: user.split('|')[1]
         }
 
         jc.log(topicModel);

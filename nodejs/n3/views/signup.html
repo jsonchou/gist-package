@@ -20,13 +20,13 @@
             </div>
             <div class="inner">
 
-                <form method="post" action="/signup" class="form-horizontal" id="signin_form">
-                    
+                <form method="post" action="/signup" class="form-horizontal" enctype="multipart/form-data" id="signin_form">
+
                     <div class="control-group">
                         <label for="user" class="control-label">用户名</label>
 
                         <div class="controls">
-                            <input type="text" size="30" name="user" id="user" class="input-xlarge">
+                            <input type="text" size="30" name="username" id="username" class="input-xlarge">
                         </div>
                     </div>
 
@@ -51,6 +51,36 @@
                             <input type="password" size="30" name="repwd" id="repwd" class="input-xlarge">
                         </div>
                     </div>
+
+                    <hr />
+
+                    <div class="control-group">
+                        <label for="pass" class="control-label">选择头像</label>
+
+                        <div class="controls">
+                            <label>
+                                <input class="vm" type="radio" name="avator" id="avator1" value="/files/avator/1.png" checked>
+                                <img class="vm" src="/files/avator/1.png" alt="" />
+                            </label>
+                            <label>
+                                <input class="vm" type="radio" name="avator" id="avator2" value="/files/avator/2.png">
+                                <img class="vm" src="/files/avator/2.png" alt="" />
+                            </label>
+                            <label>
+                                <input class="vm" type="radio" name="avator" id="avator3" value="/files/avator/3.png">
+                                <img class="vm" src="/files/avator/3.png" alt="" />
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="pass" class="control-label">自定义头像</label>
+
+                        <div class="controls">
+                            <input type="file" name="cusAvator" value="" />
+                        </div>
+                    </div>
+
 
                     <div class="form-actions">
                         <input type="submit" value="注册" class="span-primary">

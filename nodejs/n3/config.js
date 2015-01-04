@@ -16,5 +16,7 @@ exports.site = {
     cookieAge: 7,//cookie 过期，默认7天
     debug: true,
     port: 3000,
+    avatorPath: './public/files/avator',
+    imgType:['jpg','gif','png'],
     url: 'http://127.0.0.1:3000'
 }

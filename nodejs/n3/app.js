@@ -2,11 +2,14 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var multer = require('multer');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
 var ejs = require('ejs');
+
 jc = require('./services/util');
+config = require('./config.js');
 
 var index = require('./routes/index');
 var hi = require('./routes/hi');
@@ -53,6 +56,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(multer({
+    dest: './public/files/avator',
+    rename: function (fieldname, filename) {
+        return Date.now() + Math.floor(Math.random() * 0x10000);
+    }
+}));
 
 app.use('/', index);
 app.use('/hi', hi);

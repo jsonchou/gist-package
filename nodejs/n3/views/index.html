@@ -20,13 +20,12 @@
 
             <div class="inner no-padding">
                 <div id="topic_list">
-
-
+                     
                     <% for(var i=0; i<topics.length; i++) {%>
                         <div class="cell">
 
-                            <a href="/user/ <%= topics[i].user_name %>" class="user_avatar pull-left">
-                                <%= topics[i].user_name %>
+                            <a href="/user/<%= topics[i].user_name %>" class="user_avatar pull-left">
+                                <img title="<%= topics[i].user_name %>" src="<%= topics[i].avator %>">
                             </a>
 
                             <span class="reply_count pull-left">
@@ -53,11 +52,9 @@
 
                         </div>
                         <% } %>
-
-
-
+                     
                 </div>
-                <div current_page="1" class="pagination">
+                <div current-page="1" class="pagination">
                     <ul>
                         <li class="disabled"><a>«</a></li>
                         <li class="disabled active"><a>1</a></li>

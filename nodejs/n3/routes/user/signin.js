@@ -1,15 +1,10 @@
 var express = require('express');
 var crypto = require('crypto');
 var router = express.Router();
-var mongoose = require('mongoose');
 var mongoHelper = require('../../dao/mongoHelper');
 
 var user = require('../../models/userModel').User;
 var userModel = new mongoHelper(user);
-
-var config = require('../../config');
-
-var jc = require('../../services/util');
 
 // mongoose 链接
 
@@ -17,7 +12,11 @@ var jc = require('../../services/util');
 router.get('/', function (req, res) {
     var json = {
         title: '登录',
-        msg:''
+        msg: '',
+        reurl: ''
+    }
+    if (req.query.reurl) {
+        json.reurl = req.query.reurl;
     }
     res.render('signin', json);
 });
@@ -40,8 +39,13 @@ router.post('/', function (req, res) {
             //jc.log(models);
             //登录成功
             var ex = 3600000 * 24 * parseInt(config.site.cookieAge);//默认7天过期
-            res.cookie('user', models[0].user + '|' + models[0].email, { path: '/', expires: new Date(Date.now() + ex), maxAge: ex }); //7天
-            res.redirect('/');//登录成功，回到首页
+            res.cookie('user', models[0]._id + '|' + models[0].user + '|' + models[0].email, { path: '/', expires: new Date(Date.now() + ex), maxAge: ex }); //7天
+            var reurl = req.query.reurl;
+            if (reurl) {
+                res.redirect(reurl);//登录成功，回到首页
+            } else {
+                res.redirect('/');//登录成功，回到首页
+            }
         } else {
             var json = {
                 title: '登录',
@@ -49,6 +53,7 @@ router.post('/', function (req, res) {
             };
             res.render('signin', json);
         }
+
     });
 });
 

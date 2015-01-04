@@ -19,6 +19,7 @@ router.get('/', function (req, res) {
     }
     topicModel.getAll(function (err, docs) {
         json.topics = docs;
+        jc.log(docs);
         res.locals.dateFormat = jc.dateFormat;
         res.render('index', json);
     });
