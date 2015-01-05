@@ -11,7 +11,9 @@ var ejs = require('ejs');
 jc = require('./services/util');
 config = require('./config.js');
 
+//index
 var index = require('./routes/index');
+
 var hi = require('./routes/hi');
 var about = require('./routes/about');
 

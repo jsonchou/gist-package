@@ -16,6 +16,7 @@ exports.saveWords = function (content) {
     return content;
 }
 
+//日期格式
 exports.dateFormat = function (dt) {
     return moment(dt).format('YYYY年MM月DD日 hh:mm');
 }

@@ -34,7 +34,7 @@ router.post('/', function (req, res) {
             title: title,
             content: content,
             words: words,
-            user_id: user.split('|')[0],
+            user_info: user.split('|')[0],
             update_user: user.split('|')[1]
         }
 

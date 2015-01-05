@@ -11,21 +11,21 @@
     <div id='content'>
         <div class="panel">
             <div class="header">
-                <a class="topic-tab current-tab" href="/">全部</a>
-                <a class="topic-tab " href="/?tab=good">精华</a>
-                <a class="topic-tab " href="/?tab=share">分享</a>
-                <a class="topic-tab " href="/?tab=ask">问答</a>
-                <a class="topic-tab " href="/?tab=job">招聘</a>
+                <a class="topic-tab <%if(tabKey==''){%> current-tab<%}%>" href="/">全部</a>
+                <a class="topic-tab <%if(tabKey=='good'){%> current-tab<%}%>" href="/?tab=good">精华</a>
+                <%for(var tab in tabs){%>
+                <a class="topic-tab <%if(tabKey==tab){%> current-tab<%}%>" href="/?tab=<%=tab%>"><%=tabs[tab]%></a>
+                <% } %>
             </div>
 
             <div class="inner no-padding">
                 <div id="topic_list">
-                     
+
                     <% for(var i=0; i<topics.length; i++) {%>
                         <div class="cell">
 
-                            <a href="/user/<%= topics[i].user_name %>" class="user_avatar pull-left">
-                                <img title="<%= topics[i].user_name %>" src="<%= topics[i].avator %>">
+                            <a href="/user/<%= topics[i].user_info.user %>" class="user_avatar pull-left">
+                                <img title="<%= topics[i].user_info.user %>" src="<%= topics[i].user_info.avator %>">
                             </a>
 
                             <span class="reply_count pull-left">
@@ -43,7 +43,7 @@
                             </a>
 
                             <div class="topic_title_wrapper">
-                                <span class="topiclist-tab"><%= topics[i].tag %></span>
+                                <span class="topiclist-tab"><%= topics[i].tagName %></span>
 
                                 <a title="<%= topics[i].title %>" href="/topic/<%= topics[i]._id %>" class="topic_title">
                                     <%= topics[i].title %>
@@ -52,7 +52,7 @@
 
                         </div>
                         <% } %>
-                     
+
                 </div>
                 <div current-page="1" class="pagination">
                     <ul>
