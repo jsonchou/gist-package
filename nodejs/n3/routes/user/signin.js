@@ -18,18 +18,21 @@ router.get('/', function (req, res) {
     if (req.query.reurl) {
         json.reurl = req.query.reurl;
     }
+    
     res.render('signin', json);
 });
 
 router.post('/', function (req, res) {
     var email = req.body.email;
     var pwd = req.body.pass;
+    var reurl = req.query.reurl;
+
 
     var md5 = crypto.createHash('md5');
     md5.update(pwd);
 
     var data = { 
-        email: email, 
+        email: email,
         pwd: md5.digest('hex') 
     }
 
@@ -40,7 +43,7 @@ router.post('/', function (req, res) {
             //登录成功
             var ex = 3600000 * 24 * parseInt(config.site.cookieAge);//默认7天过期
             res.cookie('user', models[0]._id + '|' + models[0].user + '|' + models[0].email, { path: '/', expires: new Date(Date.now() + ex), maxAge: ex }); //7天
-            var reurl = req.query.reurl;
+            
             if (reurl) {
                 res.redirect(reurl);//登录成功，回到首页
             } else {
@@ -49,6 +52,7 @@ router.post('/', function (req, res) {
         } else {
             var json = {
                 title: '登录',
+                reurl:'',
                 msg: '* 账号密码不正确，请重新登录'
             };
             res.render('signin', json);

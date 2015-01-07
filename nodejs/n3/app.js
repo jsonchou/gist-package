@@ -91,7 +91,6 @@ app.use('/api/topics', api_topics);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    //jc.log(req.params);
     var err = new Error('Not Found');
     err.status = 404;
     next(err);

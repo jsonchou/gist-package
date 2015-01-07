@@ -1023,12 +1023,13 @@ a.light:hover { color: gray; text-decoration: none; }
 .panel .inner .unstyled li div { text-overflow: ellipsis; }
 .panel .inner.post, .panel .inner.reply, .panel .inner.topic, .panel .inner.userinfo { padding: 10px; border-top: 1px solid #e5e5e5; }
 .panel .inner { line-height: 2em; padding: 10px; background-color: #fff; border-radius: 0 0 3px 3px; }
-.panel .inner a { color: #778087; }
+
+.put_top a,.put_good a{color:#fff;}
 .panel .inner > form.form-horizontal { margin-top: 40px; }
 .panel .inner.no-padding { padding: 0; }
 .panel .inner li { line-height: 2em; }
 .panel > .cell:last-child { box-shadow: none; }
-.cell { overflow: hidden; position: relative; padding: 10px 0 10px 10px; font-size: 14px; }
+.cell {  position: relative; padding: 10px 0 10px 10px; font-size: 14px; }
 .panel .cell { padding-right: 10px; background: #fff; border-top: 1px solid #f0f0f0; }
 .panel .cell:nth-child(1) { border-top: 0; }
 .cell .reply_count { width: 70px; display: inline-block; text-align: center; }
@@ -1173,7 +1174,7 @@ textarea.editor { width: 98%; line-height: 2em; height: 200px; resize: vertical;
 .topic-tab { margin: 0 10px; color: #80bd01; }
 .topic-tab.current-tab { background-color: #80bd01; color: #fff; padding: 3px 4px; border-radius: 3px; }
 .topic-tab:hover { text-decoration: none; }
-.topiclist-tab { background-color: #e5e5e5; color: #999; padding: 2px 4px; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; -o-border-radius: 3px; font-size: 12px; }
+.topiclist-tab { background-color: #e5e5e5; color: #999; padding: 2px 4px; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; -o-border-radius: 3px; font-size: 12px; text-align:center;}
 .up_btn { cursor: pointer; opacity: .4; }
 .up_btn.uped { opacity: 1; }
 .reply .CodeMirror, .reply2_area .CodeMirror { height: 160px; }
@@ -1905,7 +1906,10 @@ li.L1, li.L3, li.L5, li.L7, li.L9 { background: #eee; }
 
 
 /*json edit*/
-
+.j_topicControl{display:inline-block;position:relative;min-width:100px;min-height:20px;}
+.j_topicControl .drop{position:absolute;left:0;top:25px;display:none;border:1px solid #08c;background:#fff;z-index:2;text-align:center;}
+.j_topicControl ul{padding:5px;margin:0;}
+.j_topicControl:hover .drop{display:block;}
 
 
 

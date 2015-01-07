@@ -16,8 +16,18 @@ router.get('/', function (req, res) {
     var json = { 
         topics: [],
         tabs: {},
-        tabKey:'',
-        title:"Uzai Nodejs Site"
+        tabKey: '',
+        isAdmin: false,
+        isUser:false,
+        title: "Uzai Nodejs Site"
+    }
+
+    var user = req.cookies.user;
+    if (user) {
+        var username = user.split('|')[1];
+        if (config.site.admin.indexOf(username) > -1) {
+            json.isAdmin = true;
+        }
     }
 
     var tab = req.query.tab;
@@ -31,7 +41,7 @@ router.get('/', function (req, res) {
         json.tabKey = tab;
     }
 
-    topicModel.model.find(cfg).sort({ 'top': 1, 'good': 1, 'create_time': -1 }).populate('user_info').exec(function (err, topicsJoin) {
+    topicModel.model.find(cfg).sort({ 'top': -1, 'good': -1, 'create_time': -1 }).populate('user_info').exec(function (err, topicsJoin) {
         if (err) {
             jc.log(err);
         }

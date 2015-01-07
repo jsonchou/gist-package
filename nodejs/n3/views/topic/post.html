@@ -18,27 +18,27 @@
                 </ol>
             </div>
             <div class='inner post'>
-                <form id='create_topic_form' action='/topic/post' method='post'>
+                <form id='create_topic_form' action='/topic/post/<%=model._id||""%>' method='post'>
                     <fieldset>
                         <span class="tab-selector">选择版块：</span>
                         <select name="tab" id="tab-value">
                             <option value="">请选择</option>
-                            <option value="share">分享</option>
-                            <option value="ask">问答</option>
-                            <option value="job">招聘</option>
+                            <%for(var tab in tabs){%>
+                            <option value="<%=tab%>" <%=(model.tag==tab)?"selected":""%>  ><%=tabs[tab]%></option>
+                            <% } %>
                         </select>
                         <span id="topic_create_warn"></span>
-                        <textarea autofocus class='span9' id='title' name='title' rows='1' placeholder="标题字数 10 字以上"></textarea>
-                         
+                        <textarea class='span9' id='title' name='title' placeholder="标题字数 10 字以上"><%=model.title||""%></textarea>
+
                         <div class='markdown_editor in_editor'>
                             <div class='markdown_in_editor'>
-                                <script type="text/plain" id="editor" style="width:99%;height:360px;"></script>
-                                <textarea class="mt10" class='span9' id='words' name='words' rows='1' placeholder="多个关键字，请使用”，“号隔开"></textarea>
+                                <script type="text/plain" id="editor" style="width:99%;height:360px;"><%-model.content||""%></script>
+                                <textarea class="mt10" class='span9' id='words' name='words' placeholder="多个关键字，请使用”，“号隔开"><%=model.words||""%></textarea>
                                 <div class='editor_buttons'><input type="submit" class='span-primary submit_btn' data-loading-text="提交中" value="提交"></div>
                             </div>
                         </div>
-                         
-                        <input type='hidden' id='topic_tags' name='topic_tags' value=''>
+
+                        <input type='hidden' name='user_info' value='<%=model.user_info||""%>'>
                         <input type='hidden' name='_csrf' value='XsIymYVm-QcpnBI2tp_wdEhpmwVzap7hUvZA'>
                     </fieldset>
                 </form>
@@ -170,15 +170,7 @@
             $(btn).removeAttr("disabled").removeClass("disabled");
         }
     }
-
-    window.onkeydown = function (e) {
-        if (!um.isFocus()) {
-            var keyCode = e.keyCode || e.which;
-            if (keyCode == 8) {
-                e.preventDefault();
-            }
-        }
-    };
+ 
 
 </script>
 

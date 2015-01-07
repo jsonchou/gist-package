@@ -20,7 +20,7 @@
             </div>
             <div class="inner">
 
-                <form method="post" action="/signin?reurl=<%=reurl%>" class="form-horizontal" id="signin_form">
+                <form method="post" action="/signin?reurl=<%=(reurl||"")%>" class="form-horizontal" id="signin_form">
                     <div class="control-group">
                         <label for="email" class="control-label">邮箱</label>
 
