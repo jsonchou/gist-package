@@ -14,6 +14,7 @@ function checkUser() {
 }
 
 function topicControl() {
+    //click
     $('.j_topicControl').find('a').on('click', function () {
         var o = $(this);
         var op = o.parents('.cell');
@@ -42,5 +43,14 @@ function topicControl() {
             _ajax(tag);
         }
 
+    });
+
+    //hover
+    $('.j_topicControl').mouseenter(function () {
+        var o = $(this);
+        o.find('.drop').show();
+    }).mouseleave(function () {
+        var o = $(this);
+        o.find('.drop').hide();
     });
 }

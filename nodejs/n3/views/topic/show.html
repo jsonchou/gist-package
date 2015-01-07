@@ -12,6 +12,13 @@
         <div class='panel'>
             <div class='header topic_header'>
                 <span class="topic_full_title">
+                    <%if(topic.top==true){%>
+                    <span class="put_top">置顶</span>
+                    <%}else if(topic.good==true){%>
+                    <span class="put_good"><a href="/?tab= <%= topic.good %>">精华</a></span>
+                    <%}else{%>
+                    <span class="topiclist-tab"><a href="/?tab=<%= topic.tag %>"><%= topic.tagName %></a></span>
+                    <%}%>
                     <%=topic.title%>
                 </span>
                 <div class="action">
@@ -43,6 +50,24 @@
                             <%}%>
                         <%}%>
                     </span>
+
+                    <div class="j_topicControl">
+                        <% if(isAdmin||isCreator){%>
+                        <span>操作》</span>
+                        <div class="drop">
+                            <ul>
+                                <li><a href="/topic/post/<%= topic._id%>">编辑</a></li>
+                                <li><a href="#del">删除</a></li>
+                                <li><a href="#good">精华</a></li>
+                                <li><a href="#top">置顶</a></li>
+                            </ul>
+                        </div>
+                        <%}%>
+                    </div>
+
+                    <style>
+                        .j_topicControl .drop{margin-top:-5px;}
+                    </style>
 
                 </div>
 

@@ -50,6 +50,11 @@ router.get('/:id/:tag', function (req, res) {
 router.get('/:id', function (req, res) {
 
     var id = req.params.id;
+    var user = req.cookies.user;
+    var userid = "";
+    if (user) {
+        userid = user.split('|')[0];
+    }
 
     topicModel.getById(id, function (err, tModel) {
         if (tModel) {
@@ -59,6 +64,8 @@ router.get('/:id', function (req, res) {
                 title: tModel.title,
                 topic: tModel,
                 tagCn: '',
+                isAdmin: false,
+                isCreator:false,
                 comments: [],
                 userInfo: {},
                 isLogin: req.cookies.user//判断是否登录
@@ -67,6 +74,9 @@ router.get('/:id', function (req, res) {
             topicModel.model.getUserByTopicId(tModel._id, function (err, topicJoin) {
                 json.userInfo = topicJoin.user_info;
             });
+
+            json.isAdmin = authAdmin.isAdmin(req, res);
+            json.isCreator = userid && (tModel.user_info == userid);
 
             json.tagCn = topicModel.model.getTagCn(tModel.tag);
 

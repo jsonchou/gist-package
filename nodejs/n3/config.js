@@ -36,7 +36,7 @@ config.site = {
     avatorPath: './public/files/avator',
     imgType: ['jpg', 'gif', 'png'],
     url: 'http://127.0.0.1:3000',
-    admin: ['jsonchou', 'lulisheng', 'xiali', 'chimeihuan', 'hewen', 'wuqiping', 'food']
+    admin: ['jsonchou', 'lulisheng', 'chimeihuan', 'hewen', 'wuqiping', 'food']
 }
 
 module.exports = config;

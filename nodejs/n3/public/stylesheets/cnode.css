@@ -1909,7 +1909,6 @@ li.L1, li.L3, li.L5, li.L7, li.L9 { background: #eee; }
 .j_topicControl{display:inline-block;position:relative;min-width:100px;min-height:20px;}
 .j_topicControl .drop{position:absolute;left:0;top:25px;display:none;border:1px solid #08c;background:#fff;z-index:2;text-align:center;}
 .j_topicControl ul{padding:5px;margin:0;}
-.j_topicControl:hover .drop{display:block;}
 
 
 

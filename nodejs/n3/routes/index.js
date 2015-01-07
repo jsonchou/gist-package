@@ -4,6 +4,8 @@ var config = require('../config');//数据配置文件
 var mongoose = require('mongoose');
 var mongoHelper = require('../dao/mongohelper');
 
+var authAdmin = require('../services/authAdmin');
+
 var topic = require('./../models/topicModel').Topic;
 var topicModel = new mongoHelper(topic);
 
@@ -22,13 +24,7 @@ router.get('/', function (req, res) {
         title: "Uzai Nodejs Site"
     }
 
-    var user = req.cookies.user;
-    if (user) {
-        var username = user.split('|')[1];
-        if (config.site.admin.indexOf(username) > -1) {
-            json.isAdmin = true;
-        }
-    }
+    json.isAdmin = authAdmin.isAdmin(req,res);
 
     var tab = req.query.tab;
     var cfg = {};
