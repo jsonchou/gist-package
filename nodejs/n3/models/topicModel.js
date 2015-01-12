@@ -9,6 +9,7 @@ var topicSchema = new Schema({
     top: { type: Boolean, default: false, index: true }, // 置顶帖
     good: { type: Boolean, default: false }, // 精华帖
     hit: { type: Number, default: 0 },
+    comment_count: { type: Number, default: 0 },//回复数量
     create_time: { type: Date, default: Date.now, index: true },
     update_time: { type: Date, default: Date.now },//最后回复的用户时间
     update_user: { type: String },//最后回复的用户

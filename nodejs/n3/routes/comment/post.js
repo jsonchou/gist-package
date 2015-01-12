@@ -7,6 +7,9 @@ var mongoHelper = require('../../dao/mongoHelper');
 var comment = require('../../models/commentModel').Comment;
 var commentModel = new mongoHelper(comment);
 
+var topic = require('../../models/topicModel').Topic;
+var topicModel = new mongoHelper(topic);
+
 /* GET users listing. */
 router.post('/', function (req, res) {
     auth.authorize(req, res, function () {
@@ -24,7 +27,12 @@ router.post('/', function (req, res) {
             if (err) {
                 res.send(err);
             }
-            res.redirect('/topic/' + topicid);
+
+            //更新回复数量
+            topicModel.update({ _id: topicid }, { $inc: { comment_count: 1 } }, {}, function (error, numAffected) {
+                res.redirect('/topic/' + topicid);
+            });
+            
         });
     });
 });

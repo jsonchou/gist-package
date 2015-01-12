@@ -34,6 +34,7 @@ config.site = {
     debug: true,
     port: 3000,
     avatorPath: './public/files/avator',
+    pageSize: 15,
     imgType: ['jpg', 'gif', 'png'],
     url: 'http://127.0.0.1:3000',
     admin: ['jsonchou', 'lulisheng', 'chimeihuan', 'hewen', 'wuqiping', 'food']

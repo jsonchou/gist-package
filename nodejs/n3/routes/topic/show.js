@@ -20,21 +20,42 @@ router.get('/:id/:tag', function (req, res) {
         topicModel.getById(id, function (err, tModel) {
             if (tModel) {
                 if (tag == 'top') {
-                    tModel.top = true;
+                    var ctag = "置顶";
+                    if (tModel.top == false) {
+                        tModel.top = true;
+                    }else{
+                        tModel.top = false;
+                        ctag = "取消置顶";
+                    }
                     topicModel.update({ _id: id }, tModel, {}, function (err, numAffected) {
-                        res.json({ 'message': '置顶设置' + '成功' });
+                        res.json({ 'message': ctag + '设置' + '成功' });
                     });
-                    res.json({ 'message': '置顶设置' + '成功' });
                 } else if (tag == 'good') {
-                    tModel.good = true;
+                    var ctag = "精华";
+                    if (tModel.good == false) {
+                        tModel.good = true;
+                    } else {
+                        tModel.good = false;
+                        ctag = "取消精华";
+                    }
                     topicModel.update({ _id: id }, tModel, {}, function (err, numAffected) {
-                        res.json({ 'message': '精华设置' + '成功' });
+                        res.json({ 'message': ctag + '设置' + '成功' });
                     });
                 } else if (tag == 'del') {
                     topicModel.delete(tModel, function (err) {
                         res.json({ 'message': '删除' + '成功' });
                     });
-                } else {
+                } else if (tag.indexOf('cdel') > -1) {
+                    //删除点评
+                    var cid=tag.split('-')[1];//评论ID
+                    commentModel.delete({ _id: cid }, function () {
+                        tModel.comment_count -= 1;//更新点评数
+                        topicModel.update({ _id: id }, tModel, {}, function (err, numAffected) {
+                            res.json({ 'message': '评论删除' + '成功' });
+                        });
+                    });
+                }
+                else {
                     res.status(404).redirect('/');//404跳转到首页
                 }
 
@@ -81,7 +102,8 @@ router.get('/:id', function (req, res) {
             json.tagCn = topicModel.model.getTagCn(tModel.tag);
 
             //更新点击量
-            topicModel.update({ _id: tModel._id }, { hit: tModel.hit + 1 }, {}, function (error, numAffected) {
+            //$inc 处增加量
+            topicModel.update({ _id: tModel._id }, { $inc: { hit:1 } }, {}, function (error, numAffected) {
                 commentModel.model.find({ _topic_id: tModel._id }).sort({ 'create_time': -1 }).populate('user_info').exec(function (err, commentJoin) {
                     if (commentJoin && commentJoin.length > 0) {
                         json.comments = commentJoin;

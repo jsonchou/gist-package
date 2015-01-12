@@ -48,7 +48,7 @@
                         <%for(var i=0; i<topic.words.split(',').length; i++){%>
                             <a href="/tag/<%=topic.words.split(',')[i]%>"><%=topic.words.split(',')[i]%></a>
                             <%}%>
-                        <%}%>
+                            <%}%>
                     </span>
 
                     <div class="j_topicControl">
@@ -66,7 +66,7 @@
                     </div>
 
                     <style>
-                        .j_topicControl .drop{margin-top:-5px;}
+                        .j_topicControl .drop { margin-top: -5px; }
                     </style>
 
                 </div>
@@ -85,28 +85,43 @@
 
         <div class='panel'>
             <div class='header'>
-                <span class='col_fade'><%=comments.length%> 回复</span>
+                <span class='col_fade'><%=topic.comment_count%> 回复</span>
             </div>
             <% for(var i=0; i<comments.length; i++) {%>
-                <div class='cell reply_area reply_item' id="reply<%=i+1%>" reply_id="<%=comments[i]._id%>">
+                                 <div class='cell reply_area reply_item' id="reply<%=i+1%>" data-id="<%= topic._id%>" reply_id="<%=comments[i]._id%>">
 
-                    <div class='author_content'>
-                        <a class="user_avatar" href="/user/<%=comments[i].user_info.user%>">
-                            <img width="30" height="30" title="<%=comments[i].user_info.user%>" src="<%=comments[i].user_info.avator%>">
-                        </a>
-                        <div class='user_info'>
-                            <p class="tr f12"><%=i+1%>楼• </p>
-                            <p class="f11"><%=dateFormat(comments[i].create_time)%></p>
-                        </div>
+                                     <div class='author_content'>
+                                         <a class="user_avatar" href="/user/<%=comments[i].user_info.user%>">
+                                             <img width="30" height="30" title="<%=comments[i].user_info.user%>" src="<%=comments[i].user_info.avator%>">
+                                         </a>
+                                         <div class='user_info'>
+                                             <div class="tr f12">
+                                                 <div class="j_topicControl" style="min-width:20px;">
+                                                     <% if(isAdmin||isCreator){%>
+                                                     <span>操作》</span>
+                                                     <div class="drop">
+                                                         <ul>
+                                                             <li><a href="#cdel-<%=comments[i]._id%>">删除</a></li>
+                                                         </ul>
+                                                     </div>
+                                                     <%}%>
+                                                 </div>
+                                                 <%=i+1%>楼•
+                                             </div>
+                                             <p class="f11"><%=dateFormat(comments[i].create_time)%></p>
 
-                    </div>
-                    <div class='reply_content from-huangrongrong'>
-                        <div class="markdown-text">
-                            <%-comments[i].content%>
-                        </div>
-                    </div>
+                                         </div>
 
-                </div>
+                                     </div>
+                                     <div class='reply_content from-huangrongrong'>
+                                         <div class="markdown-text">
+                                             <%-comments[i].content%>
+                                         </div>
+                                     </div>
+
+
+
+                                 </div>
                 <% } %>
         </div>
 
