@@ -57,13 +57,13 @@
 
                                 <div class="j_topicControl">
                                     <% if(isAdmin){%>
-                                    <span>操作》</span>
+                                    <span><i class="icon-th-list"></i>操作》</span>
                                     <div class="drop">
                                         <ul>
-                                            <li><a href="/topic/post/<%= topics[i]._id%>">编辑</a></li>
-                                            <li><a href="#del">删除</a></li>
-                                            <li><a href="#good"><%if(topics[i].good){%>取消精华<%}else{%>精华<%}%></a></li>
-                                            <li><a href="#top"><%if(topics[i].top){%>取消置顶<%}else{%>置顶<%}%></a></li>
+                                            <li><a href="/topic/post/<%= topics[i]._id%>"><i class="icon-edit"></i>编辑</a></li>
+                                            <li><a href="#del"><i class="icon-remove"></i>删除</a></li>
+                                            <li><a href="#good"><i class="icon-star"></i><%if(topics[i].good){%>取消精华<%}else{%>精华<%}%></a></li>
+                                            <li><a href="#top"><i class="icon-upload"></i><%if(topics[i].top){%>取消置顶<%}else{%>置顶<%}%></a></li>
                                         </ul>
                                     </div>
                                     <%}%>

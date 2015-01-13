@@ -30,11 +30,12 @@ config.tab = {
 
 //站点配置
 config.site = {
+    name:'CNode',
     cookieAge: 7,//cookie 过期，默认7天
     debug: true,
     port: 3000,
     avatorPath: './public/files/avator',
-    pageSize: 15,
+    pageSize: 5,
     imgType: ['jpg', 'gif', 'png'],
     url: 'http://127.0.0.1:3000',
     admin: ['jsonchou', 'lulisheng', 'chimeihuan', 'hewen', 'wuqiping', 'food']

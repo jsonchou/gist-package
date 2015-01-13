@@ -21,6 +21,9 @@ function topicControl() {
         var ohref = o.attr('href');
         var tag = ohref.replace('#', ''); //标识
         var id = op.attr('data-id');
+        if (!id) {
+            id = o.parents('.j_topicControl').attr('data-id');
+        }
 
         if (ohref.indexOf('#') > -1) {
             var _ajax = function (tag, callback) {

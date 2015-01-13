@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var config = require('../config');//数据配置文件
 var mongoose = require('mongoose');
 var mongoHelper = require('../dao/mongohelper');
 
@@ -33,11 +32,11 @@ router.get('/', function (req, res) {
         tabKey: '',
         isAdmin: false,
         isUser: false,
-        title: "Uzai Nodejs Site"
+        title: "Node.js专业中文社区"
     }
 
     json.isAdmin = authAdmin.isAdmin(req, res);
-    
+
     var cfg = {};
     if (tab) {
         if (tab == 'good') {
@@ -46,6 +45,11 @@ router.get('/', function (req, res) {
             cfg = { 'tag': tab }
         }
         json.tabKey = tab;
+        if (json.tabKey == 'good') {
+            json.title = "精华版块";
+        } else {
+            json.title = config.tab[json.tabKey] + "版块";
+        }
     }
 
     //性能特别低
@@ -83,14 +87,14 @@ router.get('/', function (req, res) {
                     sb.push("<li><a>...</a></li>");
                     sb.push("<li><a href='/?page=" + rs + "'>»</a></li>");
                 }
-                else{
+                else {
                     sb.push("<li><a href='/?page=1'>«</a></li>");
                     sb.push("<li><a>...</a></li>");
                     for (var i = rs - 4; i <= rs; i++) {
                         sb.push("<li " + ((pn == i) ? "class='disabled active' " : "") + " ><a href='/" + tabKeyNode + "page=" + i + "'>" + i + "</a></li>");
                     }
                 }
-                
+
             }
         }
 
@@ -112,12 +116,6 @@ router.get('/', function (req, res) {
         });
 
     });
-
-  
-
-    
-
-
 
 });
 

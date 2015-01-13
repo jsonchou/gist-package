@@ -1907,9 +1907,10 @@ li.L1, li.L3, li.L5, li.L7, li.L9 { background: #eee; }
 
 /*json edit*/
 .j_topicControl{display:inline-block;position:relative;min-width:100px;min-height:20px;}
+.j_topicControl span{font-size:12px;margin-left:5px;}
 .j_topicControl .drop{position:absolute;left:0;top:25px;display:none;border:1px solid #08c;background:#fff;z-index:2;text-align:center;}
-.j_topicControl ul{padding:5px;margin:0;text-align:left;}
-
+.j_topicControl ul{padding:5px;margin:0;text-align:left;font-size:12px;}
+.j_topicControl ul i{margin-right:3px;}
 
 
 

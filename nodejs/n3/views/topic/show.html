@@ -51,15 +51,15 @@
                             <%}%>
                     </span>
 
-                    <div class="j_topicControl">
+                    <div class="j_topicControl" data-id="<%= topic._id%>">
                         <% if(isAdmin||isCreator){%>
-                        <span>操作》</span>
+                        <span><i class="icon-th-list"></i>操作》</span>
                         <div class="drop">
                             <ul>
-                                <li><a href="/topic/post/<%= topic._id%>">编辑</a></li>
-                                <li><a href="#del">删除</a></li>
-                                <li><a href="#good">精华</a></li>
-                                <li><a href="#top">置顶</a></li>
+                                <li><a href="/topic/post/<%= topic._id%>"><i class="icon-edit"></i>编辑</a></li>
+                                <li><a href="#del"><i class="icon-remove"></i>删除</a></li>
+                                <li><a href="#good"><i class="icon-star"></i><%if(topic.good){%>取消精华<%}else{%>精华<%}%></a></li>
+                                <li><a href="#top"><i class="icon-upload"></i><%if(topic.top){%>取消置顶<%}else{%>置顶<%}%></a></li>
                             </ul>
                         </div>
                         <%}%>
@@ -98,10 +98,10 @@
                                              <div class="tr f12">
                                                  <div class="j_topicControl" style="min-width:20px;">
                                                      <% if(isAdmin||isCreator){%>
-                                                     <span>操作》</span>
+                                                     <span><i class="icon-th-list"></i>操作》</span>
                                                      <div class="drop">
                                                          <ul>
-                                                             <li><a href="#cdel-<%=comments[i]._id%>">删除</a></li>
+                                                             <li><i class="icon-remove"></i><a href="#cdel-<%=comments[i]._id%>">删除</a></li>
                                                          </ul>
                                                      </div>
                                                      <%}%>
