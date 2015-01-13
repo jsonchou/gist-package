@@ -1,0 +1,120 @@
+﻿<% include ../partial/header.html %>
+<% include ../partial/menu.html %>
+
+<div id='main'>
+    <div id='sidebar'>
+        <% include ../partial/userpanel.html %>
+        <% include ../partial/ad.html %>
+        <% include ../partial/friendlink.html %>
+    </div>
+
+    <div id="content">
+        <div class="panel">
+            <div class="header">
+                <ul class="breadcrumb">
+                    <li><a href="/">主页</a><span class="divider">/</span></li>
+                </ul>
+            </div>
+            <div class="inner userinfo">
+                <div class="user_big_avatar">
+                    <img title="jiyinyiyong" class="user_avatar" src="<%=userInfo.avator%>">
+                </div>
+                <a class="dark"><%=userInfo.user%></a>
+                <p class="col_fade">注册时间 <%=userInfo.create_time%></p>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="header">
+                <span class="col_fade">最近创建的话题</span>
+            </div>
+
+            <% for(var i=0; i<topics.length; i++) {%>
+                <div class="cell">
+
+                    <a href="/user/<%=topics[i].user_info.user%>" class="user_avatar pull-left">
+                        <img title="<%=topics[i].user_info.user%>" src="<%=topics[i].user_info.avator%>">
+                    </a>
+
+                    <span class="reply_count pull-left">
+                        <span title="回复数" class="count_of_replies">
+                            <%=topics[i].comment_count%>
+                        </span>
+                        <span class="count_seperator">/</span>
+                        <span title="点击数" class="count_of_visits">
+                            <%=topics[i].hit%>
+                        </span>
+                    </span>
+
+
+                    <a href="/topic/<%= topics[i]._id %>" class="last_time pull-right">
+                        <span class="last_active_time"><%= dateFormat(topics[i].update_time) %></span>
+                    </a>
+
+
+
+                    <div class="topic_title_wrapper">
+                        <a title="<%= topics[i].title %>" href="/topic/<%= topics[i]._id %>" class="topic_title">
+                            <%= topics[i].title %>
+                        </a>
+                    </div>
+                </div>
+                <%}%>
+
+                <%if(topics.length==5){%>
+                <div class="cell more">
+                    <a href="/user/<%=userInfo.user%>/topics" class="dark">查看更多»</a>
+                </div>
+                <%}%>
+        </div>
+
+        <div class="panel">
+            <div class="header">
+                <span class="col_fade">最近参与的话题</span>
+            </div>
+
+            <% for(var i=0; i<commentTopics.length; i++) {%>
+                <div class="cell">
+
+                    <a href="/user/<%=commentTopics[i].user_info.user%>" class="user_avatar pull-left">
+                        <img title="<%=commentTopics[i].user_info.user%>" src="<%=commentTopics[i].user_info.avator%>">
+                    </a>
+
+                    <span class="reply_count pull-left">
+                        <span title="回复数" class="count_of_replies">
+                            <%=commentTopics[i].comment_count%>
+                        </span>
+                        <span class="count_seperator">/</span>
+                        <span title="点击数" class="count_of_visits">
+                            <%=commentTopics[i].hit%>
+                        </span>
+                    </span>
+
+
+                    <a href="/topic/<%= topics[i]._id %>" class="last_time pull-right">
+                        <span class="last_active_time"><%= dateFormat(commentTopics[i].update_time) %></span>
+                    </a>
+
+                    <div class="topic_title_wrapper">
+                        <a title="<%= commentTopics[i].title %>" href="/topic/<%= commentTopics[i]._id %>" class="topic_title">
+                            <%= commentTopics[i].title %>
+                        </a>
+                    </div>
+                </div>
+                <%}%>
+                <%if(commentTopics.length==5){%>
+                <div class="cell more">
+                    <a href="/user/<%=userInfo.user%>/replies" class="dark">查看更多»</a>
+                </div>
+                <%}%>
+
+        </div>
+    </div>
+
+</div>
+
+
+</div>
+
+
+<% include ../partial/footer.html %>

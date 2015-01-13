@@ -18,7 +18,7 @@ router.post('/', function (req, res) {
         var content = jc.saveWords(req.body.editorValue);
 
         var data = {
-            _topic_id: topicid,
+            topic_info: topicid,
             user_info: user_info,
             content: content
         }

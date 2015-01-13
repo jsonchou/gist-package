@@ -102,8 +102,7 @@ router.get('/', function (req, res) {
 
         json.paginationNode = sb.join('');
 
-
-        topicModel.model.find(cfg).skip((pn - 1) * ps).limit(ps).sort({ 'top': -1, 'good': -1, 'create_time': -1 }).populate('user_info').exec(function (err, topicsJoin) {
+        topicModel.model.find(cfg).sort({ 'top': -1, 'good': -1, 'create_time': -1 }).skip((pn - 1) * ps).limit(ps).populate('user_info').exec(function (err, topicsJoin) {
             if (err) {
                 jc.log(err);
             }

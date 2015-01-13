@@ -9,7 +9,7 @@ var http = require('http');
 var ejs = require('ejs');
 
 jc = require('./services/util');
-config = require('./config.js');
+config = require('./config');
 
 //index
 var index = require('./routes/index');
@@ -27,6 +27,7 @@ var topic_post = require('./routes/topic/post');
 //comment
 var comment_post = require('./routes/comment/post');
 //user
+var user_show = require('./routes/user/show');
 var signin = require('./routes/user/signin');
 var signup = require('./routes/user/signup');
 var userinfo = require('./routes/user/userinfo');
@@ -69,13 +70,13 @@ app.use(multer({
 app.use('/', index);
 app.use('/hi', hi);
 app.use('/about', about);
-
 //user
 app.use('/signup', signup);
 app.use('/signin', signin);
 app.use('/userinfo', userinfo);
 app.use('/signout', signout);
 app.use('/getpwd', getpwd);
+app.use('/user/', user_show);
 //search
 app.use('/search', search);
 //tag

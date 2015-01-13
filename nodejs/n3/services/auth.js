@@ -9,7 +9,7 @@ exports.isLogin = function (req, res) {
 // login filter
 exports.authorize = function (req, res, next) {
     //jc.log(req.cookies.user);
-    if (!req.cookies.user) {
+    if (!this.isLogin(req,res)) {
         res.redirect('/signin');
     } else {
         next();

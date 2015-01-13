@@ -9,10 +9,9 @@ var topicModel = new mongoHelper(topic);
 
 /* GET users listing. */
 router.get('/', function (req, res) {
-    
+
     var ps = config.site.pageSize;//每页数量
     var pn = parseInt(req.query.page);
-    var tab = req.query.tab;
     var q = req.query.q;
 
     if (!pn) {
@@ -21,7 +20,7 @@ router.get('/', function (req, res) {
 
     var json = {
         topics: [],
-        searchtag:'',
+        searchtag: '',
         topic_currentNum: pn,
         topic_records: 0,
         topic_recordSize: 0,
@@ -36,7 +35,7 @@ router.get('/', function (req, res) {
     json.title = "您搜索的关键字：" + json.searchtag;
 
     var cfg = {
-        title: {$regex:q}
+        title: { $regex: q }
     };
 
     //性能特别低
@@ -53,7 +52,7 @@ router.get('/', function (req, res) {
         var rs = json.topic_recordSize;//记录页数
         if (rs >= 1 && rs <= pspec) {
             for (var i = 0; i < rs; i++) {
-                sb.push("<li " + ((pn == i + 1) ? "class='disabled active' " : "") + " ><a href='/search/?q="+q+"&page=" + (i + 1) + "'>" + (i + 1) + "</a></li>");
+                sb.push("<li " + ((pn == i + 1) ? "class='disabled active' " : "") + " ><a href='/search/?q=" + q + "&page=" + (i + 1) + "'>" + (i + 1) + "</a></li>");
             }
         } else {
             if (rs > pspec) {

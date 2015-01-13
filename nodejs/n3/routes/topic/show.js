@@ -104,7 +104,7 @@ router.get('/:id', function (req, res) {
             //更新点击量
             //$inc 处增加量
             topicModel.update({ _id: tModel._id }, { $inc: { hit:1 } }, {}, function (error, numAffected) {
-                commentModel.model.find({ _topic_id: tModel._id }).sort({ 'create_time': -1 }).populate('user_info').exec(function (err, commentJoin) {
+                commentModel.model.find({ topic_info: tModel._id }).sort({ 'create_time': -1 }).populate('user_info').exec(function (err, commentJoin) {
                     if (commentJoin && commentJoin.length > 0) {
                         json.comments = commentJoin;
                         //jc.log(commentJoin);

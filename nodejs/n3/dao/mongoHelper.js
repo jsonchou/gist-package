@@ -40,10 +40,10 @@ MongoHelper.prototype.getById = function (id, callback) {
  * 根据查询条件获取Model
  */
 MongoHelper.prototype.getByQuery = function (query, fileds, opt, callback) {
-    this.model.find(query, fileds, opt, function (error, model) {
+    this.model.find(query, fileds, opt, function (error, models) {
         if (error) return callback(error, null);
 
-        return callback(null, model);
+        return callback(null, models);
     });
 };
 

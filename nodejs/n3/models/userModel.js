@@ -2,7 +2,7 @@
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-    user: { type: String, length: 30 },//用户名可相同
+    user: { type: String, length: 30 },//用户名不可相同
     email: { type: String, length: 30, unique: true },
     pwd: { type: String },
     avator: { type: String, default: '' },

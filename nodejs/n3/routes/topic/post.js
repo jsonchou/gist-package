@@ -22,7 +22,6 @@ router.post('*', function (req, res) {
         var words = req.body.words.replace('，', ',').replace('｜', ',').replace(' ', '');
         var user_info = req.body.user_info;
 
-        
         var data = {
             tag: tag,
             title: title,

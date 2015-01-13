@@ -2,7 +2,7 @@
 var Schema = mongoose.Schema;
 
 var commentSchema = new Schema({
-    _topic_id: Schema.Types.ObjectId,//文章ID
+    topic_info: Schema.Types.ObjectId,//文章ID
     user_info: { type: mongoose.Schema.ObjectId, ref: 'users' },//外链ID
     content: { type: String },
     create_time: { type: Date, default: Date.now, index: true }
