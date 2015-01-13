@@ -61,7 +61,6 @@ router.get('/:username', function (req, res) {
     }, function (err, results) {
         res.locals.dateFormat = jc.dateFormat;
         res.locals.getUrlStyle = jc.getUrlStyle;
-        console.dir(results.one);
         res.render('user/show', json);
     });
 
@@ -191,11 +190,10 @@ router.get('/:username/:tag', function (req, res) {
         res.locals.getUrlStyle = jc.getUrlStyle;
         if (tag == 'topics') {
             json.title = username + "创建的话题";
-            res.render('user/show_topics', json);
         } else if (tag == 'replies') {
             json.title = username + "参与的话题";
-            res.render('user/show_replies', json);
         }
+        res.render('user/show_list', json);
     });
   
 });
