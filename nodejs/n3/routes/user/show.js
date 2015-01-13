@@ -113,6 +113,7 @@ router.get('/:username/:tag', function (req, res) {
         one_fix: function (callback) {
             if (tag == 'topics') {
                 cfg.user_info = json.userInfo._id;//填充查询条件
+                callback(null, []);
             } else if (tag == 'replies') {
                 commentModel.model.find({ user_info: json.userInfo._id }).distinct('topic_info').exec(function (err, topicInfoModels) {
                     for (var i = 0; i < topicInfoModels.length; i++) {
@@ -123,6 +124,7 @@ router.get('/:username/:tag', function (req, res) {
                     callback(err, topicInfoModels);
                 });
             }
+           
         },
         two: function (callback) {
             topicModel.model.find(cfg, {}, {}, function (err, allModels) {
