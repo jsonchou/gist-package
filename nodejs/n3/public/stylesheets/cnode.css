@@ -1142,7 +1142,7 @@ textarea#title,textarea#words { width: 98%; border: 0; margin-bottom: 1em; resiz
 #main p a.content_img { max-width: 100%; }
 div[class$=content] > blockquote > p { font-size: 14px; line-height: 18px; }
 .index_notify { font-size: 14px; }
-.top_score { color: gray; padding: 2px; }
+.top_score { color: gray; padding: 2px;display:inline-block;vertical-align:middle;width:25px; }
 #sidebar .inner ol { margin: 4px 0; list-style: none; }
 .top_score { margin-right: 10px; }
 div[class$=part] { display: inline-block; }

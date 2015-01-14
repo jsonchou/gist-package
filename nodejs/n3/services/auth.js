@@ -1,4 +1,4 @@
-﻿// check login
+// check login
 exports.isLogin = function (req, res) {
     if (req.cookies.user) {
         return true;

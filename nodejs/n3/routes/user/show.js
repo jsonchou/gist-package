@@ -1,4 +1,4 @@
-﻿var express = require('express');
+var express = require('express');
 var router = express.Router();
 
 var authAdmin = require('../../services/authAdmin');
@@ -32,14 +32,18 @@ router.get('/:username', function (req, res) {
     async.series({
         one: function (callback) {
             userModel.model.find({ user: username }, {}, {}, function (err, uModels) {
-                json.userInfo = uModels[0];
-                callback(err,uModels);
+                if (uModels && uModels.length > 0) {
+                    json.userInfo = uModels[0];
+                    callback(err, uModels);
+                } else {
+                    res.redirect('/');
+                }
             });
         },
         two: function (callback) {
             topicModel.model.find({ user_info: json.userInfo._id }).sort({ 'top': -1, 'good': -1, 'create_time': -1 }).skip(0).limit(5).populate('user_info').exec(function (err, tModels) {
                 json.topics = tModels;
-                callback(err,tModels);
+                callback(err, tModels);
             });
         },
         three: function (callback) {
@@ -63,7 +67,6 @@ router.get('/:username', function (req, res) {
         res.locals.getUrlStyle = jc.getUrlStyle;
         res.render('user/show', json);
     });
-
 });
 
 router.get('/:username/:tag', function (req, res) {
@@ -92,7 +95,6 @@ router.get('/:username/:tag', function (req, res) {
     }
 
     json.isAdmin = authAdmin.isAdmin(req, res);
-    
 
     var cfg = {
         
@@ -105,8 +107,12 @@ router.get('/:username/:tag', function (req, res) {
     async.series({
         one: function (callback) {
             userModel.model.find({ user: username }, {}, {}, function (err, uModels) {
-                json.userInfo = uModels[0];//用户实体类
-                callback(err, uModels);
+                if (uModels && uModels.length > 0) {
+                    json.userInfo = uModels[0];//用户实体类
+                    callback(err, uModels);
+                } else {
+                    res.redirect('/');
+                }
             });
         },
         one_fix: function (callback) {
@@ -123,7 +129,6 @@ router.get('/:username/:tag', function (req, res) {
                     callback(err, topicInfoModels);
                 });
             }
-           
         },
         two: function (callback) {
             topicModel.model.find(cfg, {}, {}, function (err, allModels) {
@@ -137,7 +142,6 @@ router.get('/:username/:tag', function (req, res) {
             //生成分页节点;
             var sb = [];
             sb.push("<ul>");
-
             var rs = json.topic_recordSize;//记录页数
             if (rs >= 1 && rs <= pspec) {
                 for (var i = 0; i < rs; i++) {
@@ -167,10 +171,8 @@ router.get('/:username/:tag', function (req, res) {
                             sb.push("<li " + ((pn == i) ? "class='disabled active' " : "") + " ><a href='/" + urlFix + "?page=" + i + "'>" + i + "</a></li>");
                         }
                     }
-
                 }
             }
-
             sb.join('</ul>')
 
             json.paginationNode = sb.join('');

@@ -1,4 +1,4 @@
-﻿var _env = 'real'; //real,dev
+var _env = 'real'; //real,dev
 
 var _host = document.location.host;
 if (_host.indexOf('localhost:') > -1 || _host.indexOf('127.0.0.1') > -1 || _host.indexOf('10.1.') > -1) {

@@ -1,0 +1,18 @@
+<%if(topic_noreply.length>0){%><div class="panel">
+    <div class="header">
+        <span class="col_fade">无人回复的话题</span>
+    </div>
+    <div class="inner">
+        <ul class="unstyled">
+            <% for(var i=0; i
+            <topic_noreply.length; i++) {%>
+                <li>
+                    <div>
+                        <a title="<%=topic_noreply[i].title%>" href="/topic/<%=topic_noreply[i]._id%>" class="dark topic_title"><%=topic_noreply[i].title%></a>
+                    </div>
+                </li>
+                <%}%>
+        </ul>
+
+    </div>
+</div><%}%>

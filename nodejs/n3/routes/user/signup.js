@@ -5,11 +5,11 @@ var fs = require('fs');
 var path = require('path');
 var mongoHelper = require('../../dao/mongoHelper');
 var multer = require('multer');
+
 var user = require('../../models/userModel').User;
 var userModel = new mongoHelper(user);
 
 var emailPoster = require("../../services/email");
-
 // mongoose 链接
 
 router.get('/', function (req, res) {

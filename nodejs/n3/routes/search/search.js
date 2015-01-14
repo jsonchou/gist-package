@@ -1,4 +1,4 @@
-﻿var express = require('express');
+var express = require('express');
 var router = express.Router();
 
 var authAdmin = require('../../services/authAdmin');
@@ -13,6 +13,11 @@ router.get('/', function (req, res) {
     var ps = config.site.pageSize;//每页数量
     var pn = parseInt(req.query.page);
     var q = req.query.q;
+
+    if (!q) {
+       var backUrl= req.header('Referer') || '/';
+       res.redirect(backUrl);
+    }
 
     if (!pn) {
         pn = 1;

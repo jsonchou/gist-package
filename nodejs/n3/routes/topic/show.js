@@ -1,7 +1,8 @@
-﻿var express = require('express');
+var express = require('express');
 var router = express.Router();
 
 var mongoHelper = require('../../dao/mongohelper');
+
 var topic = require('../../models/topicModel').Topic;
 var topicModel = new mongoHelper(topic);
 
@@ -9,6 +10,9 @@ var authAdmin = require('../../services/authAdmin');
 
 var comment = require('../../models/commentModel').Comment;
 var commentModel = new mongoHelper(comment);
+
+var user = require('../../models/userModel').User;
+var userModel = new mongoHelper(user);
 
 //edit
 router.get('/:id/:tag', function (req, res) {
@@ -28,6 +32,12 @@ router.get('/:id/:tag', function (req, res) {
                         ctag = "取消置顶";
                     }
                     topicModel.update({ _id: id }, tModel, {}, function (err, numAffected) {
+                        if (ctag.indexOf('取消') <= -1) {
+                            //置顶
+                            userModel.update({ _id: tModel.user_info }, { $inc: { score: 100 } }, {}, function (err, numEffect) {
+                                
+                            });
+                        } 
                         res.json({ 'message': ctag + '设置' + '成功' });
                     });
                 } else if (tag == 'good') {
@@ -39,19 +49,29 @@ router.get('/:id/:tag', function (req, res) {
                         ctag = "取消精华";
                     }
                     topicModel.update({ _id: id }, tModel, {}, function (err, numAffected) {
+                        if (ctag.indexOf('取消') <= -1) {
+                            //置顶
+                            userModel.update({ _id: tModel.user_info }, { $inc: { score: 20 } }, {}, function (err, numEffect) {
+                                
+                            });
+                        }
                         res.json({ 'message': ctag + '设置' + '成功' });
                     });
                 } else if (tag == 'del') {
                     topicModel.delete(tModel, function (err) {
-                        res.json({ 'message': '删除' + '成功' });
+                        userModel.update({ _id: tModel.user_info }, { $inc: { topic_count: -1 } }, {}, function (err, numEffect) {
+                            res.json({ 'message': '删除' + '成功' });
+                        });
                     });
                 } else if (tag.indexOf('cdel') > -1) {
                     //删除点评
-                    var cid=tag.split('-')[1];//评论ID
+                    var cid = tag.split('-')[1];//评论ID
                     commentModel.delete({ _id: cid }, function () {
-                        tModel.comment_count -= 1;//更新点评数
-                        topicModel.update({ _id: id }, tModel, {}, function (err, numAffected) {
-                            res.json({ 'message': '评论删除' + '成功' });
+                        //更新点评数
+                        topicModel.update({ _id: id }, { $inc: { comment_count: -1 } }, {}, function (err, numAffected) {
+                            userModel.update({ _id: tModel.user_info }, { $inc: { comment_count: -1 } }, {}, function (err, numEffect) {
+                                res.json({ 'message': '评论删除' + '成功' });
+                            });
                         });
                     });
                 }

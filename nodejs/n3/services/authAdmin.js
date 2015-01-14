@@ -1,4 +1,4 @@
-﻿//check admin login
+//check admin login
 exports.isAdmin = function (req,res) {
     if (!req.cookies.user) {
         return false;

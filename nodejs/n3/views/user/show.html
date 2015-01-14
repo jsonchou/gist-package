@@ -1,4 +1,4 @@
-﻿<% include ../partial/header.html %>
+<% include ../partial/header.html %>
 <% include ../partial/menu.html %>
 
 <div id='main'>
@@ -20,6 +20,7 @@
                     <img title="jiyinyiyong" class="user_avatar" src="<%=userInfo.avator%>">
                 </div>
                 <a class="dark"><%=userInfo.user%></a>
+                <span class="col_fade">邮箱 <%=userInfo.email%></span>
                 <p class="col_fade">注册时间 <%=dateFormat(userInfo.create_time)%></p>
             </div>
         </div>
@@ -29,6 +30,7 @@
                 <span class="col_fade">最近创建的话题</span>
             </div>
 
+            <%if(topics&&topics.length>0){%>
             <% for(var i=0; i<topics.length; i++) {%>
                 <div class="cell">
 
@@ -66,6 +68,7 @@
                     <a href="/user/<%=userInfo.user%>/topics" class="dark">查看更多»</a>
                 </div>
                 <%}%>
+            <%}%>
         </div>
 
         <div class="panel">

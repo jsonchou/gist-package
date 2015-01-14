@@ -6,8 +6,6 @@ var mongoHelper = require('../../dao/mongoHelper');
 var user = require('../../models/userModel').User;
 var userModel = new mongoHelper(user);
 
-// mongoose 链接
-
 /* GET users listing. */
 router.get('/', function (req, res) {
     var json = {

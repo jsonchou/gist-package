@@ -1,4 +1,4 @@
-﻿"use strict";
+"use strict";
 var config = {
     db: {},
     email: {},
@@ -35,10 +35,16 @@ config.site = {
     debug: true,
     port: 3000,
     avatorPath: './public/files/avator',
-    pageSize: 5,
+    pageSize: 15,
     imgType: ['jpg', 'gif', 'png'],
-    url: 'http://127.0.0.1:3000',
+    url: 'http://10.1.13.18:3000',
     admin: ['jsonchou', 'lulisheng', 'chimeihuan', 'hewen', 'wuqiping', 'food']
 }
+
+//+/-主题，+/-5积分
+//+/-回复，+/-1积分
+//+精华，+20积分
+//+置顶，+100积分
+//+登录，+1积分
 
 module.exports = config;

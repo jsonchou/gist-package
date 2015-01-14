@@ -1,12 +1,16 @@
-﻿var express = require('express');
+var express = require('express');
 var router = express.Router();
 
 var auth = require('../../services/auth');
 var authAdmin = require('../../services/authAdmin');
 
 var mongoHelper = require('../../dao/mongoHelper');
+
 var topic = require('../../models/topicModel').Topic;
 var topicModel = new mongoHelper(topic);
+
+var user = require('../../models/userModel').User;
+var userModel = new mongoHelper(user);
 
 /* GET users listing. */
 router.post('*', function (req, res) {
@@ -44,8 +48,12 @@ router.post('*', function (req, res) {
                 res.redirect('/topic/' + id);
             }
         } else {
+            //insert topic
+
             topicModel.create(data, function (err) {
-                res.redirect('/');
+                userModel.update({ _id: data.user_info }, { $inc: { score: 5, topic_count: 1 } }, {}, function (err, numEffect) {
+                    res.redirect('/');
+                });
             });
         }
 

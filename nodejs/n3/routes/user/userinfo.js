@@ -1,14 +1,14 @@
-﻿var express = require('express');
+var express = require('express');
 var crypto = require('crypto');
 var router = express.Router();
+
 var mongoose = require('mongoose');
-var jc = require('../../services/util');//实体共用组件
+
 var mongoHelper = require('../../dao/mongoHelper');
 var emailPoster = require("../../services/email");
+
 var user = require('../../models/userModel').User;
 var userModel = new mongoHelper(user);
-
-var config = require("../../config");
 
 var auth = require('../../services/auth');
 

@@ -28,6 +28,7 @@ var topic_post = require('./routes/topic/post');
 var comment_post = require('./routes/comment/post');
 //user
 var user_show = require('./routes/user/show');
+var user_rank = require('./routes/user/rank');
 var signin = require('./routes/user/signin');
 var signup = require('./routes/user/signup');
 var userinfo = require('./routes/user/userinfo');
@@ -76,7 +77,9 @@ app.use('/signin', signin);
 app.use('/userinfo', userinfo);
 app.use('/signout', signout);
 app.use('/getpwd', getpwd);
+app.use('/user/rank', user_rank);
 app.use('/user/', user_show);
+
 //search
 app.use('/search', search);
 //tag
@@ -120,7 +123,6 @@ app.use(function (err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;
 

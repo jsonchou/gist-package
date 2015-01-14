@@ -1,4 +1,4 @@
-﻿var express = require('express');
+var express = require('express');
 var router = express.Router();
 
 var auth = require('../../services/auth');
@@ -9,6 +9,9 @@ var commentModel = new mongoHelper(comment);
 
 var topic = require('../../models/topicModel').Topic;
 var topicModel = new mongoHelper(topic);
+
+var user = require('../../models/userModel').User;
+var userModel = new mongoHelper(user);
 
 /* GET users listing. */
 router.post('/', function (req, res) {
@@ -30,7 +33,10 @@ router.post('/', function (req, res) {
 
             //更新回复数量
             topicModel.update({ _id: topicid }, { $inc: { comment_count: 1 } }, {}, function (error, numAffected) {
-                res.redirect('/topic/' + topicid);
+                userModel.update({ _id: data.user_info }, { $inc: { score: 1, comment_count: 1 } }, {}, function (err, numEffect) {
+                    res.redirect('/topic/' + topicid);
+                });
+                
             });
             
         });

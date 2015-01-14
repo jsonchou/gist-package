@@ -4,10 +4,10 @@ var emailPoster = require("../../services/email");
 var guid = require('../../services/guid');//生成guid code
 
 var crypto = require('crypto');
+
 var mongoose = require('mongoose');
 var mongoHelper = require('../../dao/mongoHelper');
 
-var config = require("../../config");
 var auth = require('../../services/auth');
 
 var user = require('../../models/userModel').User;
