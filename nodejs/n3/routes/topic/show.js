@@ -33,10 +33,9 @@ router.get('/:id/:tag', function (req, res) {
                     }
                     topicModel.update({ _id: id }, tModel, {}, function (err, numAffected) {
                         if (ctag.indexOf('取消') <= -1) {
+                            req.session.userInfo.score += 100;
                             //置顶
-                            userModel.update({ _id: tModel.user_info }, { $inc: { score: 100 } }, {}, function (err, numEffect) {
-                                
-                            });
+                            userModel.update({ _id: tModel.user_info }, { $inc: { score: 100 } }, {}, function (err, numAffect) {});
                         } 
                         res.json({ 'message': ctag + '设置' + '成功' });
                     });
@@ -50,16 +49,15 @@ router.get('/:id/:tag', function (req, res) {
                     }
                     topicModel.update({ _id: id }, tModel, {}, function (err, numAffected) {
                         if (ctag.indexOf('取消') <= -1) {
+                            req.session.userInfo.score += 20;
                             //置顶
-                            userModel.update({ _id: tModel.user_info }, { $inc: { score: 20 } }, {}, function (err, numEffect) {
-                                
-                            });
+                            userModel.update({ _id: tModel.user_info }, { $inc: { score: 20 } }, {}, function (err, numAffect) {});
                         }
                         res.json({ 'message': ctag + '设置' + '成功' });
                     });
                 } else if (tag == 'del') {
                     topicModel.delete(tModel, function (err) {
-                        userModel.update({ _id: tModel.user_info }, { $inc: { topic_count: -1 } }, {}, function (err, numEffect) {
+                        userModel.update({ _id: tModel.user_info }, { $inc: { topic_count: -1 } }, {}, function (err, numAffect) {
                             res.json({ 'message': '删除' + '成功' });
                         });
                     });
@@ -68,8 +66,8 @@ router.get('/:id/:tag', function (req, res) {
                     var cid = tag.split('-')[1];//评论ID
                     commentModel.delete({ _id: cid }, function () {
                         //更新点评数
-                        topicModel.update({ _id: id }, { $inc: { comment_count: -1 } }, {}, function (err, numAffected) {
-                            userModel.update({ _id: tModel.user_info }, { $inc: { comment_count: -1 } }, {}, function (err, numEffect) {
+                        topicModel.update({ _id: id }, { $inc: { comment_count: -1 } }, {}, function (err, numAffect) {
+                            userModel.update({ _id: tModel.user_info }, { $inc: { comment_count: -1 } }, {}, function (err, numAffect) {
                                 res.json({ 'message': '评论删除' + '成功' });
                             });
                         });
@@ -90,11 +88,11 @@ router.get('/:id/:tag', function (req, res) {
 /* GET users listing. */
 router.get('/:id', function (req, res) {
 
+    var ui = req.session.userInfo;
     var id = req.params.id;
-    var user = req.cookies.user;
     var userid = "";
-    if (user) {
-        userid = user.split('|')[0];
+    if (ui) {
+        userid = ui._id;
     }
 
     topicModel.getById(id, function (err, tModel) {
@@ -109,7 +107,7 @@ router.get('/:id', function (req, res) {
                 isCreator:false,
                 comments: [],
                 userInfo: {},
-                isLogin: req.cookies.user//判断是否登录
+                isLogin: ui//判断是否登录
             };
 
             topicModel.model.getUserByTopicId(tModel._id, function (err, topicJoin) {

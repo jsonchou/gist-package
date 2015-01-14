@@ -1,5 +1,5 @@
 $(function () {
-    checkUser();
+    //checkUser();
     topicControl();
 });
 

@@ -1,6 +1,6 @@
 // check login
 exports.isLogin = function (req, res) {
-    if (req.cookies.user) {
+    if (req.session.userInfo) {
         return true;
     }
     return false;

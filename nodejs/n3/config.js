@@ -11,7 +11,7 @@ config.db = {
     email: 'jsonchou329@gmail.com',
     user: 'root',
     pass: 'password',
-    host: 'mongodb://127.0.0.1:27017/test'
+    host: 'mongodb://10.1.13.18:27017/test'
 }
 
 //邮箱配置
@@ -30,12 +30,13 @@ config.tab = {
 
 //站点配置
 config.site = {
-    name:'CNode',
+    name: 'CNode',
+    cookieSecret:'jsonchou',
     cookieAge: 7,//cookie 过期，默认7天
     debug: true,
     port: 3000,
     avatorPath: './public/files/avator',
-    pageSize: 15,
+    pageSize: 25,
     imgType: ['jpg', 'gif', 'png'],
     url: 'http://10.1.13.18:3000',
     admin: ['jsonchou', 'lulisheng', 'chimeihuan', 'hewen', 'wuqiping', 'food']

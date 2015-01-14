@@ -1075,7 +1075,8 @@ a.user_avatar:hover { text-decoration: none; }
 .user { -webkit-border-radius: 3px; -moz-border-radius: 3px; -o-border-radius: 3px; border-radius: 3px; -webkit-box-shadow: 0 2px 2px rgba(0,0,0,.15); -moz-box-shadow: 0 2px 2px rgba(0,0,0,.15); -o-box-shadow: 0 2px 2px rgba(0,0,0,.15); box-shadow: 0 2px 2px rgba(0,0,0,.15); width: 200px; height: 80px; border: 1px dashed #e2e2e2; padding: 10px; margin-right: 20px; margin-bottom: 20px; display: inline-block; }
 .user .user_avatar { width: 32px; height: 32px; }
 .user .user_name { font-size: 14px; margin-left: 1em; }
-.user_name { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; vertical-align: middle; }
+.user_name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; vertical-align: middle; }
+.user_name a{font-size:12px;}
 .reply_author, .reply_time { font-size: 11px; }
 .cell .anchor { position: absolute; top: -5px; }
 .author_content .user_avatar { display: inline-block; float: left; }

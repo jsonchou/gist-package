@@ -18,10 +18,15 @@
             <div class="inner userinfo">
                 <div class="user_big_avatar">
                     <img title="jiyinyiyong" class="user_avatar" src="<%=userInfo.avator%>">
+                    <a class="dark"><%=userInfo.user%></a>
                 </div>
-                <a class="dark"><%=userInfo.user%></a>
-                <span class="col_fade">邮箱 <%=userInfo.email%></span>
-                <p class="col_fade">注册时间 <%=dateFormat(userInfo.create_time)%></p>
+                <div class="user_profile">
+                    <ul class="unstyled">
+                        <li><span class="big"><%=userInfo.score%></span> 积分</li>
+                        <li><span class="col_fade">邮箱 <%=userInfo.email%></span></li>
+                        <li><p class="col_fade">注册时间 <%=dateFormat(userInfo.create_time)%></p></li>
+                    </ul>
+                </div>
             </div>
         </div>
 

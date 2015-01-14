@@ -16,8 +16,9 @@ var userModel = new mongoHelper(user);
 /* GET users listing. */
 router.post('/', function (req, res) {
     auth.authorize(req, res, function () {
+        var ui = req.session.userInfo;
         var topicid = req.body.topicid;//
-        var user_info = req.cookies.user.split('|')[0];//user id
+        var user_info = ui._id;//user id
         var content = jc.saveWords(req.body.editorValue);
 
         var data = {
@@ -30,15 +31,13 @@ router.post('/', function (req, res) {
             if (err) {
                 res.send(err);
             }
-
             //更新回复数量
             topicModel.update({ _id: topicid }, { $inc: { comment_count: 1 } }, {}, function (error, numAffected) {
                 userModel.update({ _id: data.user_info }, { $inc: { score: 1, comment_count: 1 } }, {}, function (err, numEffect) {
+                    req.session.userInfo.score += 1;
                     res.redirect('/topic/' + topicid);
                 });
-                
             });
-            
         });
     });
 });

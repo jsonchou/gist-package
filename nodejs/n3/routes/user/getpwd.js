@@ -21,9 +21,9 @@ router.get('/', function (req, res) {
         email:''
     }
 
-    user = req.cookies.user || '';
+    ui = req.session.userInfo || '';
 
-    if (user) {
+    if (ui) {
         res.redirect('/');//已登录，则返回首页
     }
     res.render('getpwd', json);
@@ -56,7 +56,8 @@ router.post('/', function (req, res) {
                 poster.send();
 
                 //清除用户cookie
-                res.clearCookie('user', { path: '/' });
+                //res.clearCookie('user', { path: '/' });
+                delete req.session.userInfo;
 
                 json.msg = "请登录您的邮箱：" + models[0].email + "，找回您的密码";
                 res.render('getpwd', json);

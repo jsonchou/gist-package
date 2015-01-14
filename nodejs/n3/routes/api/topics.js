@@ -30,7 +30,7 @@ router.get('/:id', function (req, res) {
 
 //insert
 router.post('/', function (req, res) {
-    var user = req.cookies.user;
+    var ui = req.session.userInfo;
     var title = req.body.title;
     var content = jc.saveWords(req.body.content);
     var tag = req.body.tab;
@@ -41,8 +41,8 @@ router.post('/', function (req, res) {
         title: title,
         content: content,
         words: words,
-        user_name: user.split('|')[0],
-        update_user: user.split('|')[0]
+        user_name: ui.user,
+        update_user: ui.user
     }
     //jc.log(topicModel);
     topicModel.create(data, function (err) {

@@ -18,7 +18,7 @@ router.post('*', function (req, res) {
     var id = req.url.replace('/', '');//获取ID
 
     auth.authorize(req, res, function () {
-        var user = req.cookies.user;
+        var ui = req.session.userInfo;
 
         var title = req.body.title;
         var content = jc.saveWords(req.body.editorValue);
@@ -31,8 +31,8 @@ router.post('*', function (req, res) {
             title: title,
             content: content,
             words: words.toLowerCase(),
-            user_info: user.split('|')[0],
-            update_user: user.split('|')[1]
+            user_info: ui._id,
+            update_user: ui.user
         }
 
         if (id) {
@@ -40,7 +40,7 @@ router.post('*', function (req, res) {
             data._id = id;
             data.update_time = new Date().toISOString();
 
-            if (authAdmin.isAdmin || user.split('|')[0] == user_info) {
+            if (authAdmin.isAdmin || ui._id == user_info) {
                 topicModel.update({ _id: id }, data, {}, function (err, numEffect) {
                     res.redirect('/topic/' + id);
                 });
@@ -52,6 +52,7 @@ router.post('*', function (req, res) {
 
             topicModel.create(data, function (err) {
                 userModel.update({ _id: data.user_info }, { $inc: { score: 5, topic_count: 1 } }, {}, function (err, numEffect) {
+                    req.session.userInfo.score += 5;
                     res.redirect('/');
                 });
             });
@@ -60,45 +61,46 @@ router.post('*', function (req, res) {
     });
 });
 
-
 /* GET users listing. */
 router.get('*', function (req, res) {
 
-    var user = req.cookies.user;
-    var id = req.url.replace('/', '');//获取ID
-    var username = user.split('|')[1];
+    auth.authorize(req, res, function () {
+        var ui = req.session.userInfo;
+        var id = req.url.replace('/', '');//获取ID
+        var username = ui.user;
 
-    var json = {
-        title: '发布话题',
-        msg: '',
-        model: {},
-        tabs: {}
-    };
+        var json = {
+            title: '发布话题',
+            msg: '',
+            model: {},
+            tabs: {}
+        };
 
-    json.tabs = config.tab;
+        json.tabs = config.tab;
 
-    if (id) {
-        json.title = '修改话题';
-        auth.authorize(req, res, function () {
-            topicModel.getById(id, function (err, tModel) {
-                if (tModel) {
-                    if (tModel.user == username) {
-                        json.model = tModel;
-                        res.render('topic/post', json);
-                    } else {
-                        authAdmin.authorize(req, res, function () {
+        if (id) {
+            json.title = '修改话题';
+            auth.authorize(req, res, function () {
+                topicModel.getById(id, function (err, tModel) {
+                    if (tModel) {
+                        if (tModel.user == username) {
                             json.model = tModel;
                             res.render('topic/post', json);
-                        });
+                        } else {
+                            authAdmin.authorize(req, res, function () {
+                                json.model = tModel;
+                                res.render('topic/post', json);
+                            });
+                        }
+                    } else {
+                        res.redirect('/');
                     }
-                } else {
-                    res.redirect('/');
-                }
+                });
             });
-        });
-    } else {
-        res.render('topic/post', json);
-    }
+        } else {
+            res.render('topic/post', json);
+        }
+    });
 
 });
 

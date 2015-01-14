@@ -15,10 +15,11 @@ var auth = require('../../services/auth');
 /* GET users listing. */
 router.get('/', function (req, res) {
     auth.authorize(req, res, function () {
+        jc.log(req.session.userInfo);
         var json = {
             msg: '',
             title: '修改信息',
-            email: req.cookies.user.split('|')[1]
+            email: req.session.userInfo.email
         }
         res.render('userinfo', json);
     });

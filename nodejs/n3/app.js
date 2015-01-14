@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -19,8 +20,6 @@ var about = require('./routes/about');
 
 //search
 var search = require('./routes/search/search');
-//tag
-var tag = require('./routes/tag/tag');
 //topic
 var topic_show = require('./routes/topic/show');
 var topic_post = require('./routes/topic/post');
@@ -39,6 +38,13 @@ var getpwd = require('./routes/user/getpwd');
 var api_topics = require('./routes/api/topics');
 
 var app = express();
+
+app.use(session({
+    secret: config.site.cookieSecret,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 3600000 * 24 }//一天
+}))
 
 //格式化时间
 
@@ -68,6 +74,11 @@ app.use(multer({
     }
 }));
 
+app.use(function (req, res, next) {
+    res.locals.gUserInfo = req.session.userInfo;
+    next();
+});
+
 app.use('/', index);
 app.use('/hi', hi);
 app.use('/about', about);
@@ -82,8 +93,6 @@ app.use('/user/', user_show);
 
 //search
 app.use('/search', search);
-//tag
-app.use('/tag', tag);
 //topic
 app.use('/topic/post', topic_post);
 app.use('/topic', topic_show);
