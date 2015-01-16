@@ -6,6 +6,14 @@ exports.isLogin = function (req, res) {
     return false;
 }
 
+//sing out
+exports.signOut = function (req, res) {
+    if (this.isLogin(req,res)) {
+        req.session.userInfo = null;
+        delete req.session.userInfo;
+    }
+}
+
 // login filter
 exports.authorize = function (req, res, next) {
     //jc.log(req.cookies.user);

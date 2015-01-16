@@ -1,11 +1,12 @@
-<% include partial/header.html %>
-<% include partial/menu.html %>
+<% include ../partial/header.html %>
+<% include ../partial/menu.html %>
 
 <div id='main'>
+
     <div id='sidebar'>
-
-        <% include partial/user_about.html %>
-
+        <% include ../partial/userpanel.html %>
+        <% include ../partial/ad.html %>
+        <% include ../partial/friendlink.html %>
     </div>
 
     <div id='content'>
@@ -18,7 +19,7 @@
             </div>
             <div class="inner">
 
-                <form method="post" action="/userinfo" class="form-horizontal" id="signin_form">
+                <form method="post" action="/user/userinfo" class="form-horizontal" id="signin_form">
 
                     <div class="control-group">
                         <label for="email" class="control-label">原始密码</label>
@@ -61,4 +62,4 @@
 
 </div>
 
-<% include partial/footer.html %>
+<% include ../partial/footer.html %>

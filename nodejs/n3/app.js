@@ -85,7 +85,7 @@ app.use('/about', about);
 //user
 app.use('/signup', signup);
 app.use('/signin', signin);
-app.use('/userinfo', userinfo);
+app.use('/user/userinfo', userinfo);
 app.use('/signout', signout);
 app.use('/getpwd', getpwd);
 app.use('/user/rank', user_rank);

@@ -100,7 +100,7 @@ router.get('/', function (req, res) {
 
             res.locals.dateFormat = jc.dateFormat;
             res.locals.getUrlStyle = jc.getUrlStyle;
-            res.render('search', json);
+            res.render('search/index', json);
         });
 
     });

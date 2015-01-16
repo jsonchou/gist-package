@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
         title: '注册',
         msg: ''
     }
-    res.render('signup', json);
+    res.render('user/signup', json);
 
 });
 
@@ -45,60 +45,62 @@ router.post('/', function (req, res) {
 
     if (!repwd || !pwd || !email || !username) {
         json.msg = '请正确填写您的信息';
-        res.status(500).render('signup', json);
+        res.status(500).render('user/signup', json);
     }
     else {
         if (pwd != repwd) {
             json.msg = '确认密码不正确';
-            res.status(500).render('signup', json);
+            res.status(500).render('user/signup', json);
         } else {
             userModel.getByQuery({ email: email }, {}, {}, function (error, models) {
                 if (models && models.length > 0) {
+                    //判断用户邮箱
                     json.msg = '用户邮箱' + email + '已注册';
-                    res.status(500).render('signup', json);
+                    res.status(500).render('user/signup', json);
                 } else {
-
-                    var md5 = crypto.createHash('md5');
-                    md5.update(pwd);
-
-                    var data = {
-                        user: username,
-                        email: email,
-                        avator: avator,
-                        pwd: md5.digest('hex')
-                    }
-
-                    //发送邮件
-                    var poster = new emailPoster(config.email.email, data.email, '悠哉网账户--用户注册', '新用户：' + data.user + ",(邮箱：" + data.email + ")您好，悠哉网欢迎您！");
-                    poster.send();
-
-                    if (avatorFile) {
-                        var newName = Date.now() + Math.floor(Math.random() * 0x10000);//新文件名
-                        var extension = avatorFile.extension;
-
-                        if (config.site.imgType.indexOf(extension) > -1) {
-                            data.avator = (config.site.avatorPath + '/' + avatorFile.name).replace('./public', '');
+                    //判断用户名
+                    userModel.getByQuery({ user: username }, {}, {}, function (error, models) {
+                        if (models && models.length > 0) {
+                            json.msg = '用户名称' + email + '已注册';
+                            res.status(500).render('user/signup', json);
                         } else {
-                            jc.log('不允许上传该格式的图片');
-                        }
-                    }
+                            var md5 = crypto.createHash('md5');
+                            md5.update(pwd);
 
-                    userModel.create(data, function (err) {
-                        if (!err) {
+                            var data = {
+                                user: username,
+                                email: email,
+                                avator: avator,
+                                pwd: md5.digest('hex')
+                            }
 
-                        } else {
-                            jc.log(err);
+                            //发送邮件
+                            var poster = new emailPoster(config.email.email, data.email, '悠哉网账户--用户注册', '新用户：' + data.user + ",(邮箱：" + data.email + ")您好，悠哉网欢迎您！");
+                            poster.send();
+
+                            if (avatorFile) {
+                                var newName = Date.now() + Math.floor(Math.random() * 0x10000);//新文件名
+                                var extension = avatorFile.extension;
+
+                                if (config.site.imgType.indexOf(extension) > -1) {
+                                    data.avator = (config.site.avatorPath + '/' + avatorFile.name).replace('./public', '');
+                                } else {
+                                    jc.log('不允许上传该格式的图片');
+                                }
+                            }
+
+                            userModel.create(data, function (err) {
+                                //+5积分
+                                userModel.update({ user: username }, { $inc: { score: 5, comment_count: 1 } }, {}, function (err, numEffect) {
+                                    res.redirect('/signin');
+                                });
+                            });
                         }
                     });
-
-                    //console.log("成功");
-                    res.redirect('/signin');
-
                 }
             });
         }
     }
-
 });
 
 module.exports = router;

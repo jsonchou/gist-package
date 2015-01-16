@@ -6,7 +6,6 @@ var router = express.Router();
 /* GET users listing. */
 router.get('/', function (req, res) {
     //res.clearCookie('user', { path: '/' });
-    jc.log(req.session.userInfo);
     req.session.userInfo = null;
     delete req.session.userInfo;
     res.redirect('/');

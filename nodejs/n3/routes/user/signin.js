@@ -24,20 +24,20 @@ router.get('/', function (req, res) {
         json.reurl = req.query.reurl;
     }
     
-    res.render('signin', json);
+    res.render('user/signin', json);
 });
 
 router.post('/', function (req, res) {
-    var email = req.body.email;
+    var en = req.body.email_name;
     var pwd = req.body.pass;
     var reurl = req.query.reurl;
 
     var md5 = crypto.createHash('md5');
     md5.update(pwd);
 
-    var data = { 
-        email: email,
-        pwd: md5.digest('hex') 
+    var data = {
+        $or: [{ email: en }, { user: en }],
+        pwd: md5.digest('hex')
     }
 
     userModel.getByQuery(data, {}, {}, function (error, models) {
@@ -55,18 +55,23 @@ router.post('/', function (req, res) {
             var userInfo = models[0];
             req.session.userInfo = userInfo;
 
-            if (reurl) {
-                res.redirect(reurl);//登录成功，回到首页
-            } else {
-                res.redirect('/');//登录成功，回到首页
-            }
+            //+1积分
+            userModel.update({ _id: userInfo._id }, { $inc: { score: 1, comment_count: 1 } }, {}, function (err, numEffect) {
+                req.session.userInfo.score += 1;
+                if (reurl) {
+                    res.redirect(reurl);//登录成功，回到首页
+                } else {
+                    res.redirect('/');//登录成功，回到首页
+                }
+            });
+            
         } else {
             var json = {
                 title: '登录',
                 reurl:'',
                 msg: '* 账号密码不正确，请重新登录'
             };
-            res.render('signin', json);
+            res.render('user/signin', json);
         }
 
     });
