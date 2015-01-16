@@ -11,8 +11,8 @@ exports.signOut = function (req, res, next) {
     if (this.isLogin(req, res)) {
         req.session.userInfo = null;
         delete req.session.userInfo;
-        next();
     }
+    next();
 }
 
 // login filter

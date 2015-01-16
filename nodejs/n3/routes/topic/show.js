@@ -58,7 +58,9 @@ router.get('/:id/:tag', function (req, res) {
                 } else if (tag == 'del') {
                     topicModel.delete(tModel, function (err) {
                         userModel.update({ _id: tModel.user_info }, { $inc: { topic_count: -1 } }, {}, function (err, numAffect) {
-                            res.json({ 'message': '删除' + '成功' });
+                            commentModel.delete({ topic_info: id }, function () {
+                                res.json({ 'message': '删除' + '成功' });
+                            });
                         });
                     });
                 } else if (tag.indexOf('cdel') > -1) {

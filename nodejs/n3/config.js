@@ -17,7 +17,7 @@ config.db = {
 //邮箱配置
 config.email = {
     secure:true,
-    port: 465,
+    port: 25,
     host: 'smtp.163.com',
     email: 'onlyone_329@163.com',
     pass: 'amwewihcv128'
