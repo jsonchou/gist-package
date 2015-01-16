@@ -55,13 +55,13 @@ router.post('/', function (req, res) {
             userModel.getByQuery({ email: email }, {}, {}, function (error, models) {
                 if (models && models.length > 0) {
                     //判断用户邮箱
-                    json.msg = '用户邮箱' + email + '已注册';
+                    json.msg = '用户邮箱“' + email + '”已注册';
                     res.status(500).render('user/signup', json);
                 } else {
                     //判断用户名
                     userModel.getByQuery({ user: username }, {}, {}, function (error, models) {
                         if (models && models.length > 0) {
-                            json.msg = '用户名称' + email + '已注册';
+                            json.msg = '用户名称“' + username + '”已注册';
                             res.status(500).render('user/signup', json);
                         } else {
                             var md5 = crypto.createHash('md5');
