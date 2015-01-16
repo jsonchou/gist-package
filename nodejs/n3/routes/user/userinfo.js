@@ -15,7 +15,6 @@ var auth = require('../../services/auth');
 /* GET users listing. */
 router.get('/', function (req, res) {
     auth.authorize(req, res, function () {
-        jc.log(req.session.userInfo);
         var json = {
             msg: '',
             title: '修改信息',
@@ -28,6 +27,7 @@ router.get('/', function (req, res) {
 router.post('/', function (req, res) {
 
     auth.authorize(req, res, function () {
+
         var oldpwd = req.body.oldpwd;
         var pwd = req.body.pwd;
         var repwd = req.body.repwd;
@@ -76,11 +76,11 @@ router.post('/', function (req, res) {
                                 //res.clearCookie('user', { path: '/' });
 
                                 //登出
-                                auth.signOut();
-
-                                //跳转
-                                json.msg = '用户信息修改成功，请重新<a href="/signin">登录</a>';
-                                res.render('user/userinfo', json);
+                                auth.signOut(req, res, function () {
+                                    //跳转
+                                    json.msg = '用户信息修改成功，请重新<a href="/signin">登录</a>';
+                                    res.render('user/userinfo', json);
+                                });
 
                             } else {
                                 jc.log(err);
@@ -88,7 +88,7 @@ router.post('/', function (req, res) {
                         });
                     } else {
                         json.msg = '原始密码不正确';
-                        res.redirect('/userinfo');
+                        res.redirect('user/userinfo');
                     }
                 });
             }

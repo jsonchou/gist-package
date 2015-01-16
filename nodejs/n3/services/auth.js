@@ -7,10 +7,11 @@ exports.isLogin = function (req, res) {
 }
 
 //sing out
-exports.signOut = function (req, res) {
-    if (this.isLogin(req,res)) {
+exports.signOut = function (req, res, next) {
+    if (this.isLogin(req, res)) {
         req.session.userInfo = null;
         delete req.session.userInfo;
+        next();
     }
 }
 

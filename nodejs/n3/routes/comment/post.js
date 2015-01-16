@@ -30,14 +30,15 @@ router.post('/', function (req, res) {
         commentModel.create(data, function (err) {
             if (err) {
                 res.send(err);
-            }
-            //更新回复数量
-            topicModel.update({ _id: topicid }, { $inc: { comment_count: 1 } }, {}, function (error, numAffected) {
-                userModel.update({ _id: data.user_info }, { $inc: { score: 1, comment_count: 1 } }, {}, function (err, numEffect) {
-                    req.session.userInfo.score += 1;
-                    res.redirect('/topic/' + topicid);
+            } else {
+                //更新回复数量
+                topicModel.update({ _id: topicid }, { $inc: { comment_count: 1 }, $set: { update_user: ui.user } }, {}, function (error, numAffected) {
+                    userModel.update({ _id: data.user_info }, { $inc: { score: 1, comment_count: 1 } }, {}, function (err, numEffect) {
+                        req.session.userInfo.score += 1;
+                        res.redirect('/topic/' + topicid);
+                    });
                 });
-            });
+            }
         });
     });
 });

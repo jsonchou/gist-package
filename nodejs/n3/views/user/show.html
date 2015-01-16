@@ -53,12 +53,9 @@
                         </span>
                     </span>
 
-
                     <a href="/topic/<%= topics[i]._id %>" class="last_time pull-right">
                         <span class="last_active_time"><%= dateFormat(topics[i].update_time) %></span>
                     </a>
-
-
 
                     <div class="topic_title_wrapper">
                         <a title="<%= topics[i].title %>" href="/topic/<%= topics[i]._id %>" class="topic_title">
@@ -99,7 +96,7 @@
                     </span>
 
 
-                    <a href="/topic/<%= topics[i]._id %>" class="last_time pull-right">
+                    <a href="/topic/<%= commentTopics[i]._id %>" class="last_time pull-right">
                         <span class="last_active_time"><%= dateFormat(commentTopics[i].update_time) %></span>
                     </a>
 

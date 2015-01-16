@@ -36,7 +36,6 @@ router.post('*', function (req, res) {
         }
 
         if (id) {
-            
             data._id = id;
             data.update_time = new Date().toISOString();
 

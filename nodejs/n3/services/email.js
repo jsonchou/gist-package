@@ -19,6 +19,8 @@ function email(from, to, subject, html) {
 email.prototype.send = function () {
     var transport = nodemailer.createTransport(smtpTransport({
         host: config.email.host,
+        secureConnection: config.email.secure,
+        port: config.email.port,
         auth: {
             user: config.email.email,
             pass: config.email.pass

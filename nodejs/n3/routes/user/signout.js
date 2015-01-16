@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
-
+var auth = require('../../services/auth');
 // mongoose 链接
 
 /* GET users listing. */
 router.get('/', function (req, res) {
     //res.clearCookie('user', { path: '/' });
-    req.session.userInfo = null;
-    delete req.session.userInfo;
-    res.redirect('/');
+    auth.signOut(req, res, function () {
+        res.redirect('/');
+    });
 });
  
 
