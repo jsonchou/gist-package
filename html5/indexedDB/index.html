@@ -1,0 +1,289 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>indexedDB</title>
+    <style>
+        * { font-size: 14px; margin: 0; padding: 0; }
+        .hide{display:none;}
+        .form, .list, .search { width: 600px; margin: 50px auto; }
+        table { border-collapse: collapse; width: 100%; }
+        table th { background: #eee; }
+        table th, table td { padding: 10px; border: 1px solid #ccc; }
+        input{font-size:12px;margin-right:5px;}
+    </style>
+    <script src="../../libs/jquery-2.0.3.min.js"></script>
+    <script>
+
+        //check indexedDB
+        var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.msIndexedDB;
+        var IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.mozIDBTransaction || window.msIDBTransaction;
+        var db;
+        var dbName = "PeopleDB";
+        var tbName = 'people';
+
+        //delete database
+        function deleteDB(databaseName) {
+            indexedDB.deleteDatabase(databaseName);
+        }
+
+        //meta add
+        function add(entity) {
+            var transaction = db.transaction([tbName], "readwrite");
+            var objectStore = transaction.objectStore(tbName);
+            var request = objectStore.add(entity);
+            request.onsuccess = function (eve) {
+                show();
+                console.log('add successfull');
+            };
+        }
+
+        //meta update
+        function update(entity) {
+            var transaction = db.transaction(tbName, 'readwrite');
+            var objectStore = transaction.objectStore(tbName);
+            var request = objectStore.get(entity.name);
+            request.onsuccess = function (e) {
+                var student = e.target.result;
+                student = entity;
+                objectStore.put(student);
+                show();
+            };
+        }
+
+        //meta delete
+        function remove(key) {
+            var transaction = db.transaction([tbName], "readwrite");
+            var objectStore = transaction.objectStore(tbName);
+            var request = objectStore.delete(key);
+            request.onsuccess = function (eve) {
+                show();
+                console.log('delete successfull');
+            };
+        }
+
+        //show list
+        function show(condition) {
+
+            var transaction = db.transaction([tbName], "readwrite");
+            var objectStore = transaction.objectStore(tbName);
+
+            var conditionRange;
+            if (condition) {
+                conditionRange = IDBKeyRange.only(condition);
+            }
+            var request = objectStore.openCursor(conditionRange);
+            console.log('read begin');
+            var node = $('#j_list');
+            var sb = [];
+            request.onsuccess = function (eve) {
+                var cursor = eve.target.result;
+                if (cursor) {
+                    sb.push("<tr><td>" + cursor.value.name + "</td><td>" + cursor.value.email + "</td><td><input type='button' value='删除' class='j_delete' /><input type='button' value='编辑' class='j_edit' /><input type='button' value='保存' class='j_save hide' /><input type='button' value='取消' class='j_cancle hide' /></td></tr>");
+                    cursor.continue();
+                }
+                else {
+                    node.find('tbody').html(sb.join(''));
+                    console.log("read end");
+                }
+            };
+        }
+
+        $(function () {
+
+            if (!indexedDB) {
+                alert('indexedDB is not supported, please change your browser to view!');
+                return false;
+            }
+
+            //dirty data
+            var peopleData = [
+                { name: "John", email: "john@n.com" },
+                { name: "Dow", email: "don@a.com" }
+            ];
+
+            //init db
+            function init(callback) {
+                var request = indexedDB.open(dbName, 1);
+                request.onsuccess = function (eve) {
+                    db = request.result;
+                    if (callback) {
+                        callback();
+                    }
+                };
+
+                request.onerror = function (eve) {
+                    console.log("IndexedDB error: " + eve.target.errorCode);
+                };
+
+                request.onupgradeneeded = function (eve) {
+                    if (db) {
+                        if (db.objectStoreNames.contains(tbName)) {
+                            db.deleteObjectStore(tbName);
+                        }
+                    }
+                    //var objectStore = eve.currentTarget.result.createObjectStore(tbName, { keyPath: "id", autoIncrement: true });自增列
+                    var objectStore = eve.currentTarget.result.createObjectStore(tbName, { keyPath: "name" });
+                    objectStore.createIndex("name", "name", { unique: true });
+                    objectStore.createIndex("email", "email", { unique: true });
+
+                    for (i in peopleData) {
+                        objectStore.add(peopleData[i]);
+                    }
+                };
+            }
+
+            init(show);
+
+            //add
+            $("#j_add").click(function () {
+                var entity = {
+                    name: $("#name").val(),
+                    email: $("#email").val()
+                }
+                add(entity);
+            });
+
+            //delete
+            $('#j_list').on('click', '.j_delete', function () {
+                var o = $(this);
+                var key = o.parents('tr').find('td').eq(0).text();
+                remove(key);
+            });
+
+            //edit
+            $('#j_list').on('click', '.j_edit', function () {
+                var o = $(this);
+                var op = o.parent('td');
+                var ot = o.val();
+
+                var td2 = o.parents('tr').find('td').eq(1);
+                td2.attr('data-v', td2.text());
+
+                var email = td2.text();
+
+                td2.html("<input value='" + email + "' name='email' type='text' />");
+
+                op.html("<input type='button' value='删除' class='j_delete' /><input type='button' value='编辑' class='j_edit' /><input type='button' value='保存' class='j_save hide' /><input type='button' value='取消' class='j_cancle hide' />");
+
+                op.find('.j_edit').hide();
+                op.find('.j_save').show();
+                op.find('.j_cancle').show();
+            });
+
+            //cancle
+            $('#j_list').on('click', '.j_cancle', function () {
+                var o = $(this);
+                var op = o.parent('td');
+                var ot = o.val();
+
+                var td2 = o.parents('tr').find('td').eq(1);
+                td2.html(td2.attr('data-v'));
+
+                op.html("<input type='button' value='删除' class='j_delete' /><input type='button' value='编辑' class='j_edit' /><input type='button' value='保存' class='j_save hide' /><input type='button' value='取消' class='j_cancle hide' />");
+
+                op.find('.j_edit').show();
+                op.find('.j_save').hide();
+                op.find('.j_cancle').hide();
+            });
+
+            //save
+            $('#j_list').on('click', '.j_save', function () {
+                var o = $(this);
+                var op = o.parent('td');
+                var ot = o.val();
+
+                var td1 = o.parents('tr').find('td').eq(0);
+                var td2 = o.parents('tr').find('td').eq(1);
+
+                var name = $.trim(td1.text());
+                var email = td2.find('input').val();
+
+                op.html("<input type='button' value='删除' class='j_delete' /><input type='button' value='编辑' class='j_edit' /><input type='button' value='保存' class='j_save hide' /><input type='button' value='取消' class='j_cancle hide' />");
+
+                if (name && email) {
+                    op.find('.j_edit').show();
+                    op.find('.j_save').hide();
+                    op.find('.j_cancle').hide();
+                    var entity = { name: name, email: email }
+                    //console.log('entity:', entity);
+                    update(entity);
+
+                } else {
+                    alert('请正确填写');
+                    return false;
+                    op.find('.j_edit').hide();
+                    op.find('.j_save').show();
+                    op.find('.j_cancle').show();
+                }
+            });
+
+
+            //search
+            $('#j_search').find('input[type=button]').on('click', function () {
+                var o = $(this);
+                var key = $('#j_search').find('input[type=text]').val();
+                if (key) {
+                    show(key);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <div class="form" id="j_form">
+        <table>
+            <tr>
+                <td>name：</td>
+                <td><input type="text" name="name" id="name" value="" /></td>
+            </tr>
+            <tr>
+                <td>email：</td>
+                <td><input type="text" name="email" id="email" value="" /></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center;">
+                    <input type="button" value="添加" id="j_add" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="search" id="j_search">
+        <table>
+            <tr>
+                <td>
+                    <select>
+                        <option>name</option>
+                        <!--indexedDB只能通过key值，进行only,bound,lower,upper,排序-->
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="txtSearch" value="" />
+                </td>
+                <td>
+                    <input type="button" value="搜索" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="j_list" class="list">
+        <table>
+            <thead>
+                <tr>
+                    <th>name(key)</th>
+                    <th>email</th>
+                    <th>control panel</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+
+
+
+</body>
+</html>

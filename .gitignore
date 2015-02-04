@@ -6,3 +6,4 @@ app/bower_components
 test/bower_components
 clone-package
 /nodejs/n3/public/vendor
+/bower_components
