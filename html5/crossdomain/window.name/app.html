@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>page app</title>
+    <script type="text/javascript">
+        function domainData(url, fn) {
+            var isFirst = true;
+            var iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            var loadfn = function () {
+                if (isFirst) {
+                    iframe.contentWindow.location = 'http://10.1.13.18:214/test/window.name/middle.html';
+                    isFirst = false;
+                } else {
+                    fn(iframe.contentWindow.name);
+                    iframe.contentWindow.document.write('');
+                    iframe.contentWindow.close();
+                    document.body.removeChild(iframe);
+                    iframe.src = '';
+                    iframe = null;
+                }
+            };
+            iframe.src = url;
+            if (iframe.attachEvent) {
+                iframe.attachEvent('onload', loadfn);
+            } else {
+                iframe.onload = loadfn;
+            }
+
+            document.body.appendChild(iframe);
+        }
+    </script>
+
+
+
+</head>
+<body>
+    <script type="text/javascript">
+        domainData('http://10.1.11.37/test/proxy.html', function (data) {
+            alert(data);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>app page</title>
+    <script src="../../../bower_components/jquery/dist/jquery.js"></script>
+    
+    <script type="text/javascript">
+        function postData(secureDomain, url,callback) {
+            var iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = url;
+            var loadfn = function () {
+                var msg = 'post time to server side: ' + (new Date().getTime());
+                iframe.contentWindow.postMessage(msg, secureDomain);
+            };
+            if (iframe.attachEvent) {
+                iframe.attachEvent('onload', loadfn);
+            } else {
+                iframe.onload = loadfn;
+            }
+
+            document.body.appendChild(iframe);
+        }
+        
+        window.addEventListener('message', function (event) {
+            if (event.origin !== 'http://10.1.13.18:214') {
+                //return;
+            }
+            console.log("i an origion side，get server response data:" + event.data);
+        }, false);
+
+        //919  html5/crossdomain
+        //214  test
+
+        window.onload = function () {
+            postData('http://10.1.13.18:214', 'http://10.1.13.18:214/test/window.postMessage/server-another.html?' + new Date().getTime());
+        }
+
+    </script>
+</head>
+<body>
+   
+</body>
+</html>

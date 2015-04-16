@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>data page</title>
+    <script>
+        window.addEventListener('message', function (event) {
+            //console.log(event.origin);
+            if (event.origin !== 'http://www.baidu.com') {
+                //return;
+            }
+            //console.log('message received:  ' + event.data);
+            var getOrigionData = event.data;
+            var postServerData = "server data";
+            console.log('i am server side，get origion push data:' + getOrigionData);
+            event.source.postMessage(postServerData, event.origin);
+        }, false);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
