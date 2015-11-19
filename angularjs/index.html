@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="JCApp">
+<head>
+    <title>Angularjs</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <script src="../libs/jquery-2.0.3.min.js"></script>
+    <script src="angular-1.4.3/angular.min.js"></script>
+    <script src="angular-1.4.3/angular-route.min.js"></script>
+    <link href="http://r01.uzaicdn.com/content/v1/styles/core.css" rel="stylesheet" />
+    <script>
+        var app = angular.module('JCApp', ['ngRoute']);
+        //配置路由
+        app.config(['$routeProvider', function ($routeProvider) {
+            var route = $routeProvider;
+            route.when('/list', { controller: 'listCtrl', templateUrl: 'tmpl/list.html' });
+            route.when('/view/:id', { controller: 'viewCtrl', templateUrl: 'tmpl/view.html' });
+            route.otherwise({ redirectTo: '/list' });
+        }]);
+        //创建数据服务
+        app.factory('service', function () {
+            var data = [
+                  { id: 1, title: 'page1', url: 'http://www.baidu.com' },
+                 { id: 2, title: 'page2', url: 'http://www.google.com' }
+            ];
+            return function (myid) {
+                if (!myid) return data;
+                var index = 0;
+                angular.forEach(data, function (v, k) {
+                    if (v.id == myid) {
+                        index = k;
+                    }
+                });
+                return data[index];
+            }
+        });
+        app.controller('listCtrl', ['$scope', 'service', function ($scope, service) {
+            $scope.list = service();
+        }]);
+
+        app.controller('viewCtrl', ['$scope', 'service', '$routeParams', function ($scope, service, $routeParams) {
+            $scope.model = service($routeParams.id || 0) || {};
+        }]);
+
+        app.directive('jcCheck', [function () {
+            return {
+                restrict: 'A',
+                replace: false,
+                link: function (score, ele) {
+                    var hdC = 'thead input:checkbox';
+                    var bdC = 'tbody input:checkbox';
+                    ele.on('change', hdC, function () {
+                        var o = $(this);
+                        var tds = ele.find(bdC);
+                        tds.prop('checked', o.prop('checked'));
+                    });
+
+                    ele.on('change', bdC, function () {
+                        var o = $(this);
+                        var os = ele.find(bdC);
+                        var ohs = ele.find(hdC);
+                        var len = os.length;//全部数量
+                        var onLen = os.filter(':checked').length;//选中
+                        if (onLen == len)
+                            ohs.prop('checked', true);
+                        else
+                            ohs.prop('checked', false);
+                    });
+
+                }
+            }
+        }]);
+
+        app.controller('nameCtrl', ['$scope', function ($scope) {
+            $scope.names = [
+                     { "Name": "Alfreds Futterkiste", "City": "Berlin", "Country": "Germany" },
+                     { "Name": "Berglunds snabbköp", "City": "Luleå", "Country": "Sweden" },
+                     { "Name": "Centro comercial Moctezuma", "City": "México D.F.", "Country": "Mexico" },
+                     { "Name": "Ernst Handel", "City": "Graz", "Country": "Austria" },
+                     { "Name": "FISSA Fabrica Inter. Salchichas S.A.", "City": "Madrid", "Country": "Spain" },
+                     { "Name": "Galería del gastrónomo", "City": "Barcelona", "Country": "Spain" },
+                     { "Name": "Island Trading", "City": "Cowes", "Country": "UK" },
+                     { "Name": "Königlich Essen", "City": "Brandenburg", "Country": "Germany" },
+                     { "Name": "Laughing Bacchus Wine Cellars", "City": "Vancouver", "Country": "Canada" },
+                     { "Name": "Magazzini Alimentari Riuniti", "City": "Bergamo", "Country": "Italy" },
+                     { "Name": "North/South", "City": "London", "Country": "UK" },
+                     { "Name": "Paris spécialités", "City": "Paris", "Country": "France" },
+                     { "Name": "Rattlesnake Canyon Grocery", "City": "Albuquerque", "Country": "USA" },
+                     { "Name": "Simons bistro", "City": "København", "Country": "Denmark" },
+                     { "Name": "The Big Cheese", "City": "Portland", "Country": "USA" },
+                     { "Name": "Vaffeljernet", "City": "Århus", "Country": "Denmark" },
+                     { "Name": "Wolski Zajazd", "City": "Warszawa", "Country": "Poland" }
+            ];
+        }]);
+
+
+
+    </script>
+</head>
+<body class="f14 yahei p10">
+    <div><a href="#/list">列表</a></div>
+    <div ng-view>
+    </div>
+
+    <table class="table" ng-controller="listCtrl" jc-check>
+        <thead>
+            <tr>
+                <td><input type="checkbox" name="name" value=" " /></td>
+                <td>ID</td>
+                <td>Title</td>
+                <td>URL</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in list">
+                <td><input type="checkbox" name="name" value=" " /></td>
+                <td>{{item.id}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.url}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div ng-controller="nameCtrl">
+        <input type="text" ng-model="test" value="" name="txtName" />
+        <ul ng-repeat="x in names|filter:test|orderBy:Country">
+            <li>名字：{{x.Name|lowercase}}，城市：{{x.City}}，国家：{{x.Country|uppercase}}</li>
+        </ul>
+    </div>
+</body>
+</html>
