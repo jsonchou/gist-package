@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Web SQL</title>
+    <script src="../../libs/jquery-2.0.3.min.js"></script>
+   
+    <style>
+        table{width:100%;border:1px solid #ccc;}
+        tr th{background:#eee;line-height:30px;}
+        td{padding:5px;border:1px solid #ccc;}
+    </style>
+</head>
+<body>
+
+   
+
+    <!--sqlite3 mydb.db;
+    create table test(id integer primary key,name text);
+    insert into test(id,name)values(1,'hehe');
+    insert into test(id,name)values(2,'province');
+    insert into test(id,name)values(3,'city');
+    insert into test(id,name)values(4,'area');
+    select * from test;
+    drop table test;-->
+
+    <!--D:\Projects\gist-package\html5\websql-->
+
+    <p>
+        This document was on the W3C Recommendation track but specification work has stopped. The specification reached an impasse: all interested implementors have used the same SQL backend (Sqlite), but we need multiple independent implementations to proceed along a standardisation path.
+    </p>
+
+
+    <table id="j_tb" cellpadding="0" cellspacing="0">
+        <tr>
+            <th>ID</th>
+            <th>name</th>
+        </tr>
+        
+    </table>
+
+
+    <script type="text/javascript">
+    var db = openDatabase('MYDB2', '1.0', 'MYDB2 description', 2 * 1024 * 1024);
+    var arr = ['Tincidunt', 'integer', 'eu', 'augue', 'augue', 'nunc', 'elit', 'dolo', 'luctus', 'placerat', 'scelerisque', 'euismod'];
+
+    $(function () {
+
+        db.transaction(function (context) {
+
+            context.executeSql('CREATE TABLE IF NOT EXISTS test (id unique, name text)');
+           
+            for (var j = 0; j < arr.length; j++) {
+                context.executeSql('INSERT INTO TEST (id, name) VALUES (' + j + ', "' + arr[j] + '")');
+            }
+
+        });
+
+        db.transaction(function (context) {
+            context.executeSql('SELECT * FROM test', [], function (context, results) {
+                var len = results.rows.length;
+                var sb = [];
+                for (var i = 0; i < len; i++) {
+                    sb.push('<tr>');
+                    sb.push('<td>' + results.rows.item(i).id + '</td>');
+                    sb.push('<td>' + results.rows.item(i).name + '</td>');
+                    sb.push('</tr>');
+                }
+                $('#j_tb').append(sb.join(''));
+
+            });
+        });
+    });
+
+
+    </script>
+
+</body>
+</html>
