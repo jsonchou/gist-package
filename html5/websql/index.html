@@ -48,7 +48,7 @@
 
         db.transaction(function (context) {
 
-            context.executeSql('CREATE TABLE IF NOT EXISTS test (id unique, name text)');
+            context.executeSql('CREATE TABLE IF NOT EXISTS test (id integer unique , name text)');
            
             for (var j = 0; j < arr.length; j++) {
                 context.executeSql('INSERT INTO TEST (id, name) VALUES (' + j + ', "' + arr[j] + '")');
