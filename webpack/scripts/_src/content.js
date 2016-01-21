@@ -1,1 +1,0 @@
-﻿module.exports = "It works from content.js. ---test2";
