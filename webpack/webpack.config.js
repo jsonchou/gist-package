@@ -32,7 +32,7 @@ var cfg = {
     cache: false,
     entry: {
         core: ['jquery', 'jquery.cookie'],
-        index: [pathScriptsPath + "/index/index.js"],
+        index: ['jquery.fullpage', pathScriptsPath + "/index/index.js"],
         list: [pathScriptsPath + "/list/list.js"]
     },
     output: {
@@ -50,7 +50,8 @@ var cfg = {
         root: [path.resolve(__dirname + '/libs')],
         alias: {
             'jquery': 'jquery.min',
-            'jquery.cookie': 'jquery.cookie'
+            'jquery.cookie': 'jquery.cookie',
+            'jquery.fullpage': 'jquery.fullpage.min'
         }
     },
     //devtool: 'source-map',//利于断点调试
