@@ -1,3 +1,3 @@
 ﻿$(function () {
-    alert(1);
+    console.log('un standard js load');
 });

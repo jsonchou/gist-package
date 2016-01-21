@@ -31,7 +31,7 @@ if (env === 'real') {
 var cfg = {
     cache: false,
     entry: {
-        core: ['jquery', 'jquery.cookie'],
+        core: ['jquery', 'jquery.cookie', pathLibsPath + "/_util.js", pathScriptsPath + "/common.js"],
         index: ['jquery.fullpage', pathScriptsPath + "/index/index.js"],
         list: [pathScriptsPath + "/list/list.js"]
     },

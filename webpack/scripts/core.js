@@ -99,7 +99,9 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	module.exports = __webpack_require__(4);
+	__webpack_require__(4);
+	__webpack_require__(5);
+	module.exports = __webpack_require__(6);
 
 
 /***/ },
@@ -254,6 +256,60 @@
 
 	}));
 
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	_ua = navigator.userAgent.toLowerCase();
+	_uzw = window._uzw || {};
+
+	var _util = {
+	    array: {},
+	    string: {}
+	}
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module) {
+
+	    alert(_ua);
+	    var comPath = "./com/";
+	    var track = __webpack_require__(7)(comPath + "track")
+	    track();
+
+	}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var map = {
+		"./com/track": 8
+	};
+	function webpackContext(req) {
+		return __webpack_require__(webpackContextResolve(req));
+	};
+	function webpackContextResolve(req) {
+		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
+	};
+	webpackContext.keys = function webpackContextKeys() {
+		return Object.keys(map);
+	};
+	webpackContext.resolve = webpackContextResolve;
+	module.exports = webpackContext;
+	webpackContext.id = 7;
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	module.exports = function () {
+	    console.log("com track js");
+	}
 
 /***/ }
 /******/ ]);

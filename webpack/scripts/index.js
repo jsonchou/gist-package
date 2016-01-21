@@ -1,17 +1,15 @@
-webpackJsonp([1],[
-/* 0 */
+webpackJsonp([1],{
+
+/***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(5);
-	module.exports = __webpack_require__(6);
+	__webpack_require__(9);
+	module.exports = __webpack_require__(10);
 
 
 /***/ },
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */
+
+/***/ 9:
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -26,13 +24,14 @@ webpackJsonp([1],[
 
 
 /***/ },
-/* 6 */
+
+/***/ 10:
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(jQuery, $) {!(__WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module) {
+	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function($) {!(__WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module) {
 
 	    exports.index = function () {
-	        console.log('index:' + jQuery('#j_demo').attr('id'));
+	        console.log('index function');
 	    }
 
 	    exports.fullPage = function () {
@@ -61,7 +60,8 @@ webpackJsonp([1],[
 
 	    });
 	}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(1)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }
-]);
+
+});

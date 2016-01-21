@@ -1,7 +1,7 @@
 ﻿define(function (require, exports, module) {
 
     exports.index = function () {
-        console.log('index:' + jQuery('#j_demo').attr('id'));
+        console.log('index function');
     }
 
     exports.fullPage = function () {
