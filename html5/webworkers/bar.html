@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>web workers page load</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+   
+
+    <span id="node"></span>次数
+
+    <input type="button" value="停止" onclick="wokStop();" />
+
+
+    <script>
+
+        for (var i = 0; i < 100; i++) {
+            console.log('----------' + i + '-----------');
+        }
+
+        var wok;
+
+        myWok();
+
+        function myWok() {
+
+            if (window.Worker) {
+                wok = new Worker('bar.js');
+
+                //接收
+                wok.onmessage = function (evt) {
+                    document.getElementById('node').innerHTML = evt.data;
+                }
+            }
+        }
+
+        function wokStop() {
+            //web workers 终止
+            wok.terminate();
+        }
+
+        for (var i = 0; i < 100; i++) {
+            console.log('~~~~~~~~~~~~' + i + '~~~~~~~~~~~~');
+        }
+
+    </script>
+
+</body>
+</html>

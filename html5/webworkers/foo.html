@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>common page load complex script</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    
+    <span id="node"></span>次数
+
+    <input type="button" value="停止" onclick="wokStop();" />
+
+    <p>1、脚本执行阻塞超严重</p>
+    <p>2、页面假死</p>
+    <p>3、单线程，代码按上下顺序执行</p>
+
+
+    <script>
+
+        for (var i = 0; i < 100; i++) {
+            console.log('----------' + i + '-----------');
+        }
+
+        var num = 0;
+        for (var m = 0; m < 1000000000; m++) {
+            //console.log('你猜，这块代码什么时候执行？' + m);
+            num += m;
+        }
+
+        console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@' + num + '@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+        document.getElementById('node').innerHTML = num;
+        console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@' + num + '@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+
+
+        for (var i = 0; i < 100; i++) {
+            console.log('~~~~~~~~~~~~' + i + '~~~~~~~~~~~~');
+        }
+
+    </script>
+
+
+
+</body>
+</html>
+
