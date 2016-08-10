@@ -7,6 +7,10 @@
 </head>
 <body>
    
+    <p>1、IE10及以上的支持</p>
+    <p>2、无法访问外部DOM节点，纯粹返回数据</p>
+    <p>3、仅仅处理数据，不要做额外操作</p>
+    <p>ajax 仍旧存在跨域问题</p>
 
     <span id="node"></span>次数
 
@@ -29,9 +33,9 @@
                 wok = new Worker('bar.js');
 
                 //接收
-                wok.onmessage = function (evt) {
+                wok.addEventListener('message', function (evt) {
                     document.getElementById('node').innerHTML = evt.data;
-                }
+                }, false);
             }
         }
 
